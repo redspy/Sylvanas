@@ -14,21 +14,32 @@
 
     <ion-side-menu side="left">
         <ion-header-bar class="bar-stable">
-            <h1 class="title">Left</h1>
+            <h1 class="title">Sylvanas</h1>
         </ion-header-bar>
         <ion-content>
             <ion-list>
+<!--
                 <ion-item menu-close ng-click="login()">
-                    Login
+                    주변 상점정보
                 </ion-item>
-                <ion-item menu-close href="#/app/search">
-                    Search
+-->
+                <ion-item menu-close href="#/app/localinformation"> <!--#/app/LocalInformation-->
+                    주변 상점정보
                 </ion-item>
-                <ion-item menu-close href="#/app/browse">
-                    Browse
+                <ion-item menu-close href="#/app/adstore"> <!--#/app/AdStore-->
+                    내가게 알리기
                 </ion-item>
-                <ion-item menu-close href="#/app/playlists">
-                    Playlists
+                <ion-item menu-close href="#/app/saleevent"> <!--#/app/SaleEvent-->
+                    할인 & 이벤트
+                </ion-item>
+                <ion-item menu-close href="#/app/adspot"> <!--#/app/AdSpot-->
+                    반짝 떨이
+                </ion-item>
+                <ion-item menu-close href="#/app/banner"> <!--#/app/Banner-->
+                    배너광고
+                </ion-item>
+                <ion-item menu-close href="#/app/favorites"> <!--#/app/Favorites-->
+                    내 찜 목록
                 </ion-item>
             </ion-list>
         </ion-content>

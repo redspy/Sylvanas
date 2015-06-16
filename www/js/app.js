@@ -23,49 +23,70 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
 
-        .state('app', {
+    .state('app', {
         url: "/app",
         abstract: true,
         templateUrl: "templates/menu.html",
         controller: 'AppCtrl'
     })
 
-    .state('app.search', {
-        url: "/search",
+    .state('app.localinformation', {
+        url: "/localinformation",
         views: {
             'menuContent': {
-                templateUrl: "templates/search.html"
+            templateUrl: "templates/LocalInformation.html"
+            }
+        }
+    })
+    //adstore
+    .state('app.adstore', {
+        url: "/adstore",
+        views: {
+            'menuContent': {
+            templateUrl: "templates/AdStore.html"
+            }
+        }
+    })
+    
+    //saleevent
+    .state('app.saleevent', {
+        url: "/saleevent",
+        views: {
+            'menuContent': {
+            templateUrl: "templates/SaleEvent.html"
             }
         }
     })
 
-    .state('app.browse', {
-            url: "/browse",
-            views: {
-                'menuContent': {
-                    templateUrl: "templates/browse.html"
-                }
-            }
-        })
-        .state('app.playlists', {
-            url: "/playlists",
-            views: {
-                'menuContent': {
-                    templateUrl: "templates/playlists.html",
-                    controller: 'PlaylistsCtrl'
-                }
-            }
-        })
-
-    .state('app.single', {
-        url: "/playlists/:playlistId",
+    //adspot
+    .state('app.adspot', {
+        url: "/adspot",
         views: {
             'menuContent': {
-                templateUrl: "templates/playlist.html",
-                controller: 'PlaylistCtrl'
+            templateUrl: "templates/AdSpot.html"
+            }
+        }
+    })
+    
+    //banner
+    .state('app.banner', {
+        url: "/banner",
+        views: {
+            'menuContent': {
+            templateUrl: "templates/Banner.html"
+            }
+        }
+    })
+    
+    //favorites
+    .state('app.favorites', {
+        url: "/favorites",
+        views: {
+            'menuContent': {
+            templateUrl: "templates/Favorites.html"
             }
         }
     });
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/playlists');
+    $urlRouterProvider.otherwise('/app/localinformation');
 });
