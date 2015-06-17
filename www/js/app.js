@@ -26,15 +26,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     .state('app', {
         url: "/app",
         abstract: true,
-        templateUrl: "templates/menu.html",
-        controller: 'AppCtrl'
+        templateUrl: "templates/menu.html"
     })
 
     .state('app.localinformation', {
         url: "/localinformation",
         views: {
             'menuContent': {
-            templateUrl: "templates/LocalInformation.html"
+            templateUrl: "templates/LocalInformation.html",
+            controller: 'localInformationController'
             }
         }
     })
@@ -43,7 +43,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         url: "/adstore",
         views: {
             'menuContent': {
-            templateUrl: "templates/AdStore.html"
+            templateUrl: "templates/AdStore.html",
+            controller: 'adStoreController'
             }
         }
     })
@@ -53,7 +54,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         url: "/saleevent",
         views: {
             'menuContent': {
-            templateUrl: "templates/SaleEvent.html"
+            templateUrl: "templates/SaleEvent.html",
+            controller: 'saleEventController'
             }
         }
     })
@@ -63,7 +65,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         url: "/adspot",
         views: {
             'menuContent': {
-            templateUrl: "templates/AdSpot.html"
+            templateUrl: "templates/AdSpot.html",
+            controller: 'AdSpotController'
             }
         }
     })
@@ -73,7 +76,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         url: "/banner",
         views: {
             'menuContent': {
-            templateUrl: "templates/Banner.html"
+            templateUrl: "templates/Banner.html",
+            controller: 'bannerController'
             }
         }
     })
@@ -83,7 +87,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         url: "/favorites",
         views: {
             'menuContent': {
-            templateUrl: "templates/Favorites.html"
+            templateUrl: "templates/Favorites.html",
+            controller: 'favoritesController'
             }
         }
     });
