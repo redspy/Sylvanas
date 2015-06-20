@@ -66,7 +66,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         views: {
             'menuContent': {
             templateUrl: "templates/AdSpot.html",
-            controller: 'AdSpotController'
+            controller: 'adSpotController'
             }
         }
     })
