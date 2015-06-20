@@ -1,5 +1,7 @@
 <ion-view view-title='{{name}}'>
     <ion-content>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
+        </ion-refresher>
         <h1>LocalInformation</h1>
         <div>
             <my-example></my-example>
