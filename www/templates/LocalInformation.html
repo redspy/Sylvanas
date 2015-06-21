@@ -1,5 +1,6 @@
 <ion-view view-title='{{name}}'>
     <ion-content>
+
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
         </ion-refresher>
         <h1>LocalInformation</h1>
@@ -7,4 +8,8 @@
             <my-example></my-example>
         </div>
     </ion-content>
+    <nav mfb-menu position="br" effect="zoomin" label="hover here" active-icon="ion-edit" resting-icon="ion-plus-round" toggling-method="click">
+        <button mfb-button icon="paper-airplane" label="menu item"></button>
+    </nav>
+
 </ion-view>
