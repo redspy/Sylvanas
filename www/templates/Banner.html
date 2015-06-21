@@ -1,5 +1,12 @@
 <ion-view view-title='{{name}}'>
     <ion-content>
-        <h1>Banner</h1>
+        <div class="scrollable" style="background-color : white">
+            <div class="scrollable-content">
+                <a ng-href="{{ad.link}}" ng-repeat="ad in ads">
+                    <img ng-src="img/{{ad.banner}}" width="1000" height="200" alt="{{ad.name}}" class="adImage" style="max-width : 100%; max-height:15%; padding:0px; margin : 0px; border-radius:0px" />
+                </a>
+            </div>
+        </div>
+
     </ion-content>
 </ion-view>
