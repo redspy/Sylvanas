@@ -1,0 +1,32 @@
+<div class="modal">
+    <ion-header-bar>
+        <h1 class="title">글쓰기</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeWrite()">Close</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <form ng-submit="doWrite()">
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">제목</span>
+                    <!--          <input type="text" ng-model="loginData.username">-->
+                    <input type="text">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">닉네임</span>
+                    <!-- <input type="text" ng-model="loginData.username">-->
+                    <input type="text">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">내용</span>
+                    <!-- <input type="text" ng-model="loginData.password">-->
+                    <input type="text">
+                </label>
+                <label class="item">
+                    <button class="button button-block button-positive" type="submit">올리기</button>
+                </label>
+            </div>
+        </form>
+    </ion-content>
+</div>
