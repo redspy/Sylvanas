@@ -24,6 +24,7 @@ angular.module('starter.controllers')
     $scope.doWrite = function () {
         // Simulate a login delay. Remove this and replace with your login
         // code if using a login system
+        $scope.images = [];
         $timeout(function () {
             $scope.closeWrite();
         }, 1000);
