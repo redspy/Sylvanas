@@ -3,7 +3,6 @@ angular.module('starter.controllers')
 .controller('localInformationController', function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile) {
     $scope.name = "주변 상점 정보";
 
-
     // Create the login modal that we will use later
     $ionicModal.fromTemplateUrl('templates/AddAdStore.html', {
         scope: $scope

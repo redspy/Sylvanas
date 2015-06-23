@@ -6,7 +6,7 @@
         </div>
     </ion-header-bar>
     <ion-content>
-        <form ng-submit="doWrite()">
+        <form>
             <div class="list">
                 <label class="item item-input">
                     <span class="input-label">제목</span>
@@ -23,16 +23,15 @@
                     <!-- <input type="text" ng-model="loginData.password">-->
                     <input type="text">
                 </label>
-                <label class="item">
-                    <div class="row">
-                        <button class="button button-block button-dark" ng-click="addImage()">사진</button>
-                        <button class="button button-block button-dark">올리기</button>
-                    </div>
-                </label>
-                <ion-scroll>
-                    <img ng-repeat="image in images" ng-src="{{urlForImage(image)}}" height="200px"/>
-                </ion-scroll>
+
             </div>
         </form>
+            <div class="row">
+                <button class="button button-block button-dark" ng-click="addImage()">사진</button>
+                <button class="button button-block button-dark" ng-click="doWrite()">올리기</button>
+            </div>
+        <ion-scroll direction="x" class="wide-as-needed">
+            <img ng-repeat="image in images" ng-src="{{urlForImage(image)}}" height="300px" style="margin : 5"/>
+        </ion-scroll>
     </ion-content>
 </div>

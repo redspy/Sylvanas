@@ -5,3 +5,10 @@ div.hscroller {
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+.wide-as-needed {
+  overflow: scroll;
+  white-space: nowrap;
+}
+.scroll {
+  min-width: 100%;
+} 
