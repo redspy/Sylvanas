@@ -31,7 +31,7 @@
                 <button class="button button-block button-dark" ng-click="doWrite()">올리기</button>
             </div>
         <ion-scroll direction="x" class="wide-as-needed">
-            <img ng-repeat="image in images" ng-src="{{urlForImage(image)}}" height="300px" style="margin : 5"/>
+            <img ng-repeat="image in images" style="max-height:20%" ng-src="{{urlForImage(image)}}"/>
         </ion-scroll>
     </ion-content>
 </div>
