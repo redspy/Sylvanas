@@ -2,7 +2,7 @@
 <ion-content>
     <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
     </ion-refresher>
-    <div ng-repeat="item in items" class="list card">
+    <div ng-repeat="item in items" class="list card" style="margin : 0">
         <div class="item item-avatar">
             <img src="http://lorempixel.com/200/200/people">
             <h2>Marty McFly</h2>
@@ -12,8 +12,10 @@
         <div class="item item-body">
             <img class="full-image" ng-src="http://lorempixel.com/{{item.width}}/{{item.height}}/{{item.pictureType}}/{{item.id}}">
             <p>
-                {{item}}
-                {{item.width}}/{{item.height}}/{{item.pictureType}}/{{item.id}} Lorem ipsum ut per curae pulvinar donec aliquet neque curabitur cubilia, luctus arcu sagittis habitasse eleifend pretium consequat accumsan himenaeos, primis lacus rhoncus vehicula nibh suscipit
+                {{item.width}}/{{item.height}}/{{item.pictureType}}/{{item.id}}
+            </p>
+            <p>
+                Lorem ipsum ut per curae pulvinar donec aliquet neque curabitur cubilia, luctus arcu sagittis habitasse eleifend pretium consequat accumsan himenaeos, primis lacus rhoncus vehicula nibh suscipit
                 varius sodales pellentesque
             </p>
             <p>
@@ -34,7 +36,6 @@
             </a>
         </div>
     </div>
-
 
     <ion-infinite-scroll on-infinite="loadMore()" distance="50%">
     </ion-infinite-scroll>

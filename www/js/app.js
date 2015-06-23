@@ -33,8 +33,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb'])
         url: "/localinformation",
         views: {
             'menuContent': {
-            templateUrl: "templates/LocalInformation.html",
-            controller: 'localInformationController'
+                templateUrl: "templates/LocalInformation.html",
+                controller: 'localInformationController'
             }
         }
     })
@@ -43,19 +43,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb'])
         url: "/adstore",
         views: {
             'menuContent': {
-            templateUrl: "templates/AdStore.html",
-            controller: 'adStoreController'
+                templateUrl: "templates/AdStore.html",
+                controller: 'adStoreController'
             }
         }
     })
-    
+
     //saleevent
     .state('app.saleevent', {
         url: "/saleevent",
         views: {
             'menuContent': {
-            templateUrl: "templates/SaleEvent.html",
-            controller: 'saleEventController'
+                templateUrl: "templates/SaleEvent.html",
+                controller: 'saleEventController'
             }
         }
     })
@@ -65,30 +65,30 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb'])
         url: "/adspot",
         views: {
             'menuContent': {
-            templateUrl: "templates/AdSpot.html",
-            controller: 'adSpotController'
+                templateUrl: "templates/AdSpot.html",
+                controller: 'adSpotController'
             }
         }
     })
-    
+
     //banner
     .state('app.banner', {
         url: "/banner",
         views: {
             'menuContent': {
-            templateUrl: "templates/Banner.html",
-            controller: 'bannerController'
+                templateUrl: "templates/Banner.html",
+                controller: 'bannerController'
             }
         }
     })
-    
+
     //favorites
     .state('app.favorites', {
         url: "/favorites",
         views: {
             'menuContent': {
-            templateUrl: "templates/Favorites.html",
-            controller: 'favoritesController'
+                templateUrl: "templates/Favorites.html",
+                controller: 'favoritesController'
             }
         }
     });
