@@ -21,9 +21,15 @@
     "cordova-plugin-splashscreen",
     "com.ionic.keyboard",
     "org.apache.cordova.camera",
-    "org.apache.cordova.file"
+    "org.apache.cordova.file",
+    {
+      "locator": "engine/cordova-crosswalk-engine-c0.7.1",
+      "id": "cordova-plugin-crosswalk-webview"
+    },
+    "org.apache.cordova.splashscreen"
   ],
   "cordovaPlatforms": [
-    "ios"
+    "ios",
+    "android"
   ]
 }
