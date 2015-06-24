@@ -1,14 +1,22 @@
 /* Empty. Add your own CSS if you like */
 div.hscroller {
 
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 .wide-as-needed {
-  overflow: scroll;
-  white-space: nowrap;
+    overflow: scroll;
+    white-space: nowrap;
 }
 .scroll {
-  min-width: 100%;
-} 
+    min-width: 100%;
+}
+
+.item-body {
+    min-width : 100%;
+}
+
+ion-item:active {
+    background-color: red;
+}

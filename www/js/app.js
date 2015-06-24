@@ -91,6 +91,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
                 controller: 'favoritesController'
             }
         }
+    })
+
+    // LocalInformationDetail
+    .state('app.localinformationdetail', {
+        url: '/localinformation/:unitid',
+        views: {
+            'menuContent' :{
+                templateUrl: 'templates/LocalInformationDetail.html',
+                controller: 'localinformationdetailcontroller'
+            }
+        }
     });
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/localinformation');
