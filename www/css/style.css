@@ -20,3 +20,25 @@ div.hscroller {
 ion-item:active {
     background-color: red;
 }
+
+div.wrapper{
+    float:center; /* important */
+    position:relative; /* important(so we can absolutely position the description div */
+}
+div.description{
+    position:absolute; /* absolute position (so we can position it where we want)*/
+    bottom:0px; /* position will be on bottom */
+    left:0px;
+    width:auto; /* 100%; */
+    /* styling bellow */
+    background-color:black;
+    font-size:15px;
+    color:white;
+    opacity:0.8; /* transparency */
+    filter:alpha(opacity=60); /* IE transparency */
+}
+i.description_content{
+    align : center;
+    padding:10px;
+    margin:0px;
+}

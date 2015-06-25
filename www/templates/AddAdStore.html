@@ -26,12 +26,20 @@
 
             </div>
         </form>
-            <div class="row">
-                <button class="button button-block button-dark" ng-click="addImage()">사진</button>
-                <button class="button button-block button-dark" ng-click="doWrite()">올리기</button>
-            </div>
+        <div class="row">
+            <button class="button button-block button-dark" ng-click="addImage()">사진</button>
+            <button class="button button-block button-dark" ng-click="doWrite()">올리기</button>
+        </div>
         <ion-scroll direction="x" class="wide-as-needed">
-            <img ng-repeat="image in images" style="max-height:20%" ng-src="{{urlForImage(image)}}"/>
+            <div class="wrapper">
+                <img ng-repeat="image in images" style="max-height:20%; margin : 3px" ng-src="{{urlForImage(image)}}"/>
+                <!-- <img class="full-image" ng-src="http://lorempixel.com/{{item.width}}/{{item.height}}/{{item.pictureType}}/{{item.id}}"> -->
+                <div class='description'>
+                    <!-- description content -->
+                    <i class='description_content ion-close-circled'></i>
+                    <!-- end description content -->
+                </div>
+            </div>
         </ion-scroll>
     </ion-content>
 </div>

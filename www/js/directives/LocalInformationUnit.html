@@ -2,14 +2,14 @@
 <ion-content>
     <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
     </ion-refresher>
-    <ion-item ng-repeat="item in items" class="list card" style="min-width: 100%;; margin : 0px; padding : 0px" href="#/app/localinformation/{{item.id}}">
+    <ion-item ng-repeat="item in items" class="list card" style="min-width: 100%; margin : 0px; padding : 0px" href="#/app/localinformation/{{item.id}}">
         <div class="item-avatar">
             <img src="http://lorempixel.com/200/200/people">
             <h2>우리의 밤은 당신의 낮보다 뜨겁다.</h2>
             <p>January 05, 2015</p>
         </div>
 
-        <div class="item-body">
+        <div class="item-body wrapper">
             <img class="full-image" ng-src="http://lorempixel.com/{{item.width}}/{{item.height}}/{{item.pictureType}}/{{item.id}}">
             <p>
                 link : {{item.width}}/{{item.height}}/{{item.pictureType}}/{{item.id}}
@@ -24,20 +24,20 @@
         </div>
 
         <!-- <div class="item tabs tabs-secondary tabs-icon-left">
-            <a class="tab-item" href="#">
-                <i class="icon ion-thumbsup"></i> Like
-            </a>
-            <a class="tab-item" href="#">
-                <i class="icon ion-chatbox"></i> Comment
-            </a>
-            <a class="tab-item" href="#">
-                <i class="icon ion-share"></i> Share
-            </a>
-        </div> -->
+        <a class="tab-item" href="#">
+        <i class="icon ion-thumbsup"></i> Like
+    </a>
+    <a class="tab-item" href="#">
+    <i class="icon ion-chatbox"></i> Comment
+</a>
+<a class="tab-item" href="#">
+<i class="icon ion-share"></i> Share
+</a>
+</div> -->
 
-    </ion-item>
+</ion-item>
 
-    <!-- <ion-infinite-scroll on-infinite="loadMore()" distance="70%">
-    </ion-infinite-scroll> -->
+<!-- <ion-infinite-scroll on-infinite="loadMore()" distance="70%">
+</ion-infinite-scroll> -->
 
 </ion-content>
