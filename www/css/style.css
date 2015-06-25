@@ -13,18 +13,40 @@ div.hscroller {
     min-width: 100%;
 }
 
-.item-body {
-    min-width : 100%;
-}
-
-ion-item:active {
-    background-color: red;
-}
-
 div.wrapper{
     float:center; /* important */
     position:relative; /* important(so we can absolutely position the description div */
 }
+
+.card {
+    margin-bottom : 5px !important;
+    margin-left : 2px !important;
+    margin-right : 2px !important;
+    min-width : 98% !important;
+}
+
+a.activated {
+    background-color: inherit !important;
+}
+
+.item-avatar {
+    margin : 0px !important;
+}
+
+.item-content, .item-body {
+    max-width: 100% !important;
+    padding-left: 3px !important;
+    padding-right : 3px !important;
+}
+
+.ng-binding {
+    margin : 0px !important;
+}
+
+.full-image {
+    margin : 0px !important;
+}
+
 div.description{
     position:absolute; /* absolute position (so we can position it where we want)*/
     bottom:0px; /* position will be on bottom */
@@ -37,8 +59,26 @@ div.description{
     opacity:0.8; /* transparency */
     filter:alpha(opacity=60); /* IE transparency */
 }
+
 i.description_content{
     align : center;
     padding:10px;
     margin:0px;
+}
+
+.mfb-component__button--main{
+  background-color: orange !important;
+}
+
+.mfb-component--tl, .mfb-component--tr, .mfb-component--bl, .mfb-component--br {
+  margin: 10px !important;
+  size : 20px !important;
+}
+.mfb-component__icon, .mfb-component__main-icon--active,
+.mfb-component__main-icon--resting, .mfb-component__child-icon {
+  font-size: 28px !important;
+}
+
+.item-content-leftmenu {
+    padding-left : 15px !important;
 }
