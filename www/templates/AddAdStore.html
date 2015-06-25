@@ -8,20 +8,20 @@
     <ion-content>
         <form>
             <div class="list">
-                <label class="item item-input">
-                    <!-- <span class="input-label">제목</span> -->
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">제목</span>
                     <!--          <input type="text" ng-model="loginData.username">-->
                     <input type="text" placeholder="제목" ng-model="inputData.title" />
                 </label>
-                <label class="item item-input">
-                    <!-- <span class="input-label">닉네임</span> -->
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">닉네임</span>
                     <!-- <input type="text" ng-model="loginData.username">-->
                     <input type="text" placeholder="닉네임" ng-model="inputData.nickName" />
                 </label>
-                <label class="item item-input">
-                    <!-- <span class="input-label">내용</span> -->
+                <label class="item item-input item-floating-label" style="height : 300px !important">
+                    <span class="input-label">내용</span>
                     <!-- <input type="text" ng-model="loginData.password">-->
-                    <input type="text" placeholder="내용" ng-model="inputData.body"/>
+                    <textarea id="input_textarea" placeholder="내용" ng-model="inputData.body" style="height : 300px !important"></textarea>
                 </label>
 
             </div>

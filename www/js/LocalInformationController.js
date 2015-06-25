@@ -36,6 +36,7 @@ angular.module('starter.controllers')
         // code if using a login system
         $scope.images = [];
         window.localStorage['nickName'] = $scope.inputData.nickName;
+        $scope.inputData = [];
         $timeout(function () {
             $scope.closeWrite();
         }, 1000);
@@ -176,5 +177,10 @@ angular.module('starter.controllers')
         var trueOrigin = cordova.file.dataDirectory + name;
         return trueOrigin;
     }
+
+    $scope.updateEditor = function() {
+        var element = document.getElementById("input_textarea");
+        element.style.height = element.scrollHeight + "px";
+    };
 
 });
