@@ -3,6 +3,15 @@ angular.module('starter.controllers')
 .controller('localInformationController', function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile) {
     $scope.name = "주변 상점 정보";
 
+    $scope.inputData = [];
+
+    $scope.refreshInputdata = function (){
+        $scope.inputData = {
+            title : '',
+            nickName : window.localStorage['nickName'] || '',
+            body : ''
+        };
+    };
     // Create the login modal that we will use later
     $ionicModal.fromTemplateUrl('templates/AddAdStore.html', {
         scope: $scope
@@ -17,6 +26,7 @@ angular.module('starter.controllers')
 
     // Open the login modal
     $scope.write = function () {
+        $scope.refreshInputdata();
         $scope.modal.show();
     };
 
@@ -25,6 +35,7 @@ angular.module('starter.controllers')
         // Simulate a login delay. Remove this and replace with your login
         // code if using a login system
         $scope.images = [];
+        window.localStorage['nickName'] = $scope.inputData.nickName;
         $timeout(function () {
             $scope.closeWrite();
         }, 1000);
