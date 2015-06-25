@@ -19,7 +19,8 @@ div.wrapper{
 }
 
 .card {
-    margin-bottom : 5px !important;
+    margin-top : 2px !important;
+    margin-bottom : 3px !important;
     margin-left : 2px !important;
     margin-right : 2px !important;
     min-width : 98% !important;
