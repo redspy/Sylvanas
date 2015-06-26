@@ -19,6 +19,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
         }
     });
 })
+.config(function($ionicConfigProvider) {
+  if(!ionic.Platform.isIOS())$ionicConfigProvider.scrolling.jsScrolling(false);
+})
 
 .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
