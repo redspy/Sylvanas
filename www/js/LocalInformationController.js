@@ -1,10 +1,12 @@
 angular.module('starter.controllers')
 
-.controller('localInformationController', function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile) {
+.controller('localInformationController', function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $state) {
     $scope.name = "주변 상점 정보";
 
+    // 글쓰기에서 입력되는 Data 저장 : inputData
     $scope.inputData = [];
 
+    // 글쓰기에서 입력되는 Data의 초기화
     $scope.refreshInputdata = function (){
         $scope.inputData = {
             title : '',
@@ -12,28 +14,27 @@ angular.module('starter.controllers')
             body : ''
         };
     };
-    // Create the login modal that we will use later
+
+    // Create the write modal that we will use later
     $ionicModal.fromTemplateUrl('templates/AddAdStore.html', {
         scope: $scope
     }).then(function (modal) {
         $scope.modal = modal;
     });
 
-    // Triggered in the login modal to close it
+    // Triggered in the write modal to close it
     $scope.closeWrite = function () {
         $scope.modal.hide();
     };
 
-    // Open the login modal
+    // 글쓰기 Data 초기화한뒤 Open the write modal
     $scope.write = function () {
         $scope.refreshInputdata();
         $scope.modal.show();
     };
 
-    // Perform the login action when the user submits the login form
+    // 글쓰기 입력 후 글 올리기 버튼 눌렀을때
     $scope.doWrite = function () {
-        // Simulate a login delay. Remove this and replace with your login
-        // code if using a login system
         $scope.images = [];
         window.localStorage['nickName'] = $scope.inputData.nickName;
         $scope.inputData = [];
@@ -42,7 +43,7 @@ angular.module('starter.controllers')
         }, 1000);
     };
 
-
+    // Pull to Refresh 로 당겼다가 놨을때 Callback
     $scope.doRefresh = function () {
         $timeout(function () {
             //simulate async response
@@ -83,8 +84,11 @@ angular.module('starter.controllers')
         }
         $scope.$broadcast('scroll.infiniteScrollComplete');
     }
+
     $scope.$on('$stateChangeSuccess', function() {
-        $scope.loadMore();
+        if ($state.is('app.localinformation')) {
+            $scope.loadMore();
+        }
     });
 
 
@@ -101,8 +105,6 @@ angular.module('starter.controllers')
         ];
         $scope.horizontalitems = $scope.horizontalitems.concat(tmp);
     };
-
-
 
     $scope.images = [];
 
