@@ -20,12 +20,14 @@
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
-  <feature name="Notification">
-       <param name="android-package" value="org.apache.cordova.Notification" />
-   </feature>
    <feature name="Notification">
       <param name="ios-package" value="CDVNotification" />
+      <param name="android-package" value="org.apache.cordova.Notification" />
   </feature>
+  <feature name="PushPlugin">
+        <param name="ios-package" value="PushPlugin"/>
+        <param name="android-package" value="com.plugin.gcm.PushPlugin"/>
+      </feature>
   <platform name="android">
     <icon src="resources/android/icon/drawable-ldpi-icon.png" density="ldpi"/>
     <icon src="resources/android/icon/drawable-mdpi-icon.png" density="mdpi"/>

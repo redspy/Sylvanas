@@ -34,6 +34,10 @@
     {
       "locator": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-dialogs.git",
       "id": "cordova-plugin-dialogs"
+    },
+    {
+      "locator": "https://github.com/phonegap-build/PushPlugin.git",
+      "id": "com.phonegap.plugins.PushPlugin"
     }
   ],
   "cordovaPlatforms": [
