@@ -1,14 +1,59 @@
-<ion-view view-title='{{id}}'>
+<ion-view view-title='{{id}}' ng-init="initialize()">
     <ion-content>
-        <h1>Detail Page</h1>
-    </ion-content>
-    <ion-footer-bar align-title="left" class="bar-stable" style="height : 55px">
-        <!-- <i class="ion-chatbubble-working" style="max-width : 30px;min-width : 30px; font-size : 28px; margin-right : 5px; margin-left : 3px"></i> -->
+        <ion-slide-box does-continue="true" auto-play="true" slide-interval="4000"> <!--  on-slide-changed="slideChanged(index)"> -->
+            <ion-slide ng-repeat="image in images">
+                <img class="full-image" ng-src="img/{{image.url}}">
+            </ion-slide>
+        </ion-slide-box>
+        <div style="margin-top : 15px; margin-left : 30px">
+            <p style="color : gray; font-size : 15px; margin-top : 5px !important">{{store.marketname}}</p>
+            <p style="color : black; font-size : 23px ; margin-top : 5px !important">{{store.name}}
+                <a style="color : gray; font-size : 15px"> | </a>
+                <a class="ion-star" style="color : orange; font-size : 15px"></a>
+                <a style="color : gray; font-size : 15px">{{store.favoritcount}}</a>
+            </p>
+        </div>
+        <div style="margin-top : 15px; margin-left : 30px">
+            <p style="color : gray; font-size : 15px; margin : 0px">품목 : {{store.category}}</p>
+            <p style="color : gray; font-size : 15px; margin : 0px">문의 : {{store.phone}}</p>
+            <p style="color : gray; font-size : 15px; margin : 0px">주소 : {{store.address}}</p>
+        </div>
+        <div align="center" class="row" style="margin : auto; margin-top : 15px; margin-left : 5%; margin-right : 5%; max-width : 90%">
+            <button class="button col-50" style="margin : auto !important; max-width : 48% !important">
+                <a class="ion-star"> 찜하기</a>
+            </button>
+            <button class="button col-50" style="margin : auto !important; max-width : 48% !important">
+                <a class="ion-ios-telephone"> 전화연결</a>
+            </button>
+        </div>
+        <div style="background-color : lightgray; min-width : 100%; padding : 12px; margin-top : 7px">
+            <div class="card">
+                <div class="item item-divider">
+                    소개글
+                </div>
+                <div class="item item-text-wrap">
+                    {{store.bodytext}}
+                </div>
+            </div>
+        </div>
+        <div style="background-color : lightgray; min-width : 100%; padding : 12px">
+            <div class="card">
+                <div class="item item-divider">
+                    위치
+                </div>
+                <div class="item item-text-wrap">
+                    <div id="map" style="min-height : 300px !important"></div>
+                </div>
+            </div>
+        </div>
+        </ion-content>
+        <ion-footer-bar align-title="left" class="bar-stable" style="height : 55px">
+            <!-- <i class="ion-chatbubble-working" style="max-width : 30px;min-width : 30px; font-size : 28px; margin-right : 5px; margin-left : 3px"></i> -->
         <div class="row">
             <input type="text" placeholder="댓글을 달아주세요." class="col col-90" style="margin-right : 4px; padding-left : 4px" ng-model="reply">
-                <button class="col button text-center" ng-click="doSomething()" style="min-width : 32px !important;">
-                    <i class="ion-chatbubble-working" style=" font-size : 18px"></i>
-                </button>
+            <button class="col button text-center" ng-click="doSomething()" style="min-width : 32px !important;">
+                <i class="ion-chatbubble-working" style=" font-size : 18px"></i>
+            </button>
         </div>
     </ion-footer-bar>
 </ion-view>
