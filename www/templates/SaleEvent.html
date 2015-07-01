@@ -1,7 +1,7 @@
 <ion-view view-title='{{name}}'>
     <ion-content>
         <h1>SaleEvent</h1>
-        <ion-slide-box> <!--  on-slide-changed="slideChanged(index)"> -->
+        <ion-slide-box does-continue="true" auto-play="true" slide-interval="3000"> <!--  on-slide-changed="slideChanged(index)"> -->
 
             <ion-slide ng-repeat="image in images">
                 <img class="full-image" ng-src="img/{{image.url}}">
