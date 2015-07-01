@@ -46,6 +46,13 @@ angular.module('starter.controllers')
         var mapOptions = {
             center: myLatlng,
             zoom: 16,
+            draggable: false,
+            zoomControl : false,
+            streetViewControl : false,
+            disableDoubleClickZoom : false,
+            scrollwheel : false,
+            scaleControl : false,
+            mapTypeControl : false,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(document.getElementById("map"),

@@ -38,6 +38,8 @@ a.activated {
     max-width: 100% !important;
     padding-left: 3px !important;
     padding-right : 3px !important;
+    padding-top : 0px !important;
+    padding-bottom : 0px !important;
 }
 
 .ng-binding {
@@ -111,4 +113,8 @@ ion-header-bar {
 
 .title, .ion-navicon, .header-item {
     color : white !important;
+}
+
+.item-complex {
+    padding : 0px !important;
 }

@@ -2,33 +2,60 @@
 <ion-content>
     <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
     </ion-refresher>
-    <ion-item ng-repeat="item in items" class="list card" style="margin : 0px; padding : 0px" href="#/app/localinformation/{{item.id}}">
-        <div class="item-avatar">
-            <img src="http://lorempixel.com/200/200/people">
-            <h2>우리의 밤은 당신의 낮보다 뜨겁다.</h2>
-            <p>January 05, 2015</p>
+    <ion-item ng-repeat="item in items" class="list card" style="padding : 0px !important" href="#/app/localinformation/{{item.id}}">
+        <div class="row">
+            <div class="col col-33 ">
+                <img class="full-image" ng-src="http://lorempixel.com/{{item.width}}/{{item.height}}/{{item.pictureType}}/{{item.id}}">
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col col-90">
+                        <div style="margin-left : 10px">
+                            <p style="color : gray; font-size : 15px">{{item.marketname}}</p>
+                            <p style="color : black; font-size : 23px ; margin-top : 7px !important">{{item.name}}
+                                <a style="color : gray; font-size : 15px"> | </a>
+                                <a class="ion-star" style="color : orange; font-size : 15px"></a>
+                                <a style="color : gray; font-size : 15px">{{item.favoritcount}}</a>
+                            </p>
+                        </div>
+                        <div style="margin-top : 15px; margin-left : 10px">
+                            <p style="color : gray; font-size : 15px; margin : 0px">품목 : {{item.category}}</p>
+                            <p style="color : gray; font-size : 15px; margin : 0px">문의 : {{item.phone}}</p>
+                            <p style="color : gray; font-size : 15px; margin : 0px">주소 : {{item.address}}</p>
+                        </div>
+                    </div>
+                    <div class="col" style="margin-top : 50px !important">
+                        <i class="ion-ios-arrow-right" style="font-size : 30px; color : gray"></i>
+                    </div>
+                </div>
+            </div>
         </div>
+        <!-- <div class="item-avatar">
+        <img src="http://lorempixel.com/200/200/people">
+        <h2>우리의 밤은 당신의 낮보다 뜨겁다.</h2>
+        <p>January 05, 2015</p>
+    </div>
 
-        <div class="item-body wrapper">
-            <img class="full-image" ng-src="http://lorempixel.com/{{item.width}}/{{item.height}}/{{item.pictureType}}/{{item.id}}">
-            <p>
-                link : {{item.width}}/{{item.height}}/{{item.pictureType}}/{{item.id}}
-            </p>
-            <p>
-                상처를 치료해줄 사람어디 없나, 가만히 놔두다간 끊임없이 덧나 사랑도 사람도 너무나도 겁나 혼자인게 무서워 나 잊혀질까 두려워
-            </p>
-            <p>
-                <a href="#" class="subdued">1 Like</a>
-                <a href="#" class="subdued">5 Comments</a>
-            </p>
-        </div>
+    <div class="item-body wrapper">
+    <img class="full-image" ng-src="http://lorempixel.com/{{item.width}}/{{item.height}}/{{item.pictureType}}/{{item.id}}">
+    <p>
+    link : {{item.width}}/{{item.height}}/{{item.pictureType}}/{{item.id}}
+</p>
+<p>
+상처를 치료해줄 사람어디 없나, 가만히 놔두다간 끊임없이 덧나 사랑도 사람도 너무나도 겁나 혼자인게 무서워 나 잊혀질까 두려워
+</p>
+<p>
+<a href="#" class="subdued">1 Like</a>
+<a href="#" class="subdued">5 Comments</a>
+</p>
+</div> -->
 
-        <!-- <div class="item tabs tabs-secondary tabs-icon-left">
-        <a class="tab-item" href="#">
-        <i class="icon ion-thumbsup"></i> Like
-    </a>
-    <a class="tab-item" href="#">
-    <i class="icon ion-chatbox"></i> Comment
+<!-- <div class="item tabs tabs-secondary tabs-icon-left">
+<a class="tab-item" href="#">
+<i class="icon ion-thumbsup"></i> Like
+</a>
+<a class="tab-item" href="#">
+<i class="icon ion-chatbox"></i> Comment
 </a>
 <a class="tab-item" href="#">
 <i class="icon ion-share"></i> Share

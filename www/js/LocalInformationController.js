@@ -73,6 +73,12 @@ angular.module('starter.controllers')
             id: 'Pic' + amount,
             pictureType: getRandomItem(PictureType),
             height: getRandomItem(heights),
+            marketname : "강릉 중앙시장",
+            name : "홍콩반점",
+            favoritcount : "3",
+            category : "짱깨",
+            phone : "010-6521-6240",
+            address : "강원도 강릉시 짜장면",
             width: 400
         };
         return item;
