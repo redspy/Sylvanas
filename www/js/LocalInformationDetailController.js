@@ -32,6 +32,14 @@ angular.module('starter.controllers')
         long : "127.0658082"
     }
 
+    $scope.favoriteClick = function () {
+        alert('Add to Favorite');
+    }
+
+    $scope.callClick = function () {
+        window.open('tel:' + $scope.store.phone);
+    }
+
     $scope.initialize = function () {
         var myLatlng = new google.maps.LatLng($scope.store.lat, $scope.store.long);
 
