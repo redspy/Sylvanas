@@ -1,5 +1,12 @@
 <ion-view view-title='{{name}}'>
     <ion-content>
         <h1>SaleEvent</h1>
+        <ion-slide-box> <!--  on-slide-changed="slideChanged(index)"> -->
+
+            <ion-slide ng-repeat="image in images">
+                <img class="full-image" ng-src="img/{{image.url}}">
+            </ion-slide>
+
+        </ion-slide-box>
     </ion-content>
 </ion-view>
