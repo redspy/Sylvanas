@@ -96,3 +96,19 @@ i.description_content{
 .slider {
   height: 40%;
 }
+
+.pointBackground {
+    background: #34BAAA !important;
+}
+
+.pointFontColor {
+    color : white !important;
+}
+
+ion-header-bar {
+    background: #34BAAA !important;
+}
+
+.title, .ion-navicon, .header-item {
+    color : white !important;
+}
