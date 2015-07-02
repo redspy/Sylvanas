@@ -55,6 +55,51 @@ angular.module('starter.controllers')
         }, 1000);
     };
 
+    ////////////////////////////////////////////////////////////////////////////////Image modal
+    $ionicModal.fromTemplateUrl('templates/image-modal.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function(modal) {
+        $scope.imagemodal = modal;
+    });
+
+    $scope.openModal = function() {
+        $scope.imagemodal.show();
+    };
+
+    $scope.closeModal = function() {
+        $scope.imagemodal.hide();
+    };
+
+    //Cleanup the modal when we're done with it!
+    $scope.$on('$destroy', function() {
+        $scope.imagemodal.remove();
+    });
+    // Execute action on hide modal
+    $scope.$on('modal.hide', function() {
+        // Execute action
+    });
+    // Execute action on remove modal
+    $scope.$on('modal.removed', function() {
+        // Execute action
+    });
+    $scope.$on('modal.shown', function() {
+        console.log('Modal is shown!');
+    });
+
+    var selectedImageIndex = 0;
+
+    $scope.showImage = function(index) {
+        $scope.imageSrc = $scope.urlForImage($scope.images[index]);//'http://ionicframework.com/img/ionic-logo-blog.png';
+        selectedImageIndex = index;
+        $scope.openModal();
+    }
+
+    $scope.deleteImage = function () {
+        $scope.images.splice(selectedImageIndex, 1);
+    }
+    ////////////////////////////////////////////////////////////////////////////////
+
 
     var heights = [225, 300, 375, 450];
     var widths = [75, 150, 225, 300, 375, 450, 500];

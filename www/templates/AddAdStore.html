@@ -27,12 +27,11 @@
             </div>
         </form>
         <ion-scroll direction="x" class="wide-as-needed">
-            <!-- <div class="wrapper"> -->
-                <img ng-repeat="image in images" style="max-height:20%; margin-left : 3px !important" ng-src="{{urlForImage(image)}}"/>
-                <!-- <div class='description'>
-                    <i class='description_content ion-close-circled'></i>
-                </div> -->
-            <!-- </div> -->
+            <div ng-repeat="image in images">
+                <div ng-click="showImage({{$index}})">
+                    <img style="max-height:20%; margin-left : 3px !important" ng-src="{{urlForImage(image)}}"/>
+                </div>
+            </div>
         </ion-scroll>
         <div class="row">
             <button class="button button-block button-dark" ng-click="addImage()">사진</button>
