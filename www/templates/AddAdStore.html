@@ -31,9 +31,13 @@
                 <img ng-click="showImage({{$index}})" style="max-height:20%; margin-left : 3px !important" ng-src="{{urlForImage(image)}}"/>
             </i>
         </ion-scroll>
-        <div class="row">
-            <button class="button button-block button-dark" ng-click="addImage()">사진</button>
-            <button class="button button-block button-dark" ng-click="doWrite()">올리기</button>
+        <div align="center" class="row" style="margin : auto; margin-top : 15px; margin-left : 5%; margin-right : 5%; max-width : 90%">
+            <button class="button col-50" style="margin : auto !important; max-width : 48% !important" ng-click="addImage()">
+                <a class="ion-images"> 사진</a>
+            </button>
+            <button class="button col-50" style="margin : auto !important; max-width : 48% !important" ng-click="doWrite()">
+                <a class="ion-checkmark"> 완료</a>
+            </button>
         </div>
     </ion-content>
 </div>
