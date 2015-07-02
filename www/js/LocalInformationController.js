@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-.controller('localInformationController', function ($scope, $state) {
+.controller('localInformationController', function ($scope, $timeout, $state) {
     $scope.name = "주변 상점 정보";
 
     var heights = [225, 300, 375, 450];
@@ -18,7 +18,7 @@ angular.module('starter.controllers')
 
         }, 1000);
     };
-    
+
     function getRandomItem(arrObject) {
         var rndIndex = Math.floor((Math.random() * arrObject.length) + 1);
         return arrObject[rndIndex - 1];
