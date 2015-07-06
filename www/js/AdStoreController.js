@@ -1,7 +1,14 @@
 angular.module('starter.controllers')
 
-.controller('adStoreController', function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state) {
+.controller('adStoreController', function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate) {
     $scope.name = "내가게 알리기";
+
+    $scope.handle = $ionicScrollDelegate.$getByHandle('mainScroll');
+
+    $scope.onDrag = function(e){
+        var distance = -1 * e.gesture.deltaY;
+        $scope.handle.scrollBy(0,distance,true);
+    };
 
     $scope.items = [
         {
