@@ -215,11 +215,11 @@ angular.module('starter.controllers')
         $scope.imageSrc = $scope.urlForImage($scope.images[index]);//'http://ionicframework.com/img/ionic-logo-blog.png';
         selectedImageIndex = index;
         $scope.openModal();
-    }
+    };
 
     $scope.deleteImage = function () {
         $scope.images.splice(selectedImageIndex, 1);
-    }
+    };
     ////////////////////////////////////////////////////////////////////////////////
     $scope.images = [];
 
@@ -287,13 +287,13 @@ angular.module('starter.controllers')
         }, function(err) {
             console.log(err);
         });
-    }
+    };
 
     $scope.urlForImage = function(imageName) {
         var name = imageName.substr(imageName.lastIndexOf('/') + 1);
         var trueOrigin = cordova.file.dataDirectory + name;
         return trueOrigin;
-    }
+    };
 
     $scope.updateEditor = function() {
         var element = document.getElementById("input_textarea");

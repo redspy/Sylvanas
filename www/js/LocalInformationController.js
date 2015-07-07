@@ -46,7 +46,7 @@ angular.module('starter.controllers')
             $scope.items.push(getData($scope.items.length));
         }
         $scope.$broadcast('scroll.infiniteScrollComplete');
-    }
+    };
 
     $scope.$on('$stateChangeSuccess', function() {
         if ($state.is('app.localinformation')) {

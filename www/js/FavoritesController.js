@@ -16,5 +16,5 @@ angular.module('starter.controllers')
             'Game Over',            // title
             'Done'                  // buttonName
         );
-    }
+    };
 });

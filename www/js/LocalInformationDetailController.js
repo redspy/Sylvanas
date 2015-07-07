@@ -6,7 +6,7 @@ angular.module('starter.controllers')
 
     $scope.doSomething = function () {
         $scope.reply = "";
-    }
+    };
 
     $scope.images = [
         {
@@ -18,7 +18,7 @@ angular.module('starter.controllers')
         {
             url :'example3.jpg'
         }
-    ]
+    ];
 
     $scope.store = {
         marketname : "강릉 중앙시장",
@@ -30,15 +30,15 @@ angular.module('starter.controllers')
         bodytext : "이 짜장면 집으로 말씀드릴것 같으면 소림사에서 30년간 연마한 무술과 내공으로 최고의 면빨을 자랑하기 블라블라.",
         lat : "37.5069106",
         long : "127.0658082"
-    }
+    };
 
     $scope.favoriteClick = function () {
         alert('Add to Favorite');
-    }
+    };
 
     $scope.callClick = function () {
         window.open('tel:' + $scope.store.phone);
-    }
+    };
 
     $scope.initialize = function () {
         var myLatlng = new google.maps.LatLng($scope.store.lat, $scope.store.long);
@@ -68,7 +68,7 @@ angular.module('starter.controllers')
             infowindow.open(map,marker);
         });
         $scope.map = map;
-    }
+    };
     google.maps.event.addDomListener(window, 'load', $scope.initialize);
 
 });

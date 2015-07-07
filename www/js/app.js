@@ -86,7 +86,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
         if (event.badge){
             window.plugins.pushNotification.setApplicationIconBadgeNumber(successHandler, errorHandler, event.badge);
         }
-    }
+    };
 
     /**
     * onNotificationGCM
@@ -127,7 +127,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
             console.log('알수 없는 이벤트');
             break;
         }
-    }
+    };
 
     // 디바이스가 ready가 될때 실행될 수 있도록 이벤트 리스너에 등록한다.
     document.addEventListener("deviceready", function(){
