@@ -1,9 +1,14 @@
 language: node_js
+
 node_js:
   - "0.12"
+
 before_install:
-  - "curl -L https://raw.githubusercontent.com/arunoda/travis-ci-laika/master/configure.sh | /bin/sh"
-services:
-  - mongodb
-env:
-  - LAIKA_OPTIONS="-t 5000"
+  - npm install -g npm
+
+before_script:
+  - npm install
+  - bower install
+
+after_script:
+  - 'ionic build'
