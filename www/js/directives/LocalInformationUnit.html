@@ -2,7 +2,7 @@
 <ion-content>
     <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
     </ion-refresher>
-    <ion-item ng-repeat="item in items" class="list card" style="padding : 0px !important" href="#/app/localinformation/{{item.id}}">
+    <ion-item id="ionListItemStyle" ng-repeat="item in items" class="list card" style="padding : 0px !important" href="#/app/localinformation/{{item.id}}">
         <div class="row">
             <div class="col col-33 ">
                 <img class="full-image" ng-src="http://lorempixel.com/{{item.width}}/{{item.height}}/{{item.pictureType}}/{{item.id}}">

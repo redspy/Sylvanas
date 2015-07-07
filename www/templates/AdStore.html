@@ -3,7 +3,7 @@
     <ion-content delegate-handle="mainScroll" has-bouncing="true" scroll="true">
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
         </ion-refresher>
-        <ion-item ng-repeat="item in items" style="padding : 6px !important" href="#/app/localinformation/{{item.id}}">
+        <ion-item id="ionListItemStyle" ng-repeat="item in items" style="padding : 6px !important" href="#/app/localinformation/{{item.id}}">
             <div class="card">
                 <div class="item item-divider item-text-wrap" style="background : white;  margin-top : 8px !important">
                     <b style="font-size : 18px;">{{item.title}}</b>

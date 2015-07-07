@@ -34,7 +34,7 @@ a.activated {
     margin : 0px !important;
 }
 
-.item-content, .item-body {
+#ionListItemStyle .item-content {
     max-width: 100% !important;
     padding-left: 3px !important;
     padding-right : 3px !important;
