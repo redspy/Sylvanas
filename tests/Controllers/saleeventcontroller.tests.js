@@ -6,11 +6,19 @@ describe('saleEventController', function(){
 
     beforeEach(inject(function($rootScope, $controller) {
         scope = $rootScope.$new();
-        $controller('ChatDetailCtrl', {$scope: scope});
+        $controller('saleEventController', {$scope: scope});
     }));
 
     // tests start here
     it('scope.settings.enableFriends', function(){
         expect(scope.settings.enableFriends).toEqual(true);
+    });
+
+    // it('dummyfunction', function(){
+    //     expect(dummyfunction()).toEqual(true);
+    // });
+
+    it('name', function() {
+        expect(scope.name).toEqual("할인 & 이벤트");
     });
 });
