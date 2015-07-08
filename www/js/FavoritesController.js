@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-.controller('favoritesController', function ($scope) {
+.controller('favoritesController', ['$scope', function ($scope) {
     $scope.name = "내 찜 목록";
 
     function alertDismissed() {
@@ -17,4 +17,4 @@ angular.module('starter.controllers')
             'Done'                  // buttonName
         );
     };
-});
+}]);

@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-.controller('saleEventController', function ($scope) {
+.controller('saleEventController', ['$scope', function ($scope) {
     $scope.name = "할인 & 이벤트";
 
     $scope.images = [
@@ -23,4 +23,4 @@ angular.module('starter.controllers')
             url :'images.jpg'
         }
     ];
-});
+}]);

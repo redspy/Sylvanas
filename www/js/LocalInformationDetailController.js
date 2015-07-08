@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-.controller('localinformationdetailcontroller', function ($scope, $stateParams) {
+.controller('localinformationdetailcontroller', ['$scope', '$stateParams', function ($scope, $stateParams) {
     $scope.name = "localinformationdetailcontroller";
     $scope.id = $stateParams.unitid;
 
@@ -71,4 +71,4 @@ angular.module('starter.controllers')
     };
     google.maps.event.addDomListener(window, 'load', $scope.initialize);
 
-});
+}]);
