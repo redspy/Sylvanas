@@ -3,10 +3,6 @@ angular.module('starter.controllers')
 .controller('saleEventController', function ($scope) {
     $scope.name = "할인 & 이벤트";
 
-    $scope.settings = {
-      enableFriends: true
-    };
-    
     $scope.images = [
         {
             url :'images-1.jpg'

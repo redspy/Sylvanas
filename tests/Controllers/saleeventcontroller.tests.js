@@ -10,13 +10,9 @@ describe('saleEventController', function(){
     }));
 
     // tests start here
-    it('scope.settings.enableFriends', function(){
-        expect(scope.settings.enableFriends).toEqual(true);
+    it('scope.images', function(){
+        expect(scope.images).toBeDefined();
     });
-
-    // it('dummyfunction', function(){
-    //     expect(dummyfunction()).toEqual(true);
-    // });
 
     it('name', function() {
         expect(scope.name).toEqual("할인 & 이벤트");
