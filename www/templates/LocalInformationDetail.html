@@ -1,5 +1,5 @@
 <ion-view view-title='{{id}}' ng-init="initialize()">
-    <ion-content>
+    <ion-content id="detailListStyle">
         <ion-slide-box does-continue="true" auto-play="true" slide-interval="4000">
             <!--  on-slide-changed="slideChanged(index)"> -->
             <ion-slide ng-repeat="image in images">
@@ -24,16 +24,16 @@
         </div>
         <div align="center" class="row"
              style="margin : auto; margin-top : 15px; margin-left : 5%; margin-right : 5%; max-width : 90%">
-            <button class="button col-50" style="margin : auto !important; max-width : 48% !important"
+            <button class="button col-50" style="margin : auto !important; max-width : 48% !important; min-height : 43px; max-height : 43px"
                     ng-click="favoriteClick()">
                 <a class="ion-star"> 찜하기</a>
             </button>
-            <button class="button col-50" style="margin : auto !important; max-width : 48% !important"
+            <button class="button col-50" style="margin : auto !important; max-width : 48% !important; min-height : 43px; max-height : 43px"
                     ng-click="callClick()">
                 <a class="ion-ios-telephone"> 전화연결</a>
             </button>
         </div>
-        <div style="background-color : lightgray; min-width : 100%; padding : 12px; margin-top : 7px">
+        <div style="background-color : #e7e7e7; min-width : 100%; padding : 12px; margin-top : 7px">
             <div class="card">
                 <div class="item item-divider">
                     소개글
@@ -43,7 +43,7 @@
                 </div>
             </div>
         </div>
-        <div style="background-color : lightgray; min-width : 100%; padding : 12px; padding-top : 1px">
+        <div style="background-color : #e7e7e7; min-width : 100%; padding : 12px; padding-top : 1px">
             <div class="card">
                 <div class="item item-divider">
                     위치

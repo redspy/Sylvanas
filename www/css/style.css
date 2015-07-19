@@ -20,12 +20,18 @@ div.wrapper {
     position: relative; /* important(so we can absolutely position the description div */
 }
 
-.card {
+#ionListItemStyle .card {
     margin-top: 13px !important;
     margin-bottom: 13px !important;
     margin-left: 13px !important;
     margin-right: 13px !important;
+}
 
+#detailListStyle .card {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    margin-left: 5px !important;
+    margin-right: 5px !important;
 }
 
 a.activated {
@@ -77,7 +83,6 @@ i.description_content {
 
 .mfb-component--tl, .mfb-component--tr, .mfb-component--bl, .mfb-component--br {
     margin: 10px !important;
-    size: 20px !important;
 }
 
 .slider-pager .slider-pager-page {
