@@ -1,6 +1,7 @@
 <div class="modal">
     <ion-header-bar>
         <h1 class="title">글쓰기</h1>
+
         <div class="buttons">
             <button class="button button-clear pointFontColor" ng-click="closeWrite()">Close</button>
         </div>
@@ -11,31 +12,36 @@
                 <label class="item item-input item-floating-label">
                     <span class="input-label">제목</span>
                     <!--          <input type="text" ng-model="loginData.username">-->
-                    <input type="text" placeholder="제목" ng-model="inputData.title" />
+                    <input type="text" placeholder="제목" ng-model="inputData.title"/>
                 </label>
                 <label class="item item-input item-floating-label">
                     <span class="input-label">닉네임</span>
                     <!-- <input type="text" ng-model="loginData.username">-->
-                    <input type="text" placeholder="닉네임" ng-model="inputData.nickName" />
+                    <input type="text" placeholder="닉네임" ng-model="inputData.nickName"/>
                 </label>
                 <label class="item item-input item-floating-label" style="height : 150px !important">
                     <span class="input-label">내용</span>
                     <!-- <input type="text" ng-model="loginData.password">-->
-                    <textarea id="input_textarea" placeholder="내용" ng-model="inputData.body" style="height : 300px !important"></textarea>
+                    <textarea id="input_textarea" placeholder="내용" ng-model="inputData.body"
+                              style="height : 300px !important"></textarea>
                 </label>
 
             </div>
         </form>
         <ion-scroll direction="x" class="wide-as-needed">
             <i ng-repeat="image in images">
-                <img ng-click="showImage({{$index}})" style="max-height:20%; margin-left : 3px !important" ng-src="{{urlForImage(image)}}"/>
+                <img ng-click="showImage({{$index}})" style="max-height:20%; margin-left : 3px !important"
+                     ng-src="{{urlForImage(image)}}"/>
             </i>
         </ion-scroll>
-        <div align="center" class="row" style="margin : auto; margin-top : 15px; margin-left : 5%; margin-right : 5%; max-width : 90%">
-            <button class="button col-50" style="margin : auto !important; max-width : 48% !important" ng-click="addImage()">
+        <div align="center" class="row"
+             style="margin : auto; margin-top : 15px; margin-left : 5%; margin-right : 5%; max-width : 90%">
+            <button class="button col-50" style="margin : auto !important; max-width : 48% !important"
+                    ng-click="addImage()">
                 <a class="ion-images"> 사진</a>
             </button>
-            <button class="button col-50" style="margin : auto !important; max-width : 48% !important" ng-click="doWrite()">
+            <button class="button col-50" style="margin : auto !important; max-width : 48% !important"
+                    ng-click="doWrite()">
                 <a class="ion-checkmark"> 완료</a>
             </button>
         </div>

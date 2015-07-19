@@ -2,10 +2,12 @@
 <ion-content>
     <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
     </ion-refresher>
-    <ion-item id="ionListItemStyle" ng-repeat="item in items" class="list card" style="padding : 0px !important" href="#/app/localinformation/{{item.id}}">
+    <ion-item id="ionListItemStyle" ng-repeat="item in items" class="list card" style="padding : 0px !important"
+              href="#/app/localinformation/{{item.id}}">
         <div class="row">
             <div class="col col-33 ">
-                <img class="full-image" ng-src="http://lorempixel.com/{{item.width}}/{{item.height}}/{{item.pictureType}}/{{item.id}}">
+                <img class="full-image"
+                     ng-src="http://lorempixel.com/{{item.width}}/{{item.height}}/{{item.pictureType}}/{{item.id}}">
             </div>
             <div class="col">
                 <div class="row">
@@ -13,6 +15,7 @@
                         <div style="margin-left : 10px">
                             <span style="color : gray; font-size : 15px">{{item.marketname}}</span>
                             <br>
+
                             <div style="margin-top : 5px">
                                 <span style="color : black; font-size : 23px">{{item.name}}</span>
                                 <a style="color : gray; font-size : 15px"> | </a>
@@ -22,7 +25,9 @@
                         </div>
                         <div style="margin-top : 15px; margin-left : 10px">
                             <p style="color : gray; font-size : 15px; margin : 0px">품목 : {{item.category}}</p>
+
                             <p style="color : gray; font-size : 15px; margin : 0px">문의 : {{item.phone}}</p>
+
                             <p style="color : gray; font-size : 15px; margin : 0px">주소 : {{item.address}}</p>
                         </div>
                     </div>
@@ -52,21 +57,21 @@
 </p>
 </div> -->
 
-<!-- <div class="item tabs tabs-secondary tabs-icon-left">
-<a class="tab-item" href="#">
-<i class="icon ion-thumbsup"></i> Like
-</a>
-<a class="tab-item" href="#">
-<i class="icon ion-chatbox"></i> Comment
-</a>
-<a class="tab-item" href="#">
-<i class="icon ion-share"></i> Share
-</a>
-</div> -->
+        <!-- <div class="item tabs tabs-secondary tabs-icon-left">
+        <a class="tab-item" href="#">
+        <i class="icon ion-thumbsup"></i> Like
+        </a>
+        <a class="tab-item" href="#">
+        <i class="icon ion-chatbox"></i> Comment
+        </a>
+        <a class="tab-item" href="#">
+        <i class="icon ion-share"></i> Share
+        </a>
+        </div> -->
 
-</ion-item>
+    </ion-item>
 
-<ion-infinite-scroll icon="ion-loading-c" on-infinite="loadMore()">
-</ion-infinite-scroll>
+    <ion-infinite-scroll icon="ion-loading-c" on-infinite="loadMore()">
+    </ion-infinite-scroll>
 
 </ion-content>

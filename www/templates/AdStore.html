@@ -1,21 +1,28 @@
 <ion-view view-title='{{name}}'>
-    <nav mfb-menu position="br" effect="slidein-spring" active-icon="ion-compose" resting-icon="ion-compose" toggling-method="click" ng-click="write()"></nav>
+    <nav mfb-menu position="br" effect="slidein-spring" active-icon="ion-compose" resting-icon="ion-compose"
+         toggling-method="click" ng-click="write()"></nav>
     <ion-content delegate-handle="mainScroll" has-bouncing="true" scroll="true">
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
         </ion-refresher>
-        <ion-item id="ionListItemStyle" ng-repeat="item in items" style="padding : 6px !important" href="#/app/localinformation/{{item.id}}">
+        <ion-item id="ionListItemStyle" ng-repeat="item in items" style="padding : 6px !important"
+                  href="#/app/localinformation/{{item.id}}">
             <div class="card">
                 <div class="item item-divider item-text-wrap" style="background : white;  margin-top : 8px !important">
                     <b style="font-size : 18px;">{{item.title}}</b>
+
                     <p style="font-size : 10px; margin-top : 3px !important">
                         <i style="font-size : 15px">닉네임 : {{item.nickname}}</i>
                         <i style="font-size : 12px; margin-left : 3px !important">{{item.uploaddate}}</i>
                     </p>
-                    <p style="font-size : 18px; margin-top : 20px !important; margin-bottom : 12px !important">{{item.body}}</p>
+
+                    <p style="font-size : 18px; margin-top : 20px !important; margin-bottom : 12px !important">
+                        {{item.body}}</p>
                 </div>
                 <div class="item item-text-wrap" style="padding : 0px">
-                    <ion-scroll direction="x" scrollbar-y="false" scrollbar-x="false" on-drag-down="onDrag($event)" on-drag-up="onDrag($event)" class="wide-as-needed">
-                        <img ng-repeat="image in item.images" width="200px" height="100px" style="margin : 2px !important" ng-src="img/{{image.url}}"/>
+                    <ion-scroll direction="x" scrollbar-y="false" scrollbar-x="false" on-drag-down="onDrag($event)"
+                                on-drag-up="onDrag($event)" class="wide-as-needed">
+                        <img ng-repeat="image in item.images" width="200px" height="100px"
+                             style="margin : 2px !important" ng-src="img/{{image.url}}"/>
                     </ion-scroll>
                 </div>
             </div>

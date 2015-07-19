@@ -6,5 +6,6 @@ platforms/
 plugins/
 engine/
 www/lib/
+.idea/
 
 .brackets.json
