@@ -80,6 +80,13 @@ i.description_content {
     size: 20px !important;
 }
 
+.slider-pager .slider-pager-page {
+    width: 12px;
+    color: #DDDDDD;
+    opacity: 0.4;
+    font-size: 9px;
+}
+
 .mfb-component__icon, .mfb-component__main-icon--active,
 .mfb-component__main-icon--resting, .mfb-component__child-icon {
     font-size: 28px !important;
