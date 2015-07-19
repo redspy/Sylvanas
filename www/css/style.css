@@ -21,11 +21,11 @@ div.wrapper {
 }
 
 .card {
-    margin-top: 2px !important;
-    margin-bottom: 3px !important;
-    margin-left: 2px !important;
-    margin-right: 2px !important;
-    min-width: 98% !important;
+    margin-top: 13px !important;
+    margin-bottom: 13px !important;
+    margin-left: 13px !important;
+    margin-right: 13px !important;
+
 }
 
 a.activated {
