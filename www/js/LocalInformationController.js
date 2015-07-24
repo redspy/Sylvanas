@@ -1,4 +1,4 @@
-angular.module('starter.controllers')
+angular.module('starter.controllers', ['timer'])
 
     .controller('localInformationController', ['$scope', '$timeout', '$state', function ($scope, $timeout, $state) {
         $scope.name = "주변 상점 정보";
@@ -25,6 +25,11 @@ angular.module('starter.controllers')
         }
 
         function getData(amount) {
+            var rndIndex = Math.floor((Math.random() * 10000));
+            if (rndIndex < 2000) {
+                rndIndex = null;
+            }
+
             var item = {};
             item = {
                 id: 'Pic' + amount,
@@ -36,6 +41,7 @@ angular.module('starter.controllers')
                 category: "짱깨",
                 phone: "010-6521-6240",
                 address: "강원도 강릉시 짜장면",
+                enddate: rndIndex,
                 width: 400
             };
             return item;
