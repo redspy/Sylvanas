@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['timer'])
+angular.module('starter.controllers')
 
     .controller('localInformationController', ['$scope', '$timeout', '$state', function ($scope, $timeout, $state) {
         $scope.name = "주변 상점 정보";
