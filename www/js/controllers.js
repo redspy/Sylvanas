@@ -1,4 +1,4 @@
-angular.module('starter.controllers',['timer'])
+angular.module('starter.controllers',['timer', 'ngResource', 'ngFileUpload'])
 
     .controller('AppCtrl', ['$scope', '$ionicModal', '$timeout', function ($scope, $ionicModal, $timeout) {
 
