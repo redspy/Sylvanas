@@ -11,10 +11,24 @@
                     <b style="font-size : 18px;">{{item.title}}</b>
 
                     <p style="font-size : 10px; margin-top : 3px !important">
-                        <i style="font-size : 15px">닉네임 : {{item.nickname}}</i>
+                        <i style="font-size : 15px">{{item.nickname}}</i>
                         <i style="font-size : 12px; margin-left : 3px !important">{{item.uploaddate}}</i>
                     </p>
 
+                    <div ng-show="item.enddate != null" style="margin-top : 10px">
+                        <!--<span style="color : gray; font-size : 10px; color : red"> 남은시간 : </span>-->
+                            <i class="ion-ios-alarm" style="color : #34BAAA"></i>
+                            <span style="font-size : 15px; color : #34BAAA">
+                                <timer countdown="item.enddate" interval="1000">
+                                    <span ng-show="days != 0"> {{days}}일</span>
+                                    <span ng-show="hours != 0">{{hours}}시간</span>
+                                    <span>{{mminutes}} 분</span>
+                                    <span>{{sseconds}} 초</span>
+                                    <span> 남음</span>
+                                </timer>
+                            </span>
+                    </div>
+                    <hr size="1" style="border-color: white">
                     <p style="font-size : 18px; margin-top : 20px !important; margin-bottom : 12px !important">
                         {{item.body}}</p>
                 </div>

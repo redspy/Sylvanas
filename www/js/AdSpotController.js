@@ -8,7 +8,8 @@ angular.module('starter.controllers')
         '$cordovaGeolocation',
         '$state',
         '$ionicScrollDelegate',
-        function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate) {
+        '$timeout',
+        function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate, $timeout) {
         $scope.name = "반짝 떨이";
 
         $scope.handle = $ionicScrollDelegate.$getByHandle('mainScroll');
@@ -17,6 +18,16 @@ angular.module('starter.controllers')
             var distance = -1 * e.gesture.deltaY;
             $scope.handle.scrollBy(0, distance, true);
         };
+
+        $scope.rndIndex = function() {
+            var rndIndex = Math.floor((Math.random() * 10000));
+            if (rndIndex < 2000) {
+                return null;
+            }
+            else {
+                return rndIndex;
+            }
+        }
 
         $scope.items = [
             {
@@ -35,7 +46,8 @@ angular.module('starter.controllers')
                     {
                         url: 'example3.jpg'
                     }
-                ]
+                ],
+                enddate: $scope.rndIndex()
             },
             {
                 id: '0002',
@@ -54,7 +66,8 @@ angular.module('starter.controllers')
                     {
                         url: 'images-3.jpg'
                     }
-                ]
+                ],
+                enddate: $scope.rndIndex()
             },
             {
                 id: '0001',
@@ -72,7 +85,8 @@ angular.module('starter.controllers')
                     {
                         url: 'example3.jpg'
                     }
-                ]
+                ],
+                enddate: $scope.rndIndex()
             },
             {
                 id: '0002',
@@ -91,7 +105,8 @@ angular.module('starter.controllers')
                     {
                         url: 'images-3.jpg'
                     }
-                ]
+                ],
+                enddate: $scope.rndIndex()
             },
             {
                 id: '0001',
@@ -109,7 +124,8 @@ angular.module('starter.controllers')
                     {
                         url: 'example3.jpg'
                     }
-                ]
+                ],
+                enddate: $scope.rndIndex()
             },
             {
                 id: '0002',
@@ -128,7 +144,8 @@ angular.module('starter.controllers')
                     {
                         url: 'images-3.jpg'
                     }
-                ]
+                ],
+                enddate: $scope.rndIndex()
             },
         ];
         //글쓰기///////////////////////////////////////////////////////////////////////

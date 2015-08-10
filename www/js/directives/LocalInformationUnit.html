@@ -14,18 +14,7 @@
                 <div class="col col-90">
                     <div style="margin-left : 10px">
                         <span style="color : gray; font-size : 15px">{{item.marketname}}</span>
-                        <br>
-                        <div ng-show="item.enddate != null">
-                            <span style="color : gray; font-size : 10px; color : red"> 남은시간 : </span>
-                            <span style="color : gray; font-size : 10px; color : red">
-                                <timer countdown="item.enddate" interval="1000">
-                                    {{days}} 일
-                                    {{hours}} 시간
-                                    {{mminutes}} 분
-                                    {{sseconds}} 초
-                                </timer>
-                            </span>
-                        </div>
+
                         <div style="margin-top : 5px">
                             <span style="color : black; font-size : 23px">{{item.name}}</span>
                             <a style="color : gray; font-size : 15px"> | </a>
