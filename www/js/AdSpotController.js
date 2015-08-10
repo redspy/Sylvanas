@@ -22,7 +22,7 @@ angular.module('starter.controllers')
         $scope.rndIndex = function() {
             var rndIndex = Math.floor((Math.random() * 10000));
             if (rndIndex < 2000) {
-                return null;
+                return 0;
             }
             else {
                 return rndIndex;

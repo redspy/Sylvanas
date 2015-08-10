@@ -8,14 +8,23 @@
                   href="#/app/localinformation/{{item.id}}">
             <div class="card">
                 <div class="item item-divider item-text-wrap" style="background : white;  margin-top : 8px !important">
-                    <b style="font-size : 18px;">{{item.title}}</b>
+                    <div ng-show="item.enddate < 3000; item.enddate != 0">
+                        <table align="right" style="width:70px; border: 1px solid #FEAB62; border-collapse: collapse; ; margin-bottom : 7px">
+                            <tr>
+                                <th>
+                                    <span style="font-size : 13px; color : #FEAB62">마감임박</span>
+                                </th>
+                            </tr>
+                        </table>
+                    </div>
+                    <b style="font-size : 18px">{{item.title}}</b>
 
                     <p style="font-size : 10px; margin-top : 3px !important">
                         <i style="font-size : 15px">{{item.nickname}}</i>
                         <i style="font-size : 12px; margin-left : 3px !important">{{item.uploaddate}}</i>
                     </p>
 
-                    <div ng-show="item.enddate != null" style="margin-top : 10px">
+                    <div ng-show="item.enddate != 0" style="margin-top : 10px">
                         <!--<span style="color : gray; font-size : 10px; color : red"> 남은시간 : </span>-->
                             <i class="ion-ios-alarm" style="color : #34BAAA"></i>
                             <span style="font-size : 15px; color : #34BAAA">
@@ -28,6 +37,7 @@
                                 </timer>
                             </span>
                     </div>
+                    <span ng-show="item.enddate == 0" style="font-size : 15px; color : red">마감된 이벤트 입니다</span>
                     <hr size="1" style="border-color: white">
                     <p style="font-size : 18px; margin-top : 20px !important; margin-bottom : 12px !important">
                         {{item.body}}</p>
@@ -39,7 +49,20 @@
                              style="margin : 2px !important" ng-src="img/{{image.url}}"/>
                     </ion-scroll>
                 </div>
+                <div class="item item-divider">
+                    <table style="border: 1px solid #808080; min-width: 80%">
+                        <tr style="border: 1px solid #808080">
+                            <td style="border: 1px solid #808080; text-align : center">
+                                <span class="ion-forward" style="color : #808080"> 공유하기</span>
+                            </td>
+                            <td style="border: 1px solid #808080; text-align : center">
+                                <span class="ion-chatbox-working" style="color : #808080"> 댓글</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
+
         </ion-item>
     </ion-content>
 </ion-view>
