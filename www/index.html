@@ -41,20 +41,23 @@
     <script src="lib/angular-timer/dist/angular-timer.js"></script>
     <script src="lib/angular-resource/angular-resource.js"></script>
     <script src="lib/ng-file-upload/ng-file-upload-all.min.js"></script>
+    <script src="lib/angular-http-auth/src/http-auth-interceptor.js"></script>
 
     <!-- your directive's js -->
     <script src="js/directives/directives.js"></script>
+    <script src="js/directives/authentication.js"></script>
 
     <!-- your factories -->
     <script src="js/factories/imageService.js"></script>
     <script src="js/factories/bannerService.js"></script>
+    <script src="js/factories/authenticationService.js"></script>
 
     <!-- google maps javascript -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDq9Eubsfi2pRnnrODC58OArbiovOOQ8rc"></script>
 </head>
 
-<body ng-app="starter">
-<ion-nav-view></ion-nav-view>
+<body ng-app="starter" class="authentication">
+    <ion-nav-view></ion-nav-view>
 </body>
 
 </html>

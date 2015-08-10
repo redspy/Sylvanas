@@ -1,6 +1,3 @@
-/**
- * Created by ©╣еб on 2015-08-02.
- */
 angular.module('starter.controllers')
 
     .factory('imageService', ['$resource', 'SERVICE_ENDPOINT', 'Upload', function ($resource, SERVICE_ENDPOINT, Upload) {
