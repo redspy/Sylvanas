@@ -3,9 +3,9 @@ angular.module('starter.controllers')
     .controller('localInformationController', ['$scope', '$timeout', '$state', function ($scope, $timeout, $state) {
         $scope.name = "주변 상점 정보";
 
-        var heights = [225, 300, 375, 450];
-        var widths = [75, 150, 225, 300, 375, 450, 500];
-        var PictureType = ['abstract', 'animals', 'business', 'cats', 'city', 'food', 'nightlife', 'fashion', 'people', 'nature', 'sports', 'technics', 'transport'];
+        $scope.heights = [225, 300, 375, 450];
+        $scope.widths = [75, 150, 225, 300, 375, 450, 500];
+        $scope.PictureType = ['abstract', 'animals', 'business', 'cats', 'city', 'food', 'nightlife', 'fashion', 'people', 'nature', 'sports', 'technics', 'transport'];
         $scope.items = [];
         //$scope.items = getData(10);
         $scope.doRefresh = function () {
@@ -19,12 +19,12 @@ angular.module('starter.controllers')
             }, 1000);
         };
 
-        function getRandomItem(arrObject) {
+        $scope.getRandomItem = function (arrObject){
             var rndIndex = Math.floor((Math.random() * arrObject.length) + 1);
             return arrObject[rndIndex - 1];
-        }
+        };
 
-        function getData(amount) {
+        $scope.getData = function (amount) {
             var rndIndex = Math.floor((Math.random() * 10000));
             if (rndIndex < 2000) {
                 rndIndex = null;
@@ -33,8 +33,8 @@ angular.module('starter.controllers')
             var item = {};
             item = {
                 id: 'Pic' + amount,
-                pictureType: getRandomItem(PictureType),
-                height: getRandomItem(heights),
+                pictureType: $scope.getRandomItem($scope.PictureType),
+                height: $scope.getRandomItem($scope.heights),
                 marketname: "강릉 중앙시장",
                 name: "홍콩반점",
                 favoritcount: "3",
@@ -45,11 +45,11 @@ angular.module('starter.controllers')
                 width: 400
             };
             return item;
-        }
+        };
 
         $scope.loadMore = function () {
             for (var i = 0; i < 10; i++) {
-                $scope.items.push(getData($scope.items.length));
+                $scope.items.push($scope.getData($scope.items.length));
             }
             $scope.$broadcast('scroll.infiniteScrollComplete');
         };
