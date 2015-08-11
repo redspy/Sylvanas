@@ -1,7 +1,7 @@
 <ion-view view-title='{{name}}'>
     <nav mfb-menu position="br" effect="slidein-spring" active-icon="ion-compose" resting-icon="ion-compose"
          toggling-method="click" ng-click="write()"></nav>
-    <ion-content style="background-color : red !important" delegate-handle="mainScroll" has-bouncing="true" scroll="true">
+    <ion-content style="background-color: #EEEEEE !important" delegate-handle="mainScroll" has-bouncing="true" scroll="true">
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
         </ion-refresher>
         <ion-item id="ionListItemCardStyle" ng-repeat="item in items"
