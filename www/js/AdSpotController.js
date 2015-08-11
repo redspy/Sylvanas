@@ -47,7 +47,8 @@ angular.module('starter.controllers')
                         url: 'example3.jpg'
                     }
                 ],
-                enddate: $scope.rndIndex()
+                enddate: $scope.rndIndex(),
+                replyCount : 3
             },
             {
                 id: '0002',
@@ -67,7 +68,8 @@ angular.module('starter.controllers')
                         url: 'images-3.jpg'
                     }
                 ],
-                enddate: $scope.rndIndex()
+                enddate: $scope.rndIndex(),
+                replyCount : 3
             },
             {
                 id: '0001',
@@ -86,7 +88,8 @@ angular.module('starter.controllers')
                         url: 'example3.jpg'
                     }
                 ],
-                enddate: $scope.rndIndex()
+                enddate: $scope.rndIndex(),
+                replyCount : 3
             },
             {
                 id: '0002',
@@ -106,7 +109,8 @@ angular.module('starter.controllers')
                         url: 'images-3.jpg'
                     }
                 ],
-                enddate: $scope.rndIndex()
+                enddate: $scope.rndIndex(),
+                replyCount : 3
             },
             {
                 id: '0001',
@@ -125,7 +129,8 @@ angular.module('starter.controllers')
                         url: 'example3.jpg'
                     }
                 ],
-                enddate: $scope.rndIndex()
+                enddate: $scope.rndIndex(),
+                replyCount : 3
             },
             {
                 id: '0002',
@@ -145,7 +150,8 @@ angular.module('starter.controllers')
                         url: 'images-3.jpg'
                     }
                 ],
-                enddate: $scope.rndIndex()
+                enddate: $scope.rndIndex(),
+                replyCount : 3
             },
         ];
         //글쓰기///////////////////////////////////////////////////////////////////////

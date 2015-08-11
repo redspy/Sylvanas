@@ -4,7 +4,7 @@
     <ion-content delegate-handle="mainScroll" has-bouncing="true" scroll="true">
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
         </ion-refresher>
-        <ion-item id="ionListItemStyle" ng-repeat="item in items" style="padding : 6px !important"
+        <ion-item id="ionListItemCardStyle" ng-repeat="item in items"
                   href="#/app/localinformation/{{item.id}}">
             <div class="card">
                 <div class="item item-divider item-text-wrap" style="background : white;  margin-top : 8px !important">
@@ -24,6 +24,14 @@
                         <img ng-repeat="image in item.images" width="200px" height="100px"
                              style="margin : 2px !important" ng-src="img/{{image.url}}"/>
                     </ion-scroll>
+                </div>
+                <div class="item tabs tabs-secondary tabs-icon-left" style="background-color : #f1f1f1">
+                    <a class="tab-item" href="#/app/localinformation/{{item.id}}">
+                        <i class="icon ion-forward"></i> 공유하기
+                    </a>
+                    <a class="tab-item" href="#/app/localinformation/{{item.id}}">
+                        <i class="icon ion-chatbox-working"></i> 댓글({{item.replyCount}})
+                    </a>
                 </div>
             </div>
         </ion-item>

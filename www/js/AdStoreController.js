@@ -36,7 +36,8 @@ angular.module('starter.controllers')
                         {
                             url: 'example3.jpg'
                         }
-                    ]
+                    ],
+                    replyCount : 3
                 },
                 {
                     id: '0002',
@@ -55,7 +56,8 @@ angular.module('starter.controllers')
                         {
                             url: 'images-3.jpg'
                         }
-                    ]
+                    ],
+                    replyCount : 3
                 },
                 {
                     id: '0001',
@@ -73,7 +75,8 @@ angular.module('starter.controllers')
                         {
                             url: 'example3.jpg'
                         }
-                    ]
+                    ],
+                    replyCount : 3
                 },
                 {
                     id: '0002',
@@ -92,7 +95,8 @@ angular.module('starter.controllers')
                         {
                             url: 'images-3.jpg'
                         }
-                    ]
+                    ],
+                    replyCount : 3
                 },
                 {
                     id: '0001',
@@ -110,7 +114,8 @@ angular.module('starter.controllers')
                         {
                             url: 'example3.jpg'
                         }
-                    ]
+                    ],
+                    replyCount : 3
                 },
                 {
                     id: '0002',
@@ -129,7 +134,8 @@ angular.module('starter.controllers')
                         {
                             url: 'images-3.jpg'
                         }
-                    ]
+                    ],
+                    replyCount : 3
                 },
             ];
             //글쓰기///////////////////////////////////////////////////////////////////////

@@ -1,13 +1,13 @@
 <ion-view view-title='{{name}}'>
     <nav mfb-menu position="br" effect="slidein-spring" active-icon="ion-compose" resting-icon="ion-compose"
          toggling-method="click" ng-click="write()"></nav>
-    <ion-content delegate-handle="mainScroll" has-bouncing="true" scroll="true">
+    <ion-content style="background-color : red !important" delegate-handle="mainScroll" has-bouncing="true" scroll="true">
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
         </ion-refresher>
-        <ion-item id="ionListItemStyle" ng-repeat="item in items" style="padding : 6px !important"
+        <ion-item id="ionListItemCardStyle" ng-repeat="item in items"
                   href="#/app/localinformation/{{item.id}}">
             <div class="card">
-                <div class="item item-divider item-text-wrap" style="background : white;  margin-top : 8px !important">
+                <div class="item item-divider item-text-wrap" style="background : white">
                     <div ng-show="item.enddate < 3000; item.enddate != 0">
                         <table align="right" style="width:70px; border: 1px solid #FEAB62; border-collapse: collapse; ; margin-bottom : 7px">
                             <tr>
@@ -50,12 +50,12 @@
                     </ion-scroll>
                 </div>
 
-                <div class="item tabs tabs-secondary tabs-icon-left">
-                    <a class="tab-item" href="#">
+                <div class="item tabs tabs-secondary tabs-icon-left" style="background-color : #f1f1f1">
+                    <a class="tab-item" href="#/app/localinformation/{{item.id}}">
                         <i class="icon ion-forward"></i> 공유하기
                     </a>
-                    <a class="tab-item" href="#">
-                        <i class="icon ion-chatbox-working"></i> 댓글
+                    <a class="tab-item" href="#/app/localinformation/{{item.id}}">
+                        <i class="icon ion-chatbox-working"></i> 댓글({{item.replyCount}})
                     </a>
                 </div>
             </div>
