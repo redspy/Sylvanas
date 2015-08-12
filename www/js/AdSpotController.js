@@ -163,6 +163,7 @@ angular.module('starter.controllers')
             $scope.inputData = {
                 title: '',
                 nickName: window.localStorage['nickName'] || '',
+                enddate: '2015-08-15',
                 body: ''
             };
         };

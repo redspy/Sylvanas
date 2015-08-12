@@ -19,6 +19,12 @@
                     <!-- <input type="text" ng-model="loginData.username">-->
                     <input type="text" placeholder="닉네임" ng-model="inputData.nickName"/>
                 </label>
+
+                <label class="item item-input item-floating-label" ng-show="name == '반짝 떨이'">
+                    <span class="input-label">마감시간</span>
+                    <!-- <input type="text" ng-model="loginData.username">-->
+                    <input type="text" placeholder="닉네임" ng-model="inputData.enddate"/>
+                </label>
                 <label class="item item-input item-floating-label" style="height : 150px !important">
                     <span class="input-label">내용</span>
                     <!-- <input type="text" ng-model="loginData.password">-->
@@ -28,13 +34,13 @@
 
             </div>
         </form>
-        <ion-scroll direction="x" class="wide-as-needed">
+        <ion-scroll direction="x" class="wide-as-needed" ng-show="items.images.count > 0">
             <i ng-repeat="image in images">
                 <img ng-click="showImage({{$index}})" style="max-height:20%; margin-left : 3px !important"
                      ng-src="{{urlForImage(image)}}"/>
             </i>
         </ion-scroll>
-        <div align="center" class="row"
+        <!-- <div align="center" class="row"
              style="margin : auto; margin-top : 15px; margin-left : 5%; margin-right : 5%; max-width : 90%">
             <button class="button col-50" style="margin : auto !important; max-width : 48% !important"
                     ng-click="addImage()">
@@ -44,6 +50,14 @@
                     ng-click="doWrite()">
                 <a class="ion-checkmark"> 완료</a>
             </button>
+        </div> -->
+        <div class="item tabs tabs-secondary tabs-icon-left; min-width:100%" style="background-color : #f1f1f1">
+            <a class="tab-item" ng-click="addImage()">
+                <i class="icon ion-camera"  style="font-size : 15px">  사진</i>
+            </a>
+            <a class="tab-item" ng-click="doWrite()">
+                <i class="icon ion-checkmark-circled" style="font-size : 15px">  완료</i>
+            </a>
         </div>
     </ion-content>
 </div>
