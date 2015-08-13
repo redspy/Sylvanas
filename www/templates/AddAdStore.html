@@ -34,7 +34,7 @@
 
             </div>
         </form>
-        <ion-scroll direction="x" class="wide-as-needed" ng-show="items.images.count > 0">
+        <ion-scroll direction="x" class="wide-as-needed" ng-show="images.length > 0">
             <i ng-repeat="image in images">
                 <img ng-click="showImage({{$index}})" style="max-height:20%; margin-left : 3px !important"
                      ng-src="{{urlForImage(image)}}"/>
