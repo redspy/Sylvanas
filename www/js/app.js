@@ -131,7 +131,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
 
     // 디바이스가 ready가 될때 실행될 수 있도록 이벤트 리스너에 등록한다.
     document.addEventListener("deviceready", function () {
-        /*
         if (device.platform.toUpperCase() == 'ANDROID') {
             window.plugins.pushNotification.register(successHandler, errorHandler, {
                 "senderID": "196142849250", // Google GCM 서비스에서 생성한 Project Number를 입력한다.
@@ -145,8 +144,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
                 "alert": "true", // alert를 사용한다.
                 "ecb": "window.onNotificationAPN" // 디바이스로 푸시가 오면 onNotificationAPN 함수를 실행할 수 있도록 ecb(event callback)에 등록한다.
             });
-        }*/
-
+        }
     });
 })
 
