@@ -5,24 +5,24 @@
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
         </ion-refresher>
         <ion-item id="ionListItemCardStyle" ng-repeat="item in items"
-                  href="#/app/localinformation/{{item.id}}">
+                  href="#/app/localinformation/{{item.Id}}">
             <div class="card">
                 <div class="item item-divider item-text-wrap" style="background : white;  margin-top : 8px !important">
-                    <b style="font-size : 18px;">{{item.title}}</b>
+                    <b style="font-size : 18px;">{{item.Title}}</b>
 
                     <p style="font-size : 10px; margin-top : 3px !important">
                         <i style="font-size : 15px">{{item.nickname}}</i>
-                        <i style="font-size : 12px; margin-left : 3px !important">{{item.uploaddate}}</i>
+                        <i style="font-size : 12px; margin-left : 3px !important">{{item.CreateDate | date: 'yyyy-MM-dd'}}</i>
                     </p>
 
                     <p style="font-size : 18px; margin-top : 20px !important; margin-bottom : 12px !important">
-                        {{item.body}}</p>
+                        {{item.Description}}</p>
                 </div>
                 <div class="item item-text-wrap" style="padding : 0px">
                     <ion-scroll direction="x" scrollbar-y="false" scrollbar-x="false" on-drag-down="onDrag($event)"
                                 on-drag-up="onDrag($event)" class="wide-as-needed">
-                        <img ng-repeat="image in item.images" width="200px" height="100px"
-                             style="margin : 2px !important" ng-src="img/{{image.url}}"/>
+                        <img ng-repeat="image in item.Images" width="200px" height="100px"
+                             style="margin : 2px !important" ng-src="{{getImageURL(image)}}"/>
                     </ion-scroll>
                 </div>
                 <div class="item tabs tabs-secondary tabs-icon-left" style="background-color : #f1f1f1">
@@ -30,7 +30,7 @@
                         <i class="icon ion-forward"></i> 공유하기
                     </a>
                     <a class="tab-item" href="#/app/localinformation/{{item.id}}">
-                        <i class="icon ion-chatbox-working"></i> 댓글({{item.replyCount}})
+                        <i class="icon ion-chatbox-working"></i> 댓글({{item.Replies.length}})
                     </a>
                 </div>
             </div>

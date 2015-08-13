@@ -9,7 +9,12 @@ angular.module('starter.controllers')
         '$cordovaGeolocation',
         '$state',
         '$ionicScrollDelegate',
-        function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate) {
+        '$q',
+        'introShopService',
+        'IMAGE_ENDPOINT',
+        'SERVICE_ENDPOINT',
+        '$cordovaFileTransfer',
+        function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate, $q, introShopService, IMAGE_ENDPOINT, SERVICE_ENDPOINT, $cordovaFileTransfer) {
             $scope.name = "내가게 알리기";
 
             $scope.handle = $ionicScrollDelegate.$getByHandle('mainScroll');
@@ -18,7 +23,7 @@ angular.module('starter.controllers')
                 var distance = -1 * e.gesture.deltaY;
                 $scope.handle.scrollBy(0, distance, true);
             };
-
+            /*
             $scope.items = [
                 {
                     id: '0001',
@@ -138,6 +143,25 @@ angular.module('starter.controllers')
                     replyCount : 3
                 },
             ];
+            */
+
+            /* spencer.roh
+             * 서버에서 데이터를 가져온다. 제일 최근에서 부터 10개 데이터를 가져오도록 함.
+             */
+            function refreshItems() {
+                introShopService.readAll({
+                    id: -1, count: 10
+                }, function (data) {
+                    $scope.items = data;
+
+                    console.log($scope.items);
+                })
+            }
+            $scope.getImageURL = function (imageID) {
+                return IMAGE_ENDPOINT + imageID;
+            };
+
+            refreshItems();
             //글쓰기///////////////////////////////////////////////////////////////////////
             // 글쓰기에서 입력되는 Data 저장 : inputData
             $scope.inputData = [];
@@ -175,7 +199,28 @@ angular.module('starter.controllers')
                 window.localStorage['nickName'] = $scope.inputData.nickName;
                 $scope.inputData = [];
                 $timeout(function () {
-                    $scope.closeWrite();
+                    console.log('images', $scope.imageURLs);
+
+                    $scope.imageURLs.forEach(function (url) {
+                        var options = new FileUploadOptions();
+                        options.fileKey = 'image'
+                        options.fileName = url.substr(url.lastIndexOf('/') + 1);
+                        options.mimeType = 'image/jpeg';
+                        options.params = new Object();
+                        options.chunkedMode = false;
+
+                        //var ft = new window.FileTransfer();
+                        $cordovaFileTransfer.upload(SERVICE_ENDPOINT + 'images', url, options, true)
+                            .then(function (result) {
+                                console.log(result);
+                            }, function (err) {
+                               console.log(err);
+                            });
+                    })
+
+
+
+                    //$scope.closeWrite();
                 }, 1000);
             };
             //글쓰기///////////////////////////////////////////////////////////////////////
@@ -183,6 +228,10 @@ angular.module('starter.controllers')
             // Pull to Refresh 로 당겼다가 놨을때 Callback
             $scope.doRefresh = function () {
                 $timeout(function () {
+                    /* spencer.roh
+                     * pull to refresh가 이뤄지면 서버에서 결과값을 다시 받아오도록함
+                     */
+                    refreshItems();
                     //simulate async response
                     // Refresh
                     //$window.location.reload(true);
@@ -237,6 +286,7 @@ angular.module('starter.controllers')
             };
             ////////////////////////////////////////////////////////////////////////////////
             $scope.images = [];
+            $scope.imageURLs = [];
 
             $scope.addImage = function () {
                 // 2
@@ -245,7 +295,7 @@ angular.module('starter.controllers')
                     sourceType: Camera.PictureSourceType.PHOTOLIBRARY,// Camera.PictureSourceType.CAMERA, // Camera.PictureSourceType.PHOTOLIBRARY
                     allowEdit: false,
                     encodingType: Camera.EncodingType.JPEG,
-                    popoverOptions: CameraPopoverOptions,
+                    popoverOptions: CameraPopoverOptions
                 };
 
                 // 3
@@ -255,7 +305,8 @@ angular.module('starter.controllers')
                     onImageSuccess(imageData);
 
                     function onImageSuccess(fileURI) {
-                        createFileEntry(fileURI);
+                        //createFileEntry(fileURI);
+                        $scope.imageURLs.push(fileURI);
                     }
 
                     function createFileEntry(fileURI) {

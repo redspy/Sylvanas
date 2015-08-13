@@ -22,35 +22,36 @@
         "shelljs": "^0.3.0"
     },
     "cordovaPlugins": [
-        "cordova-plugin-device",
-        "cordova-plugin-console",
-        "cordova-plugin-whitelist",
-        "cordova-plugin-splashscreen",
-        "com.ionic.keyboard",
-        "org.apache.cordova.camera",
-        "org.apache.cordova.file",
-        "org.apache.cordova.splashscreen",
+    "cordova-plugin-device",
+    "cordova-plugin-console",
+    "cordova-plugin-whitelist",
+    "cordova-plugin-splashscreen",
+    "cordova-plugin-file-transfer",
+    "com.ionic.keyboard",
+    "org.apache.cordova.camera",
+    "org.apache.cordova.file",
+    "org.apache.cordova.splashscreen",
         {
             "locator": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-geolocation.git",
             "id": "cordova-plugin-geolocation"
-        },
+    },
         {
             "locator": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-vibration.git",
             "id": "cordova-plugin-vibration"
-        },
+    },
         {
             "locator": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-dialogs.git",
             "id": "cordova-plugin-dialogs"
-        },
+    },
         {
             "locator": "https://github.com/phonegap-build/PushPlugin.git",
             "id": "com.phonegap.plugins.PushPlugin"
-        }
-    ],
+    }
+  ],
     "cordovaPlatforms": [
-        "ios",
-        "android"
-    ],
+    "ios",
+    "android"
+  ],
     "scripts": {
         "test": "gulp test"
     }
