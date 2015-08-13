@@ -14,7 +14,8 @@ angular.module('starter.controllers')
         'IMAGE_ENDPOINT',
         'SERVICE_ENDPOINT',
         '$cordovaFileTransfer',
-        function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate, $q, introShopService, IMAGE_ENDPOINT, SERVICE_ENDPOINT, $cordovaFileTransfer) {
+        'imageService',
+        function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate, $q, introShopService, IMAGE_ENDPOINT, SERVICE_ENDPOINT, $cordovaFileTransfer, imageService) {
             $scope.name = "내가게 알리기";
 
             $scope.handle = $ionicScrollDelegate.$getByHandle('mainScroll');
@@ -153,8 +154,6 @@ angular.module('starter.controllers')
                     id: -1, count: 10
                 }, function (data) {
                     $scope.items = data;
-
-                    console.log($scope.items);
                 })
             }
             $scope.getImageURL = function (imageID) {
@@ -197,30 +196,34 @@ angular.module('starter.controllers')
             $scope.doWrite = function () {
                 $scope.images = [];
                 window.localStorage['nickName'] = $scope.inputData.nickName;
-                $scope.inputData = [];
+
                 $timeout(function () {
-                    console.log('images', $scope.imageURLs);
+                    var imageKeys = [];
+                    var imagePromise = [];
 
                     $scope.imageURLs.forEach(function (url) {
-                        var options = new FileUploadOptions();
-                        options.fileKey = 'image'
-                        options.fileName = url.substr(url.lastIndexOf('/') + 1);
-                        options.mimeType = 'image/jpeg';
-                        options.params = new Object();
-                        options.chunkedMode = false;
+                        imagePromise.push(imageService.create(url)
+                            .then(function (res) {
+                                imageKeys.push(res.value.image);
+                            }));
+                    });
 
-                        //var ft = new window.FileTransfer();
-                        $cordovaFileTransfer.upload(SERVICE_ENDPOINT + 'images', url, options, true)
-                            .then(function (result) {
-                                console.log(result);
-                            }, function (err) {
-                               console.log(err);
-                            });
-                    })
+                    $q.all(imagePromise).then(function () {
+                        var introData = {
+                            Title: $scope.inputData.title,
+                            Description: $scope.inputData.body,
+                            NickName: $scope.inputData.nickName,
+                            Images: imageKeys
+                        };
 
+                        introShopService.create(introData, function () {
+                            $scope.closeWrite();
+                            refreshItems();
+                        });
 
-
-                    //$scope.closeWrite();
+                        $scope.imageURLs.length = 0;
+                        $scope.inputData = {};
+                    });
                 }, 1000);
             };
             //글쓰기///////////////////////////////////////////////////////////////////////

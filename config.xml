@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.sylvanas958777" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Sylvanas</name>
-  <description>
-        An Ionic Framework and Cordova project.
+  <description>&#xD;
+        An Ionic Framework and Cordova project.&#xD;
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-        Ionic Framework Team
+  <author email="hi@ionicframework" href="http://ionicframework.com/">&#xD;
+        Ionic Framework Team&#xD;
     </author>
   <access origin="tel:*" launch-external="yes"/>
   <access origin="*"/>
@@ -20,14 +20,14 @@
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
-   <feature name="Notification">
-      <param name="ios-package" value="CDVNotification" />
-      <param name="android-package" value="org.apache.cordova.Notification" />
+  <feature name="Notification">
+    <param name="ios-package" value="CDVNotification"/>
+    <param name="android-package" value="org.apache.cordova.Notification"/>
   </feature>
   <feature name="PushPlugin">
-        <param name="ios-package" value="PushPlugin"/>
-        <param name="android-package" value="com.plugin.gcm.PushPlugin"/>
-      </feature>
+    <param name="ios-package" value="PushPlugin"/>
+    <param name="android-package" value="com.plugin.gcm.PushPlugin"/>
+  </feature>
   <platform name="android">
     <icon src="resources/android/icon/drawable-ldpi-icon.png" density="ldpi"/>
     <icon src="resources/android/icon/drawable-mdpi-icon.png" density="mdpi"/>
