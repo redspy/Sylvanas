@@ -15,16 +15,57 @@ angular.module('starter.controllers')
         '$q',
         function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate, $timeout, lightningDealService, IMAGE_ENDPOINT, imageService, $q) {
             $scope.name = "반짝 떨이";
-
-            $scope.handle = $ionicScrollDelegate.$getByHandle('mainScroll');
-
-            $scope.onDrag = function (e) {
-                var distance = -1 * e.gesture.deltaY;
-                $scope.handle.scrollBy(0, distance, true);
-            };
-
-            $scope.items = [];
             $scope.imageURLs = [];
+
+            $scope.$watch('items', function () {
+                $timeout(function () {
+                    $ionicScrollDelegate._instances.forEach(function (delegateInstance) {
+                        // delegateHandle이 horizontal로 시작하는 ion-scroll만 아래와 같이 이벤트 변경
+                        if (/^horizontal[0-9]+/g.test(delegateInstance.$$delegateHandle)) {
+                            var sv = delegateInstance.getScrollView();
+
+                            var container = sv.__container;
+
+                            var originaltouchStart = sv.touchStart;
+                            var originalmouseDown = sv.mouseDown;
+                            var originaltouchMove = sv.touchMove;
+                            var originalmouseMove = sv.mouseMove;
+
+                            container.removeEventListener('touchstart', sv.touchStart);
+                            container.removeEventListener('mousedown', sv.mouseDown);
+                            document.removeEventListener('touchmove', sv.touchMove);
+                            document.removeEventListener('mousemove', sv.mouseMove);
+
+
+                            sv.touchStart = function(e) {
+                                e.preventDefault = function(){};
+                                originaltouchStart.apply(sv, [e]);
+                            };
+
+                            sv.touchMove = function(e) {
+                                e.preventDefault = function(){};
+                                originaltouchMove.apply(sv, [e]);
+                            };
+
+                            sv.mouseDown = function(e) {
+                                e.preventDefault = function(){};
+                                originalmouseDown.apply(sv, [e]);
+                            };
+
+                            sv.mouseMove = function(e) {
+                                e.preventDefault = function(){};
+                                originalmouseMove.apply(sv, [e]);
+                            };
+
+                            container.addEventListener("touchstart", sv.touchStart, false);
+                            container.addEventListener("mousedown", sv.mouseDown, false);
+                            document.addEventListener("touchmove", sv.touchMove, false);
+                            document.addEventListener("mousemove", sv.mouseMove, false);
+                        }
+
+                    });
+                });
+            });
 
             function refreshItems() {
                 lightningDealService.readAll({
@@ -35,8 +76,6 @@ angular.module('starter.controllers')
                         var end = new Date(item.EndDate);
 
                         item.EndDate = Math.max((end.getTime() - (now.getTime() + now.getTimezoneOffset() * 60 * 1000)) / 1000, 0);
-
-                        console.log(item.EndDate);
                     });
                     $scope.items = data;
                 });
