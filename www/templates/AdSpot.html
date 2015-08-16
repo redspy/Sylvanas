@@ -15,7 +15,7 @@
         </ion-refresher>
         <ion-item id="ionListItemCardStyle"
                   ng-repeat="item in items track by $index"
-                  href="#/app/localinformation/{{item.id}}">
+                  href="">
             <div class="card">
                 <div class="item item-divider item-text-wrap"
                      style="background : white">
@@ -78,12 +78,12 @@
 
                 <div class="item tabs tabs-secondary tabs-icon-left"
                      style="background-color : #f1f1f1">
-                    <a class="tab-item"
-                       href="#/app/localinformation/{{item.id}}">
+                    <a class="tab-item">
+                       <!--href="#/app/localinformation/{{item.id}}">-->
                         <i class="icon ion-forward"></i> 공유하기
                     </a>
-                    <a class="tab-item"
-                       href="#/app/localinformation/{{item.id}}">
+                    <a class="tab-item">
+                       <!--href="#/app/localinformation/{{item.id}}">-->
                         <i class="icon ion-chatbox-working"></i> 댓글({{item.Replies.length}})
                     </a>
                 </div>
