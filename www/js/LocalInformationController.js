@@ -2,7 +2,7 @@ angular.module('starter.controllers')
 
     .controller('localInformationController', ['$scope', '$timeout', '$state', 'storeService', '$q', 'IMAGE_ENDPOINT', function ($scope, $timeout, $state, storeService, $q, IMAGE_ENDPOINT) {
         $scope.name = "주변 상점 정보";
-
+        $scope.detailLink = "#/app/localinformation/";
         $scope.MarketName = "강릉 중앙시장";
 
         $scope.items = [];

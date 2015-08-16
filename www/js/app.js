@@ -230,7 +230,42 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
                 controller: 'localinformationdetailcontroller'
             }
         }
-    });
-    // if none of the above states are matched, use this as the fallback
+    })
+
+    // AdStoreDetail
+    .state('app.adstoredetail', {
+        url: '/adstore/:unitid',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/AdStoreDetail.html',
+                controller: 'adstoredetailcontroller'
+            }
+        }
+    })
+
+    // AdSpotDetail
+        .state('app.adspotdetail', {
+            url: '/adspot/:unitid',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/AdSpotDetail.html',
+                    controller: 'adspotdetailcontroller'
+                }
+            }
+        })
+
+    // SaleEventDetail
+        .state('app.saleeventdetail', {
+            url: '/saleevent/:unitid',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/SaleEventDetail.html',
+                    controller: 'saleeventdetailcontroller'
+                }
+            }
+        });
+
+
+        // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/localinformation');
 });
