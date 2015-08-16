@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-    .controller('localinformationdetailcontroller', ['$scope', '$stateParams', 'storeService', '$q', 'IMAGE_ENDPOINT', function ($scope, $stateParams, storeService, $q, IMAGE_ENDPOINT) {
+    .controller('localinformationdetailcontroller', ['$scope', '$stateParams', 'storeService', '$q', 'IMAGE_ENDPOINT', '$ionicSlideBoxDelegate', function ($scope, $stateParams, storeService, $q, IMAGE_ENDPOINT, $ionicSlideBoxDelegate) {
         $scope.name = "";
         $scope.id = $stateParams.unitid;
         $scope.item = [];
@@ -49,6 +49,7 @@ angular.module('starter.controllers')
                 //$scope.images[i].url = $scope.getImageURL($scope.item.Images[i]);
             }
             $scope.name = $scope.item.Name;
+            $ionicSlideBoxDelegate.update();
             $scope.initialize();
         });
 
