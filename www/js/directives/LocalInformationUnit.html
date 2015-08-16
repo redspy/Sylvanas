@@ -23,7 +23,8 @@
                         </div>
                     </div>
                     <div style="margin-top : 15px; margin-left : 10px">
-                        <p style="color : gray; font-size : 15px; margin : 0px">품목 : {{item.Product}}</p>
+                        <p style="color : gray; font-size : 15px; margin : 0px" ng-show="name == '주변 상점 정보'">품목 : {{item.Product}}</p>
+                        <p style="color : gray; font-size : 15px; margin : 0px" ng-show="name != '주변 상점 정보'">종료 : {{item.EventTo}}</p>
 
                         <p style="color : gray; font-size : 15px; margin : 0px">문의 : {{item.Contact}}</p>
 
