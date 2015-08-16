@@ -15,7 +15,8 @@ angular.module('starter.controllers')
         'SERVICE_ENDPOINT',
         '$cordovaFileTransfer',
         'imageService',
-        function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate, $q, introShopService, IMAGE_ENDPOINT, SERVICE_ENDPOINT, $cordovaFileTransfer, imageService) {
+        '$ionicSlideBoxDelegate',
+        function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate, $q, introShopService, IMAGE_ENDPOINT, SERVICE_ENDPOINT, $cordovaFileTransfer, imageService, $ionicSlideBoxDelegate) {
             $scope.name = "내가게 알리기";
 
             $scope.handle = $ionicScrollDelegate.$getByHandle('mainScroll');
@@ -73,7 +74,7 @@ angular.module('starter.controllers')
 
             // 글쓰기 입력 후 글 올리기 버튼 눌렀을때
             $scope.doWrite = function () {
-                $scope.images = [];
+                $scope.thumbimages = [];
                 window.localStorage['nickName'] = $scope.inputData.nickName;
 
                 $timeout(function () {
@@ -158,16 +159,16 @@ angular.module('starter.controllers')
             var selectedImageIndex = 0;
 
             $scope.showImage = function (index) {
-                $scope.imageSrc = $scope.urlForImage($scope.images[index]);//'http://ionicframework.com/img/ionic-logo-blog.png';
+                $scope.imageSrc = $scope.urlForImage($scope.thumbimages[index]);//'http://ionicframework.com/img/ionic-logo-blog.png';
                 selectedImageIndex = index;
                 $scope.openModal();
             };
 
             $scope.deleteImage = function () {
-                $scope.images.splice(selectedImageIndex, 1);
+                $scope.thumbimages.splice(selectedImageIndex, 1);
             };
             ////////////////////////////////////////////////////////////////////////////////
-            $scope.images = [];
+            $scope.thumbimages = [];
             $scope.imageURLs = [];
 
             $scope.addImage = function () {
@@ -187,7 +188,7 @@ angular.module('starter.controllers')
                     onImageSuccess(imageData);
 
                     function onImageSuccess(fileURI) {
-                        //createFileEntry(fileURI);
+                        createFileEntry(fileURI);
                         $scope.imageURLs.push(fileURI);
                     }
 
@@ -214,7 +215,7 @@ angular.module('starter.controllers')
                     // 6
                     function onCopySuccess(entry) {
                         $scope.$apply(function () {
-                            $scope.images.push(entry.nativeURL);
+                            $scope.thumbimages.push(entry.nativeURL);
                         });
                     }
 
@@ -247,71 +248,4 @@ angular.module('starter.controllers')
                 var element = document.getElementById("input_textarea");
                 element.style.height = element.scrollHeight + "px";
             };
-
-            /* 현재위치로 맵 띄우기 예제
-
-             var posOptions = {timeout: 10000, enableHighAccuracy: false};
-             $cordovaGeolocation
-             .getCurrentPosition(posOptions)
-             .then(function (position) {
-             $scope.lat  = position.coords.latitude
-             $scope.long = position.coords.longitude
-             initialize();
-             }, function(err) {
-             // error
-             });
-
-
-             var watchOptions = {
-             frequency : 1000,
-             timeout : 3000,
-             enableHighAccuracy: false // may cause errors if true
-             };
-
-             var watch = $cordovaGeolocation.watchPosition(watchOptions);
-
-             watch.then(
-             null,
-             function(err) {
-             // error
-             },
-             function(position) {
-             $scope.lat  = position.coords.latitude
-             $scope.long = position.coords.longitude
-             });
-
-
-             watch.clearWatch();
-
-             // OR
-             // $cordovaGeolocation.clearWatch(watch)
-             // .then(function(result) {
-             //     // success
-             // }, function (error) {
-             //     // error
-             // });
-             var initialize = function () {
-             var myLatlng = new google.maps.LatLng($scope.lat, $scope.long);
-
-             var mapOptions = {
-             center: myLatlng,
-             zoom: 16,
-             mapTypeId: google.maps.MapTypeId.ROADMAP
-             };
-             var map = new google.maps.Map(document.getElementById("map"),
-             mapOptions);
-
-             var marker = new google.maps.Marker({
-             position: myLatlng,
-             map: map,
-             title: 'Uluru (Ayers Rock)'
-             });
-
-             google.maps.event.addListener(marker, 'click', function() {
-             infowindow.open(map,marker);
-             });
-             $scope.map = map;
-             }
-             google.maps.event.addDomListener(window, 'load', initialize);
-             현재위치로 맵 띄우기 예제 */
         }]);
