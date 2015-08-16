@@ -99,7 +99,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
         switch (e.event) {
             case 'registered': // 안드로이드 디바이스의 registerID를 획득하는 event 중 registerd 일 경우 호출된다.
                 console.log('registerID:' + e.regid);
-                alert('registerID:' + e.regid);
+                //alert('registerID:' + e.regid);
                 break;
             case 'message': // 안드로이드 디바이스에 푸시 메세지가 오면 호출된다.
                 {

@@ -3,31 +3,31 @@
     <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
     </ion-refresher>
     <ion-item id="ionListItemStyle" ng-repeat="item in items" class="list card" style="padding : 0px !important"
-    href="#/app/localinformation/{{item.id}}">
+    href="#/app/localinformation/{{item.Id}}">
     <div class="row">
         <div class="col col-33 ">
             <img class="full-image"
-            ng-src="http://lorempixel.com/{{item.width}}/{{item.height}}/{{item.pictureType}}/{{item.id}}">
+            ng-src="{{getImageURL(item.Images[0])}}">
         </div>
         <div class="col">
             <div class="row">
                 <div class="col col-90">
                     <div style="margin-left : 10px">
-                        <span style="color : gray; font-size : 15px">{{item.marketname}}</span>
+                        <span style="color : gray; font-size : 15px">{{MarketName}}</span>
 
                         <div style="margin-top : 5px">
-                            <span style="color : black; font-size : 23px">{{item.name}}</span>
+                            <span style="color : black; font-size : 23px">{{item.Name}}</span>
                             <a style="color : gray; font-size : 15px"> | </a>
                             <a class="ion-star" style="color : orange; font-size : 15px"></a>
                             <a style="color : gray; font-size : 15px">{{item.favoritcount}}</a>
                         </div>
                     </div>
                     <div style="margin-top : 15px; margin-left : 10px">
-                        <p style="color : gray; font-size : 15px; margin : 0px">품목 : {{item.category}}</p>
+                        <p style="color : gray; font-size : 15px; margin : 0px">품목 : {{item.Product}}</p>
 
-                        <p style="color : gray; font-size : 15px; margin : 0px">문의 : {{item.phone}}</p>
+                        <p style="color : gray; font-size : 15px; margin : 0px">문의 : {{item.Contact}}</p>
 
-                        <p style="color : gray; font-size : 15px; margin : 0px">주소 : {{item.address}}</p>
+                        <p style="color : gray; font-size : 15px; margin : 0px">주소 : {{item.Address}}</p>
                     </div>
                 </div>
                 <div class="col" style="margin-top : 50px !important">
