@@ -15,8 +15,7 @@ angular.module('starter.controllers')
         'SERVICE_ENDPOINT',
         '$cordovaFileTransfer',
         'imageService',
-        '$ionicSlideBoxDelegate',
-        function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate, $q, introShopService, IMAGE_ENDPOINT, SERVICE_ENDPOINT, $cordovaFileTransfer, imageService, $ionicSlideBoxDelegate) {
+        function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate, $q, introShopService, IMAGE_ENDPOINT, SERVICE_ENDPOINT, $cordovaFileTransfer, imageService) {
             $scope.name = "내가게 알리기";
 
             $scope.handle = $ionicScrollDelegate.$getByHandle('mainScroll');

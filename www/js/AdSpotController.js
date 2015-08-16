@@ -134,7 +134,7 @@ angular.module('starter.controllers')
 
             // 글쓰기 입력 후 글 올리기 버튼 눌렀을때
             $scope.doWrite = function () {
-                $scope.images = [];
+                $scope.thumbimages = [];
                 window.localStorage['nickName'] = $scope.inputData.nickName;
                 $timeout(function () {
                     var imageKeys = [];
@@ -204,16 +204,16 @@ angular.module('starter.controllers')
             var selectedImageIndex = 0;
 
             $scope.showImage = function (index) {
-                $scope.imageSrc = $scope.urlForImage($scope.images[index]);//'http://ionicframework.com/img/ionic-logo-blog.png';
+                $scope.imageSrc = $scope.urlForImage($scope.thumbimages[index]);//'http://ionicframework.com/img/ionic-logo-blog.png';
                 selectedImageIndex = index;
                 $scope.openModal();
             };
 
             $scope.deleteImage = function () {
-                $scope.images.splice(selectedImageIndex, 1);
+                $scope.thumbimages.splice(selectedImageIndex, 1);
             };
             ////////////////////////////////////////////////////////////////////////////////
-            $scope.images = [];
+            $scope.thumbimages = [];
 
             $scope.addImage = function () {
                 // 2
@@ -232,8 +232,8 @@ angular.module('starter.controllers')
                     onImageSuccess(imageData);
 
                     function onImageSuccess(fileURI) {
+                        createFileEntry(fileURI);
                         $scope.imageURLs.push(fileURI);
-                        //createFileEntry(fileURI);
                     }
 
                     function createFileEntry(fileURI) {
@@ -259,7 +259,7 @@ angular.module('starter.controllers')
                     // 6
                     function onCopySuccess(entry) {
                         $scope.$apply(function () {
-                            $scope.images.push(entry.nativeURL);
+                            $scope.thumbimages.push(entry.nativeURL);
                         });
                     }
 
