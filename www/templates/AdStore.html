@@ -19,10 +19,18 @@
                         {{item.Description}}</p>
                 </div>
                 <div class="item item-text-wrap" style="padding : 0px">
-                    <ion-scroll direction="x" scrollbar-y="false" scrollbar-x="false" on-drag-down="onDrag($event)"
-                                on-drag-up="onDrag($event)" class="wide-as-needed">
-                        <img ng-repeat="image in item.Images" width="200px" height="100px"
-                             style="margin : 2px !important" ng-src="{{getImageURL(image)}}"/>
+                    <ion-scroll delegate-handle="{{'horizontal' + $index}}"
+                                direction="x"
+                                scrollbar-y="false"
+                                scrollbar-x="false"
+                                horizontal-scroll-fix="mainScroll"
+                                class="wide-as-needed"
+                                style="position:relative;left:0px">
+                        <img ng-repeat="image in item.Images"
+                             width="200px"
+                             height="100px"
+                             style="margin : 2px !important"
+                             ng-src="{{getImageURL(image)}}"/>
                     </ion-scroll>
                 </div>
                 <div class="item tabs tabs-secondary tabs-icon-left" style="background-color : #f1f1f1">
