@@ -15,7 +15,7 @@
         </ion-refresher>
         <ion-item id="ionListItemCardStyle"
                   ng-repeat="item in items track by $index"
-                  href="">
+                  href="#/app/adspot/{{item.Id}}">
             <div class="card">
                 <div class="item item-divider item-text-wrap"
                      style="background : white">
@@ -60,7 +60,7 @@
                         {{item.Description}}</p>
                 </div>
                 <div class="item item-text-wrap"
-                     style="height:100px;padding:0px;">
+                     style="padding:0px;">
                     <ion-scroll delegate-handle="{{'horizontal' + $index}}"
                                 direction="x"
                                 scrollbar-y="false"
@@ -68,7 +68,8 @@
                                 horizontal-scroll-fix="mainScroll"
                                 class="wide-as-needed"
                                 style="position:relative;left:0px">
-                        <img ng-repeat="image in item.Images"
+                        <img ng-show="item.Images.length > 0"
+                             ng-repeat="image in item.Images"
                              width="200px"
                              height="100px"
                              style="margin : 2px !important"

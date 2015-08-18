@@ -26,7 +26,8 @@
                                 horizontal-scroll-fix="mainScroll"
                                 class="wide-as-needed"
                                 style="position:relative;left:0px">
-                        <img ng-repeat="image in item.Images"
+                        <img ng-show="item.Images.length > 0"
+                             ng-repeat="image in item.Images"
                              width="200px"
                              height="100px"
                              style="margin : 2px !important"

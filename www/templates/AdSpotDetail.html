@@ -1,10 +1,56 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<ion-view view-title='{{name}}'>
+    <ion-content id="detailListStyle">
+        <div class="item item-divider item-text-wrap" style="background : white;  margin-top : 0px !important">
+            <div ng-show="item.EndDate < 3000; item.EndDate != 0">
+                <table align="right"
+                       style="width:70px; border: 1px solid #FEAB62; border-collapse: collapse; ; margin-bottom : 7px">
+                    <tr>
+                        <th>
+                            <span style="font-size : 13px; color : #FEAB62">마감임박</span>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+            <b style="font-size : 18px">{{item.Title}}</b>
 
-</body>
-</html>
+            <p style="font-size : 10px; margin-top : 3px !important">
+                <i style="font-size : 15px">{{item.NickName}}</i>
+                <i style="font-size : 12px; margin-left : 3px !important">{{item.LastUpdateDate | date: 'yyyy-MM-dd HH:mm:ss a'}}</i>
+            </p>
+
+            <div ng-show="item.EndDate != 0" style="margin-top : 10px">
+                <!--<span style="color : gray; font-size : 10px; color : red"> 남은시간 : </span>-->
+                <i class="ion-ios-alarm" style="color : #34BAAA"></i>
+                    <span style="font-size : 15px; color : #34BAAA">
+                        <timer countdown="item.EndDate" interval="1000">
+                            <span ng-show="days != 0"> {{days}}일</span>
+                            <span ng-show="hours != 0">{{hours}}시간</span>
+                            <span>{{mminutes}} 분</span>
+                            <span>{{sseconds}} 초</span>
+                            <span> 남음</span>
+                        </timer>
+                    </span>
+
+            </div>
+            <span ng-show="item.EndDate == 0" style="font-size : 15px; color : red">마감된 이벤트 입니다</span>
+            <hr size="1" style="border-color: white">
+            <p style="font-size : 18px; margin-top : 20px !important; margin-bottom : 12px !important">
+                {{item.Description}}</p>
+        </div>
+
+        <div ng-repeat="image in images">
+            <img class="full-image" ng-src="{{image}}"/>
+        </div>
+
+    </ion-content>
+    <ion-footer-bar align-title="left" class="bar-stable" style="height : 55px">
+        <div class="row">
+            <input type="text" placeholder="댓글을 달아주세요." class="col col-90"
+                   style="margin-right : 4px; padding-left : 4px" ng-model="reply">
+            <button class="col button text-center" ng-click="doSomething()" style="min-width : 32px !important;">
+                <i class="ion-chatbubble-working" style=" font-size : 18px"></i>
+            </button>
+        </div>
+    </ion-footer-bar>
+
+</ion-view>

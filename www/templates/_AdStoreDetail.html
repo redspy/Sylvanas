@@ -1,11 +1,5 @@
 <ion-view view-title='{{name}}'>
     <ion-content id="detailListStyle">
-        <!--<ion-slide-box does-continue="true" auto-play="true" slide-interval="4000">-->
-        <!--&lt;!&ndash;  on-slide-changed="slideChanged(index)"> &ndash;&gt;-->
-        <!--<ion-slide ng-repeat="image in images">-->
-        <!--<img class="full-image" ng-src="{{image}}">-->
-        <!--</ion-slide>-->
-        <!--</ion-slide-box>-->
         <div class="item item-divider item-text-wrap" style="background : white;  margin-top : 0px !important">
             <b style="font-size : 18px;">{{item.Title}}</b>
 
@@ -24,7 +18,6 @@
 
     </ion-content>
     <ion-footer-bar align-title="left" class="bar-stable" style="height : 55px">
-        <!-- <i class="ion-chatbubble-working" style="max-width : 30px;min-width : 30px; font-size : 28px; margin-right : 5px; margin-left : 3px"></i> -->
         <div class="row">
             <input type="text" placeholder="댓글을 달아주세요." class="col col-90"
                    style="margin-right : 4px; padding-left : 4px" ng-model="reply">

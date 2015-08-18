@@ -8,12 +8,11 @@ angular.module('starter.controllers')
         '$cordovaGeolocation',
         '$state',
         '$ionicScrollDelegate',
-        '$timeout',
         'lightningDealService',
         'IMAGE_ENDPOINT',
         'imageService',
         '$q',
-        function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate, $timeout, lightningDealService, IMAGE_ENDPOINT, imageService, $q) {
+        function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate, lightningDealService, IMAGE_ENDPOINT, imageService, $q) {
             $scope.name = "반짝 떨이";
             $scope.imageURLs = [];
 
