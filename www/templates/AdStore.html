@@ -5,7 +5,7 @@
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
         </ion-refresher>
         <ion-item id="ionListItemCardStyle" ng-repeat="item in items"
-                  href="">
+                  href="#/app/adstore/{{item.Id}}">
             <div class="card">
                 <div class="item item-divider item-text-wrap" style="background : white;  margin-top : 8px !important">
                     <b style="font-size : 18px;">{{item.Title}}</b>

@@ -237,7 +237,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
         url: '/adstore/:unitid',
         views: {
             'menuContent': {
-                templateUrl: 'templates/AdStoreDetail.html',
+                templateUrl: 'templates/_AdStoreDetail.html',
                 controller: 'adstoredetailcontroller'
             }
         }
