@@ -36,23 +36,25 @@
                         <i style="font-size : 12px; margin-left : 3px !important">{{item.LastUpdateDate | date: 'yyyy-MM-dd HH:mm:ss a'}}</i>
                     </p>
 
-                    <div ng-show="item.EndDate != 0"
+                    <div ng-if="item.Duration > 0"
                          style="margin-top : 10px">
-                        <!--<span style="color : gray; font-size : 10px; color : red"> 남은시간 : </span>-->
-                        <i class="ion-ios-alarm"
-                           style="color : #34BAAA"></i>
-                            <span style="font-size : 15px; color : #34BAAA">
-                                <timer countdown="item.EndDate"
-                                       interval="1000">
-                                    <span ng-show="days != 0"> {{days}}일</span>
-                                    <span ng-show="hours != 0">{{hours}}시간</span>
-                                    <span>{{mminutes}} 분</span>
-                                    <span>{{sseconds}} 초</span>
-                                    <span> 남음</span>
+                                <timer end-time="item.EndDate"
+                                       interval="1000" language="ko"
+                                       finish-callback="timerDone(item)">
+                                    <i class="ion-ios-alarm"
+                                       style="color : #34BAAA"></i>
+                                    <span style="font-size : 15px; color : #34BAAA">
+                                        <span>{{days}} 일</span>
+                                        <span>{{hhours}} 시간</span>
+                                        <span>{{mminutes}} 분</span>
+                                        <span>{{sseconds}} 초</span>
+                                        <span> 남음</span>
+                                    </span>
+
                                 </timer>
-                            </span>
                     </div>
-                    <span ng-show="item.EndDate == 0"
+
+                    <span ng-if="item.Duration <= 0"
                           style="font-size : 15px; color : red">마감된 이벤트 입니다</span>
                     <hr size="1"
                         style="border-color: white">

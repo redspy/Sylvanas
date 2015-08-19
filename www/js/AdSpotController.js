@@ -75,13 +75,23 @@ angular.module('starter.controllers')
                         var now = new Date();
                         var end = new Date(item.EndDate);
 
-                        item.EndDate = Math.max((end.getTime() - (now.getTime() + now.getTimezoneOffset() * 60 * 1000)) / 1000, 0);
+                        item.EndDate = end.getTime() - now.getTimezoneOffset() * 60 * 1000;
+                        item.Duration = Math.max((end.getTime() - (now.getTime() + now.getTimezoneOffset() * 60 * 1000)) / 1000, 0);
+                        console.log(item.Duration);
                     });
                     $scope.items = data;
                 });
             }
 
             refreshItems();
+
+            $scope.timerDone = function (item) {
+                if (item.Duration > 0) {
+                    item.Duration = 0;
+                    console.log(item.Duration);
+                    $scope.$apply();
+                }
+            };
 
             $scope.getImageURL = function (imageID) {
                 return IMAGE_ENDPOINT + imageID;
@@ -94,10 +104,11 @@ angular.module('starter.controllers')
                     // Refresh
                     //$window.location.reload(true);
                     //Stop the ion-refresher from spinning
-                    refreshItems();
+
                     $scope.$broadcast('scroll.refreshComplete');
 
                 }, 1000);
+                refreshItems();
             };
 
             //글쓰기///////////////////////////////////////////////////////////////////////
