@@ -34,23 +34,13 @@
 
             </div>
         </form>
-        <ion-scroll direction="x" class="wide-as-needed" ng-show="images.length > 0">
-            <i ng-repeat="image in images">
-                <img ng-click="showImage({{$index}})" style="max-height:20%; margin-left : 3px !important"
+        <ion-scroll direction="x" class="wide-as-needed" ng-show="thumbimages.length > 0">
+            <i ng-repeat="image in thumbimages">
+                <img ng-click="showImage({{$index}})" style="max-height:20%;min-height:20%; margin-left : 3px !important"
                      ng-src="{{urlForImage(image)}}"/>
             </i>
         </ion-scroll>
-        <!-- <div align="center" class="row"
-             style="margin : auto; margin-top : 15px; margin-left : 5%; margin-right : 5%; max-width : 90%">
-            <button class="button col-50" style="margin : auto !important; max-width : 48% !important"
-                    ng-click="addImage()">
-                <a class="ion-images"> 사진</a>
-            </button>
-            <button class="button col-50" style="margin : auto !important; max-width : 48% !important"
-                    ng-click="doWrite()">
-                <a class="ion-checkmark"> 완료</a>
-            </button>
-        </div> -->
+
         <div class="item tabs tabs-secondary tabs-icon-left; min-width:100%" style="background-color : #f1f1f1">
             <a class="tab-item" ng-click="addImage()">
                 <i class="icon ion-camera"  style="font-size : 15px">  사진</i>

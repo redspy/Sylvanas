@@ -8,12 +8,11 @@ angular.module('starter.controllers')
         '$cordovaGeolocation',
         '$state',
         '$ionicScrollDelegate',
-        '$timeout',
         'lightningDealService',
         'IMAGE_ENDPOINT',
         'imageService',
         '$q',
-        function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate, $timeout, lightningDealService, IMAGE_ENDPOINT, imageService, $q) {
+        function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate, lightningDealService, IMAGE_ENDPOINT, imageService, $q) {
             $scope.name = "반짝 떨이";
             $scope.imageURLs = [];
 
@@ -145,7 +144,7 @@ angular.module('starter.controllers')
 
             // 글쓰기 입력 후 글 올리기 버튼 눌렀을때
             $scope.doWrite = function () {
-                $scope.images = [];
+                $scope.thumbimages = [];
                 window.localStorage['nickName'] = $scope.inputData.nickName;
                 $timeout(function () {
                     var imageKeys = [];
@@ -215,16 +214,16 @@ angular.module('starter.controllers')
             var selectedImageIndex = 0;
 
             $scope.showImage = function (index) {
-                $scope.imageSrc = $scope.urlForImage($scope.images[index]);//'http://ionicframework.com/img/ionic-logo-blog.png';
+                $scope.imageSrc = $scope.urlForImage($scope.thumbimages[index]);//'http://ionicframework.com/img/ionic-logo-blog.png';
                 selectedImageIndex = index;
                 $scope.openModal();
             };
 
             $scope.deleteImage = function () {
-                $scope.images.splice(selectedImageIndex, 1);
+                $scope.thumbimages.splice(selectedImageIndex, 1);
             };
             ////////////////////////////////////////////////////////////////////////////////
-            $scope.images = [];
+            $scope.thumbimages = [];
 
             $scope.addImage = function () {
                 // 2
@@ -243,8 +242,8 @@ angular.module('starter.controllers')
                     onImageSuccess(imageData);
 
                     function onImageSuccess(fileURI) {
+                        createFileEntry(fileURI);
                         $scope.imageURLs.push(fileURI);
-                        //createFileEntry(fileURI);
                     }
 
                     function createFileEntry(fileURI) {
@@ -270,7 +269,7 @@ angular.module('starter.controllers')
                     // 6
                     function onCopySuccess(entry) {
                         $scope.$apply(function () {
-                            $scope.images.push(entry.nativeURL);
+                            $scope.thumbimages.push(entry.nativeURL);
                         });
                     }
 
@@ -303,141 +302,4 @@ angular.module('starter.controllers')
                 var element = document.getElementById("input_textarea");
                 element.style.height = element.scrollHeight + "px";
             };
-
-            /*
-             $scope.rndIndex = function() {
-             var rndIndex = Math.floor((Math.random() * 10000));
-             if (rndIndex < 2000) {
-             return 0;
-             }
-             else {
-             return rndIndex;
-             }
-             };
-             $scope.items = [
-             {
-             id: '0001',
-             title: '탄산수를 집에서 직접 만들어 먹자!!',
-             nickname: '넌이미사고있다',
-             uploaddate: '2015. 7. 1',
-             body: '지금까지 사먹던 바로 그것! 탄산수!! 이제는 집에서 만들어 드실 수 있습니다. 한번 먹어봐~! 장님이 벌떡 일어나고 앉음뱅이가 눈을 번쩍! 이제는 사먹지 마세요',
-             images: [
-             {
-             url: 'example1.jpg'
-             },
-             {
-             url: 'example2.jpg'
-             },
-             {
-             url: 'example3.jpg'
-             }
-             ],
-             enddate: $scope.rndIndex(),
-             replyCount : 3
-             },
-             {
-             id: '0002',
-             title: '무료로 앱 만들어 드립니다.',
-             uploaddate: '2015. 6. 30',
-             nickname: '일단보고가',
-             body: '핸드폰 앱 만들기! 별거 아닙니다.. 그까이꺼 그냥 대~~충 만들다 보면 대박이 나고, 대박이 나면 잘살아 지고, 잘살아 지면 죽어.',
-             url: '',
-             images: [
-             {
-             url: 'images-1.jpg'
-             },
-             {
-             url: 'images-2.jpg'
-             },
-             {
-             url: 'images-3.jpg'
-             }
-             ],
-             enddate: $scope.rndIndex(),
-             replyCount : 3
-             },
-             {
-             id: '0001',
-             title: '탄산수를 집에서 직접 만들어 먹자!!',
-             nickname: '넌이미사고있다',
-             uploaddate: '2015. 7. 1',
-             body: '지금까지 사먹던 바로 그것! 탄산수!! 이제는 집에서 만들어 드실 수 있습니다. 한번 먹어봐~! 장님이 벌떡 일어나고 앉음뱅이가 눈을 번쩍! 이제는 사먹지 마세요',
-             images: [
-             {
-             url: 'example1.jpg'
-             },
-             {
-             url: 'example2.jpg'
-             },
-             {
-             url: 'example3.jpg'
-             }
-             ],
-             enddate: $scope.rndIndex(),
-             replyCount : 3
-             },
-             {
-             id: '0002',
-             title: '무료로 앱 만들어 드립니다.',
-             uploaddate: '2015. 6. 30',
-             nickname: '일단보고가',
-             body: '핸드폰 앱 만들기! 별거 아닙니다.. 그까이꺼 그냥 대~~충 만들다 보면 대박이 나고, 대박이 나면 잘살아 지고, 잘살아 지면 죽어.',
-             url: '',
-             images: [
-             {
-             url: 'images-1.jpg'
-             },
-             {
-             url: 'images-2.jpg'
-             },
-             {
-             url: 'images-3.jpg'
-             }
-             ],
-             enddate: $scope.rndIndex(),
-             replyCount : 3
-             },
-             {
-             id: '0001',
-             title: '탄산수를 집에서 직접 만들어 먹자!!',
-             nickname: '넌이미사고있다',
-             uploaddate: '2015. 7. 1',
-             body: '지금까지 사먹던 바로 그것! 탄산수!! 이제는 집에서 만들어 드실 수 있습니다. 한번 먹어봐~! 장님이 벌떡 일어나고 앉음뱅이가 눈을 번쩍! 이제는 사먹지 마세요',
-             images: [
-             {
-             url: 'example1.jpg'
-             },
-             {
-             url: 'example2.jpg'
-             },
-             {
-             url: 'example3.jpg'
-             }
-             ],
-             enddate: $scope.rndIndex(),
-             replyCount : 3
-             },
-             {
-             id: '0002',
-             title: '무료로 앱 만들어 드립니다.',
-             uploaddate: '2015. 6. 30',
-             nickname: '일단보고가',
-             body: '핸드폰 앱 만들기! 별거 아닙니다.. 그까이꺼 그냥 대~~충 만들다 보면 대박이 나고, 대박이 나면 잘살아 지고, 잘살아 지면 죽어.',
-             url: '',
-             images: [
-             {
-             url: 'images-1.jpg'
-             },
-             {
-             url: 'images-2.jpg'
-             },
-             {
-             url: 'images-3.jpg'
-             }
-             ],
-             enddate: $scope.rndIndex(),
-             replyCount : 3
-             },
-             ];
-             */
         }]);

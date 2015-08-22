@@ -1,26 +1,26 @@
-<ion-view view-title='{{id}}' ng-init="initialize()">
+<ion-view view-title='{{name}}'>
     <ion-content id="detailListStyle">
         <ion-slide-box does-continue="true" auto-play="true" slide-interval="4000">
             <!--  on-slide-changed="slideChanged(index)"> -->
             <ion-slide ng-repeat="image in images">
-                <img class="full-image" ng-src="img/{{image.url}}">
+                <img class="full-image" ng-src="{{image}}">
             </ion-slide>
         </ion-slide-box>
         <div style="margin-top : 15px; margin-left : 30px">
-            <p style="color : gray; font-size : 15px; margin-top : 5px !important">{{store.marketname}}</p>
+            <p style="color : gray; font-size : 15px; margin-top : 5px !important">강릉 중앙시장</p>
 
-            <p style="color : black; font-size : 23px ; margin-top : 5px !important">{{store.name}}
+            <p style="color : black; font-size : 23px ; margin-top : 5px !important">{{item.Name}}
                 <a style="color : gray; font-size : 15px"> | </a>
                 <a class="ion-star" style="color : orange; font-size : 15px"></a>
-                <a style="color : gray; font-size : 15px">{{store.favoritcount}}</a>
+                <a style="color : gray; font-size : 15px">5</a>
             </p>
         </div>
         <div style="margin-top : 15px; margin-left : 30px">
-            <p style="color : gray; font-size : 15px; margin : 0px">품목 : {{store.category}}</p>
+            <p style="color : gray; font-size : 15px; margin : 0px">품목 : {{item.Product}}</p>
 
-            <p style="color : gray; font-size : 15px; margin : 0px">문의 : {{store.phone}}</p>
+            <p style="color : gray; font-size : 15px; margin : 0px">문의 : {{item.Contact}}</p>
 
-            <p style="color : gray; font-size : 15px; margin : 0px">주소 : {{store.address}}</p>
+            <p style="color : gray; font-size : 15px; margin : 0px">주소 : {{item.Address}}</p>
         </div>
         <div align="center" class="row"
              style="margin : auto; margin-top : 15px; margin-left : 5%; margin-right : 5%; max-width : 90%">
@@ -39,7 +39,7 @@
                     소개글
                 </div>
                 <div class="item item-text-wrap">
-                    {{store.bodytext}}
+                    {{item.Description}}
                 </div>
             </div>
         </div>
