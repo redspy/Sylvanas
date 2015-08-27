@@ -12,15 +12,25 @@
                 {{item.Description}}</p>
         </div>
 
-            <div ng-repeat="image in images">
-                <img class="full-image" ng-src="{{image}}"/>
+        <div ng-repeat="image in images">
+            <img class="full-image" ng-src="{{image}}"/>
+        </div>
+        <p style="font-size: 18px; margin: 5px !important;">댓글</p>
+        <hr>
+        <div style="margin-top : 5px;">
+            <div class="card" ng-repeat="reply in item.Replies" style="margin: 3px !important;">
+                <div style="margin: 3px !important;">
+                    <span style="font-size: 15px">{{reply.NickName}}</span>
+                    <span style="font-size: 10px">{{reply.CreateDate | date: 'yyyy-MM-dd HH:mm:ss a'}}</span>
+                    <p style="font-size: 15px">{{reply.Description}}</p>
+                </div>
             </div>
-
+        </div>
     </ion-content>
-    <ion-footer-bar align-title="left" class="bar-stable" style="height : 55px">
+    <ion-footer-bar align-title="left" class="bar-stable" style="padding : 0px !important">
         <div class="row">
             <input type="text" placeholder="댓글을 달아주세요." class="col col-90"
-                   style="margin-right : 4px; padding-left : 4px" ng-model="reply">
+                   style="margin: 1px !important; margin-right : 4px; padding-left : 4px" ng-model="reply">
             <button class="col button text-center" ng-click="doSomething()" style="min-width : 32px !important;">
                 <i class="ion-chatbubble-working" style=" font-size : 18px"></i>
             </button>

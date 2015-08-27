@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-    .controller('adstoredetailcontroller', ['$scope', '$stateParams', 'introShopService', '$q', 'IMAGE_ENDPOINT', '$ionicSlideBoxDelegate', function ($scope, $stateParams, introShopService, $q, IMAGE_ENDPOINT, $ionicSlideBoxDelegate) {
+    .controller('adstoredetailcontroller', ['$scope', '$stateParams', 'introShopService', '$q', 'IMAGE_ENDPOINT', '$ionicSlideBoxDelegate', 'introShopReplyService', function ($scope, $stateParams, introShopService, $q, IMAGE_ENDPOINT, $ionicSlideBoxDelegate, introShopReplyService) {
         $scope.name = "내가게 알리기";
         $scope.id = $stateParams.unitid;
         $scope.item = [];
@@ -44,6 +44,33 @@ angular.module('starter.controllers')
 
         $scope.callClick = function () {
             window.open('tel:' + $scope.item.Contact);
+        };
+
+        function refreshIntroShop() {
+            introShopService.readAll({
+                id: -1, count: -1
+            }, function (data) {
+                $scope.introShops = data;
+            });
+        }
+
+        refreshIntroShop();
+
+        $scope.submitReply = function (id) {
+            if ('Id' in $scope.reply) {
+                introShopReplyService.modify({
+                    id: $scope.reply.Id
+                }, $scope.reply, function () {
+                    refreshIntroShop();
+                });
+            } else {
+                introShopReplyService.create({
+                    id: id
+                }, $scope.reply, function () {
+                    refreshIntroShop();
+                });
+            }
+
         };
 
     }]);
