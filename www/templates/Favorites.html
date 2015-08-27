@@ -1,6 +1,16 @@
 <ion-view view-title='{{name}}'>
     <ion-content>
-        <h1>Favorites</h1>
-        <button class="button" ng-click="notification()">Notification</button>
+        <!--<ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">-->
+        <!--</ion-refresher>-->
+        <ion-item id="ionListItemStyle" ng-repeat="item in items" class="list card" style="padding : 0px !important"
+                  href="{{detailLink}}{{item.Id}}">
+            <!--<h1>Favorites</h1>-->
+            <!--<button class="button" ng-click="notification()">Notification</button>-->
+            <p style="font-size: 14px">{{item.listType}}</p>
+            <img class="full-image" ng-src="{{item.image}}" style="margin-top: 5px !important;"/>
+
+            <p style="font-size: 18px; margin-top: 8px !important;">{{item.Title}}</p>
+            <p style="font-size: 15px; margin-top: 8px !important;">{{item.body}}</p>
+        </ion-item>
     </ion-content>
 </ion-view>
