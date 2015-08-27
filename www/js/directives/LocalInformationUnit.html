@@ -6,7 +6,7 @@
     href="{{detailLink}}{{item.Id}}">
     <div class="row">
         <div class="col col-33 ">
-            <img class="full-image"
+            <img style="height : 135px !important; width: inherit"
             ng-src="{{getImageURL(item.Images[0])}}">
         </div>
         <div class="col">
@@ -19,7 +19,7 @@
                             <span style="color : black; font-size : 23px">{{item.Name}}</span>
                             <a style="color : gray; font-size : 15px"> | </a>
                             <a class="ion-star" style="color : orange; font-size : 15px"></a>
-                            <a style="color : gray; font-size : 15px">5</a>
+                            <a style="color : gray; font-size : 15px">{{item.BookmarkCount}}</a>
                         </div>
                     </div>
                     <div style="margin-top : 15px; margin-left : 10px">

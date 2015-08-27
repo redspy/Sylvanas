@@ -3,7 +3,7 @@
  */
 angular.module('starter.controllers')
 
-    .controller('saleeventdetailcontroller', ['$scope', '$stateParams', 'saleService', '$q', 'IMAGE_ENDPOINT', '$ionicSlideBoxDelegate', function ($scope, $stateParams, saleService, $q, IMAGE_ENDPOINT, $ionicSlideBoxDelegate) {
+    .controller('saleeventdetailcontroller', ['$scope', '$stateParams', 'saleService', '$q', 'IMAGE_ENDPOINT', '$ionicSlideBoxDelegate', 'bookmarkSaleService', function ($scope, $stateParams, saleService, $q, IMAGE_ENDPOINT, $ionicSlideBoxDelegate, bookmarkSaleService) {
         $scope.name = "";
         $scope.id = $stateParams.unitid;
         $scope.item = [];
@@ -65,7 +65,11 @@ angular.module('starter.controllers')
         };
 
         $scope.favoriteClick = function () {
-            alert('Add to Favorite');
+            bookmarkSaleService.create({
+                id: $scope.id
+            }, {}, function () {
+
+            });
         };
 
         $scope.callClick = function () {

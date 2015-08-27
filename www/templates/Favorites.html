@@ -1,16 +1,46 @@
 <ion-view view-title='{{name}}'>
     <ion-content>
-        <!--<ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">-->
-        <!--</ion-refresher>-->
-        <ion-item id="ionListItemStyle" ng-repeat="item in items" class="list card" style="padding : 0px !important"
-                  href="{{detailLink}}{{item.Id}}">
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
+        </ion-refresher>
+        <ion-item id="ionListItemStyle" ng-repeat="item in items.shops" class="list card" style="padding : 0px !important"
+                  href="{{detailLinkLocalInformation}}{{item.Id}}">
             <!--<h1>Favorites</h1>-->
             <!--<button class="button" ng-click="notification()">Notification</button>-->
-            <p style="font-size: 14px">{{item.listType}}</p>
-            <img class="full-image" ng-src="{{item.image}}" style="margin-top: 5px !important;"/>
+            <p style="font-size: 14px">주변 상점정보</p>
+            <div style="margin-top : 5px">
+                <span style="color : black; font-size : 23px">{{item.Name}}</span>
+                <a style="color : gray; font-size : 15px"> | </a>
+                <a class="ion-star" style="color : orange; font-size : 15px"></a>
+                <a style="color : gray; font-size : 15px">{{item.BookmarkCount}}</a>
+            </div>
+            <img class="full-image" ng-src="{{getImageURL(item.Images[0])}}" style="margin-top: 5px !important;"/>
 
-            <p style="font-size: 18px; margin-top: 8px !important;">{{item.Title}}</p>
-            <p style="font-size: 15px; margin-top: 8px !important;">{{item.body}}</p>
+            <div style="margin-top : 5px; margin-left : 10px">
+                <p style="color : gray; font-size : 15px; margin : 0px">품목 : {{item.Product}}</p>
+
+                <p style="color : gray; font-size : 15px; margin : 0px">문의 : {{item.Contact}}</p>
+
+                <p style="color : gray; font-size : 15px; margin : 0px">주소 : {{item.Address}}</p>
+            </div>
+
+        </ion-item>
+        <ion-item id="ionListItemStyle" ng-repeat="item in items.sales" class="list card" style="padding : 0px !important"
+                  href="{{detailLinkSaleEvent}}{{item.Id}}">
+            <p style="font-size: 14px">할인 & 이벤트</p>
+            <div style="margin-top : 5px">
+                <span style="color : black; font-size : 23px">{{item.Name}}</span>
+                <a style="color : gray; font-size : 15px"> | </a>
+                <a class="ion-star" style="color : orange; font-size : 15px"></a>
+                <a style="color : gray; font-size : 15px">{{item.BookmarkCount}}</a>
+            </div>
+            <img class="full-image" ng-src="{{getImageURL(item.Images[0])}}" style="margin-top: 5px !important;"/>
+            <div style="margin-top : 15px; margin-left : 10px">
+                <p style="color : gray; font-size : 15px; margin : 0px">종료 : {{item.EventTo}}</p>
+
+                <p style="color : gray; font-size : 15px; margin : 0px">문의 : {{item.Contact}}</p>
+
+                <p style="color : gray; font-size : 15px; margin : 0px">주소 : {{item.Address}}</p>
+            </div>
         </ion-item>
     </ion-content>
 </ion-view>

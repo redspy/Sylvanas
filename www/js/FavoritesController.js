@@ -1,8 +1,9 @@
 angular.module('starter.controllers')
 
-    .controller('favoritesController', ['$scope', function ($scope) {
+    .controller('favoritesController', ['$scope', 'bookmarkService', 'bookmarkStoreService', 'bookmarkSaleService', 'IMAGE_ENDPOINT', '$timeout', function ($scope, bookmarkService, bookmarkStoreService, bookmarkSaleService, IMAGE_ENDPOINT, $timeout) {
         $scope.name = "내 찜 목록";
-
+        $scope.detailLinkLocalInformation = "#/app/localinformation/";
+        $scope.detailLinkSaleEvent = "#/app/saleevent/";
         $scope.items = [
             {
                 Id : "1",
@@ -12,7 +13,23 @@ angular.module('starter.controllers')
                 image: "/img/images.jpg"
             }
         ];
+        $scope.doRefresh = function () {
+            $timeout(function () {
+                refresh();
+                $scope.$broadcast('scroll.refreshComplete');
+            }, 1000);
+        };
+        function refresh() {
+            bookmarkService.readAll(function (data) {
+                $scope.items = data;
+            });
+        }
 
+        refresh();
+
+        $scope.getImageURL = function (imageID) {
+            return IMAGE_ENDPOINT + imageID;
+        };
         //function alertDismissed() {
         //    // do something
         //}

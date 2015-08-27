@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-    .controller('localinformationdetailcontroller', ['$scope', '$stateParams', 'storeService', '$q', 'IMAGE_ENDPOINT', '$ionicSlideBoxDelegate', function ($scope, $stateParams, storeService, $q, IMAGE_ENDPOINT, $ionicSlideBoxDelegate) {
+    .controller('localinformationdetailcontroller', ['$scope', '$stateParams', 'storeService', '$q', 'IMAGE_ENDPOINT', '$ionicSlideBoxDelegate', 'bookmarkStoreService', function ($scope, $stateParams, storeService, $q, IMAGE_ENDPOINT, $ionicSlideBoxDelegate, bookmarkStoreService) {
         $scope.name = "";
         $scope.id = $stateParams.unitid;
         $scope.item = [];
@@ -62,7 +62,11 @@ angular.module('starter.controllers')
         };
 
         $scope.favoriteClick = function () {
-            alert('Add to Favorite');
+            bookmarkStoreService.create({
+                id: $scope.id
+            }, {}, function () {
+
+            });
         };
 
         $scope.callClick = function () {
