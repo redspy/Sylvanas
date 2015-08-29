@@ -1,4 +1,4 @@
-angular.module('starter.controllers').directive('authentication', ['authenticationService', 'authService', '$ionicPlatform', '$http', 'certService', function (authenticationService, authService, $ionicPlatform, $http, certService) {
+angular.module('starter.controllers').directive('authentication', ['authenticationService', 'authService', '$ionicPlatform', '$http', 'certService', '$cordovaDevice', function (authenticationService, authService, $ionicPlatform, $http, certService, $cordovaDevice) {
     var failed = 0;
     return {
         restrict: 'C',
@@ -11,13 +11,23 @@ angular.module('starter.controllers').directive('authentication', ['authenticati
                     var publicKey = response.data;
                     var now = new Date();
                     var time = now.getTime();
-                    var loginData = angular.fromJson({
-                        'Now': parseInt(time / 1000),
-                        'DeviceUUID': 'TEST_DEVICE_UUID',
-                        'DeviceToken': 'TEST_DEVICE_TOKEN',
-                        'DeviceOS': 'TEST_DEVICE_OS'
-                    });
-                    console.log(JSON.stringify(loginData));
+
+                    var loginData = '';
+                    if (ionic.Platform.platform() == 'win32') {
+                        loginData = angular.fromJson({
+                            'Now': parseInt(time / 1000),
+                            'DeviceUUID': 'WINDOW_DEBUG_DEVICE',
+                            'DeviceToken': 'WINDOW_DEBUG_TOKEN',
+                            'DeviceOS': ionic.Platform.platform()
+                        });
+                    } else {
+                        loginData = angular.fromJson({
+                            'Now': parseInt(time / 1000),
+                            'DeviceUUID': $cordovaDevice.getUUID(),
+                            'DeviceToken': 'TEST_DEVICE_TOKEN',
+                            'DeviceOS': ionic.Platform.platform()
+                        });
+                    }
 
                     var encrypt = new JSEncrypt();
                     encrypt.setPublicKey(publicKey);
@@ -26,7 +36,7 @@ angular.module('starter.controllers').directive('authentication', ['authenticati
                     authenticationService.login({
                         'Login': encrypted
                     }, function (response) {
-                        $http.defaults.headers.common['X-Device-Id'] = 'TEST_DEVICE_UUID';
+                        $http.defaults.headers.common['X-Token'] = response.token;
                         if (failed < 2)
                             authService.loginConfirmed();
                     }, function (error) {
@@ -35,7 +45,7 @@ angular.module('starter.controllers').directive('authentication', ['authenticati
                 });
             });
             scope.$on('event:auth-loginConfirmed', function () {
-                console.log('login sucess');
+                console.log('login success');
             });
         }
     };
