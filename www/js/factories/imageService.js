@@ -6,12 +6,10 @@ angular.module('starter.controllers')
             delete: { method: 'DELETE' }
         });
 
-        var defaultOptions = new FileUploadOptions('image', '', 'image/jpeg', new Object());
-
         return {
             create: function (file) {
                 var deferred = $q.defer();
-                var options = angular.extend(defaultOptions);
+                var options = new FileUploadOptions('image', '', 'image/jpeg', new Object());
                 options.fileName = file.substr(file.lastIndexOf('/') + 1);
 
                 $cordovaFileTransfer.upload(SERVICE_ENDPOINT + '/images', file, options, true)

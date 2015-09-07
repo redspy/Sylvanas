@@ -6,7 +6,7 @@ angular.module('starter.controllers')
             method: 'POST'
         },
         isLoggedIn: {
-            method: 'GET',
+            method: 'GET'
         },
         logout: {
             method: 'DELETE'
