@@ -263,8 +263,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
                     controller: 'saleeventdetailcontroller'
                 }
             }
+        })
+    // settingController
+    .state('app.setting', {
+            url: '/setting',
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/Setting.html",
+                    controller: 'settingController'
+                }
+            }
         });
-
 
         // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/localinformation');
