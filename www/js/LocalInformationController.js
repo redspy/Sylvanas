@@ -77,7 +77,7 @@ angular.module('starter.controllers')
         });
 
         $scope.getImageURL = function (imageID) {
-            return IMAGE_ENDPOINT + imageID;
+            return IMAGE_ENDPOINT + 'thumb/' + imageID;
         };
     }
     ]);

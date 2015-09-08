@@ -93,7 +93,7 @@ angular.module('starter.controllers')
             };
 
             $scope.getImageURL = function (imageID) {
-                return IMAGE_ENDPOINT + imageID;
+                return IMAGE_ENDPOINT + 'thumb/' + imageID;
             };
 
             // Pull to Refresh 로 당겼다가 놨을때 Callback
