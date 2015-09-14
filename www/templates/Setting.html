@@ -14,9 +14,9 @@
             <li>
                 <div class="item range">
                     <span style="margin-right : 20px">검색범위</span>
-                    <i>1km</i>
-                    <input type="range" name="region" min="1" max="5" step="1">
-                    <i>5km</i>
+                    <input type="range" name="region" min="1" max="5" step="1" ng-model="regionValue"
+                           value="{{regionValue}}">
+                    <i>{{regionValue}}km</i>
                 </div>
             </li>
         </ul>

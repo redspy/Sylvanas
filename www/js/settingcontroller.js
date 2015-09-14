@@ -5,4 +5,6 @@ angular.module('starter.controllers')
 
     .controller('settingController', ['$scope', function ($scope) {
         $scope.name = "설정";
+
+        $scope.regionValue = 1;
     }]);
