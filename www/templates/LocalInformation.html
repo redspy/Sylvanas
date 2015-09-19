@@ -8,10 +8,9 @@
             <div class="input-label">
                 품목
             </div>
-            <select>
-                <option>분식</option>
-                <option selected>한식</option>
-                <option>일식</option>
+            <select ng-model="searchProductType">
+                <option selected="selected" value="-1">전체</option>
+                <option ng-repeat="type in productType" value="{{type.Id}}">{{type.Type}}</option>
             </select>
         </label>
     </ion-header-bar>

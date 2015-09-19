@@ -1,11 +1,11 @@
 /**
- * Created by ©╣еб on 2015-08-11.
+ * Created by О©╫О©╫О©╫О©╫ on 2015-08-11.
  */
 angular.module('starter.controllers')
 
     .factory('storeService', ['$resource', 'SERVICE_ENDPOINT', function ($resource, SERVICE_ENDPOINT) {
         'use strict';
-        return $resource(SERVICE_ENDPOINT + '/store/:id/:count', {}, {
+        var base = $resource(SERVICE_ENDPOINT + '/store/:id/:count', {}, {
             create: {
                 method: 'POST'
             },
@@ -23,4 +23,16 @@ angular.module('starter.controllers')
                 method: 'DELETE'
             }
         });
+
+        return base;
+    }])
+    .factory('storeSearchService', ['$resource', 'SERVICE_ENDPOINT', function ($resource, SERVICE_ENDPOINT) {
+        var search = $resource(SERVICE_ENDPOINT + '/store/type/:type/gps/:latitude/:longitude', {}, {
+            search: {
+                method: 'GET',
+                isArray: true
+            }
+        });
+
+        return search;
     }]);

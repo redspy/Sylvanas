@@ -1,12 +1,13 @@
 angular.module('starter.controllers')
 
-    .controller('localInformationController', ['$scope', '$timeout', '$state', 'storeService', '$q', 'IMAGE_ENDPOINT', function ($scope, $timeout, $state, storeService, $q, IMAGE_ENDPOINT) {
+    .controller('localInformationController', ['$scope', '$timeout', '$state', 'storeService', '$q', 'IMAGE_ENDPOINT', 'productTypeService', 'storeSearchService', function ($scope, $timeout, $state, storeService, $q, IMAGE_ENDPOINT, productTypeService, storeSearchService) {
         $scope.name = "주변 상점 정보";
         $scope.detailLink = "#/app/localinformation/";
         $scope.MarketName = "강릉 중앙시장";
 
         $scope.items = [];
         //$scope.items = getData(10);
+        /*
         $scope.doRefresh = function () {
             $timeout(function () {
                 //simulate async response
@@ -21,7 +22,18 @@ angular.module('starter.controllers')
 
                 $scope.$broadcast('scroll.refreshComplete');
             }, 1000);
-        };
+        };*/
+
+        productTypeService.read(function (data) {
+            $scope.productType = data;
+        });
+
+        $scope.searchProductType = -1;
+        $scope.$watch('searchProductType', function (nv) {
+            filterStoreByType(nv, 37.5, 127.5).then(function (data) {
+               $scope.items = data;
+            });
+        });
 
         //$scope.loadMore = function () {
         //
@@ -38,6 +50,24 @@ angular.module('starter.controllers')
         //        $scope.loadMore();
         //    }
         //});
+
+        /*
+         * type에 해당하는 상점 정보를 리턴한다. 이때 (latitude, longtitude)에서 가장 가까운 순서로
+         * 리턴한다. type이 -1인 경우 모든 품목에 대해 검색한다.
+         */
+        function filterStoreByType(type, latitude, longitude) {
+            var deferred = $q.defer();
+
+            storeSearchService.search(
+                {type:type, latitude:latitude, longitude:longitude},
+                function (value, responseHeaders) {
+                    deferred.resolve(value);
+                }, function (httpResponse) {
+                    deferred.reject(httpResponse)
+                });
+
+            return deferred.promise;
+        }
 
         /*
         * 상점 정보를 from에 지정된 id 상점을 기준으로 count만큼의 상점정보를 리턴한다.
