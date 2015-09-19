@@ -42,8 +42,8 @@ angular.module('starter.controllers')
             $scope.images = [];
             $scope.item = data[0];
 
-            $scope.item.lat = $scope.item.GPS.split(',')[0];
-            $scope.item.long = $scope.item.GPS.split(',')[1];
+            $scope.item.lat = $scope.item.Latitude;
+            $scope.item.long = $scope.item.Longitude;
             for (var i = 0; i < $scope.item.Images.length; i++) {
                 $scope.images.push($scope.getImageURL($scope.item.Images[i]));
                 //$scope.images[i].url = $scope.getImageURL($scope.item.Images[i]);
