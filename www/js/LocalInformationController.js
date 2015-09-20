@@ -7,31 +7,24 @@ angular.module('starter.controllers')
 
         $scope.items = [];
         //$scope.items = getData(10);
-        /*
+
         $scope.doRefresh = function () {
             $timeout(function () {
-                //simulate async response
-                // Refresh
-                //$window.location.reload(true);
-                //Stop the ion-refresher from spinning
-                getStoreInformation(-1, -1).then(function (data) {
-                    console.log(data);
+                filterStoreByType($scope.searchProductType, 37.5, 127.5).then(function (data) {
                     $scope.items = data;
+                    $scope.$broadcast('scroll.refreshComplete');
                 });
-
-
-                $scope.$broadcast('scroll.refreshComplete');
             }, 1000);
-        };*/
-
-        productTypeService.read(function (data) {
-            $scope.productType = data;
-        });
+        };
 
         $scope.searchProductType = -1;
-        $scope.$watch('searchProductType', function (nv) {
-            filterStoreByType(nv, 37.5, 127.5).then(function (data) {
-               $scope.items = data;
+        productTypeService.read(function (data) {
+            $scope.productType = data;
+
+            $scope.$watch('searchProductType', function (nv) {
+                filterStoreByType(nv, 37.5, 127.5).then(function (data) {
+                    $scope.items = data;
+                });
             });
         });
 
@@ -100,11 +93,12 @@ angular.module('starter.controllers')
 
             return deferred.promise;
         }
-
+        /*
         getStoreInformation(-1, -1).then(function (data) {
             console.log(data);
             $scope.items = data;
         });
+        */
 
         $scope.getImageURL = function (imageID) {
             return IMAGE_ENDPOINT + 'thumb/' + imageID;
