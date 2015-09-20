@@ -131,6 +131,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
 
     // 디바이스가 ready가 될때 실행될 수 있도록 이벤트 리스너에 등록한다.
     document.addEventListener("deviceready", function () {
+        console.log('gcm id');
         if (device.platform.toUpperCase() == 'ANDROID') {
             window.plugins.pushNotification.register(successHandler, errorHandler, {
                 "senderID": "196142849250", // Google GCM 서비스에서 생성한 Project Number를 입력한다.
@@ -154,7 +155,51 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
         .state('app', {
         url: "/app",
         abstract: true,
-        templateUrl: "templates/menu.html"
+        templateUrl: "templates/menu.html",
+        resolve: {
+            login: function ($q, authenticationService, certService, $cordovaDevice, $http) {
+                var deferred = $q.defer();
+                ionic.Platform.ready(function () {
+                    certService.then(function (response) {
+                        var publicKey = response.data;
+                        var now = new Date();
+                        var time = now.getTime();
+
+                        var loginData = '';
+                        if (ionic.Platform.platform() == 'win32') {
+                            loginData = angular.fromJson({
+                                'Now': parseInt(time / 1000),
+                                'DeviceUUID': 'WINDOW_DEBUG_DEVICE',
+                                'DeviceToken': 'WINDOW_DEBUG_TOKEN',
+                                'DeviceOS': ionic.Platform.platform()
+                            });
+                        } else {
+                            loginData = angular.fromJson({
+                                'Now': parseInt(time / 1000),
+                                'DeviceUUID': $cordovaDevice.getUUID(),
+                                'DeviceToken': 'TEST_DEVICE_TOKEN',
+                                'DeviceOS': ionic.Platform.platform()
+                            });
+                        }
+
+                        var encrypt = new JSEncrypt();
+                        encrypt.setPublicKey(publicKey);
+                        var encrypted = encrypt.encrypt(JSON.stringify(loginData));
+
+                        authenticationService.login({
+                            'Login': encrypted
+                        }, function (response) {
+                            $http.defaults.headers.common['X-Token'] = response.token;
+                            deferred.resolve();
+                        }, function (error) {
+                            deferred.reject();
+                        });
+                    });
+                });
+
+                return deferred.promise;
+            }
+        }
     })
 
     .state('app.localinformation', {
