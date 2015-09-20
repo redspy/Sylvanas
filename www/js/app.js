@@ -157,7 +157,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
         abstract: true,
         templateUrl: "templates/menu.html",
         resolve: {
-            login: function ($q, authenticationService, certService, $cordovaDevice, $http) {
+            login: function ($q, authenticationService, certService, $cordovaDevice, $http, authService) {
                 var deferred = $q.defer();
                 ionic.Platform.ready(function () {
                     certService.then(function (response) {
@@ -190,8 +190,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
                             'Login': encrypted
                         }, function (response) {
                             $http.defaults.headers.common['X-Token'] = response.token;
+                            authService.loginConfirmed(response.token, function (config) {
+                                config.headers['X-Token'] = response.token;
+                                return config;
+                            });
+                            console.log('login success');
                             deferred.resolve();
                         }, function (error) {
+                            delete $http.defaults.headers.common['X-Token'];
+                            console.log('login failed', error);
                             deferred.reject();
                         });
                     });

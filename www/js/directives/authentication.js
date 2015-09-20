@@ -6,6 +6,8 @@ angular.module('starter.controllers').directive('authentication', ['authenticati
                 console.log('login require');
 
                 certService.then(function (response) {
+                    delete $http.defaults.headers.common['X-Token'];
+
                     var publicKey = response.data;
                     var now = new Date();
                     var time = now.getTime();
@@ -35,14 +37,17 @@ angular.module('starter.controllers').directive('authentication', ['authenticati
                         'Login': encrypted
                     }, function (response) {
                         $http.defaults.headers.common['X-Token'] = response.token;
+                        authService.loginConfirmed(response.token, function (config) {
+                            config.headers['X-Token'] = response.token;
+                            return config;
+                        });
                         authService.loginConfirmed();
+                        console.log('login success');
                     }, function (error) {
+                        delete $http.defaults.headers.common['X-Token'];
                         console.log('login failed', error);
                     });
                 });
-            });
-            scope.$on('event:auth-loginConfirmed', function () {
-                console.log('login success');
             });
         }
     };
