@@ -1,11 +1,9 @@
 angular.module('starter.controllers').directive('authentication', ['authenticationService', 'authService', '$ionicPlatform', '$http', 'certService', '$cordovaDevice', function (authenticationService, authService, $ionicPlatform, $http, certService, $cordovaDevice) {
-    var failed = 0;
     return {
         restrict: 'C',
         link: function (scope) {
             scope.$on('event:auth-loginRequired', function () {
                 console.log('login require');
-                failed++;
 
                 certService.then(function (response) {
                     var publicKey = response.data;
@@ -37,8 +35,7 @@ angular.module('starter.controllers').directive('authentication', ['authenticati
                         'Login': encrypted
                     }, function (response) {
                         $http.defaults.headers.common['X-Token'] = response.token;
-                        if (failed < 2)
-                            authService.loginConfirmed();
+                        authService.loginConfirmed();
                     }, function (error) {
                         console.log('login failed', error);
                     });
