@@ -36,7 +36,7 @@
         </form>
         <ion-scroll direction="x" class="wide-as-needed" ng-show="thumbimages.length > 0">
             <i ng-repeat="image in thumbimages">
-                <img ng-click="showImage({{$index}})" style="max-height:20%;min-height:20%; margin-left : 3px !important"
+                <img ng-click="showImage({{$index}})" style="height:100px;margin: 0px 1px !important"
                      ng-src="{{urlForImage(image)}}"/>
             </i>
         </ion-scroll>
