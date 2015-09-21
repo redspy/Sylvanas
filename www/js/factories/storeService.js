@@ -27,7 +27,7 @@ angular.module('starter.controllers')
         return base;
     }])
     .factory('storeSearchService', ['$resource', 'SERVICE_ENDPOINT', function ($resource, SERVICE_ENDPOINT) {
-        var search = $resource(SERVICE_ENDPOINT + '/store/type/:type/gps/:latitude/:longitude', {}, {
+        var search = $resource(SERVICE_ENDPOINT + '/store/type/:type/gps/:latitude/:longitude/filter/:from/:count', {}, {
             search: {
                 method: 'GET',
                 isArray: true

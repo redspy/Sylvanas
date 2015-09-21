@@ -10,9 +10,12 @@ angular.module('starter.controllers')
 
         $scope.doRefresh = function () {
             $timeout(function () {
-                filterStoreByType($scope.searchProductType, 37.5, 127.5).then(function (data) {
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+
+                filterStoreByType($scope.searchProductType, 37.5, 127.5, 0, 5).then(function (data) {
                     $scope.items = data;
                     $scope.$broadcast('scroll.refreshComplete');
+                    console.log(1111);
                 });
             }, 1000);
         };
@@ -22,11 +25,26 @@ angular.module('starter.controllers')
             $scope.productType = data;
 
             $scope.$watch('searchProductType', function (nv) {
-                filterStoreByType(nv, 37.5, 127.5).then(function (data) {
+                filterStoreByType(nv, 37.5, 127.5, 0, 5).then(function (data) {
                     $scope.items = data;
                 });
             });
         });
+
+        $scope.loadMore = function () {
+            console.log(1);
+
+            filterStoreByType($scope.searchProductType, 37.5, 127.5, $scope.items.length, 5).then(function (data) {
+
+                if (data.length != 0) {
+                    data.forEach(function (item) {
+                        $scope.items.push(item);
+                    });
+
+                    $scope.$broadcast('scroll.infiniteScrollComplete');
+                }
+            });
+        };
 
         //$scope.loadMore = function () {
         //
@@ -48,11 +66,11 @@ angular.module('starter.controllers')
          * type에 해당하는 상점 정보를 리턴한다. 이때 (latitude, longtitude)에서 가장 가까운 순서로
          * 리턴한다. type이 -1인 경우 모든 품목에 대해 검색한다.
          */
-        function filterStoreByType(type, latitude, longitude) {
+        function filterStoreByType(type, latitude, longitude, from, count) {
             var deferred = $q.defer();
 
             storeSearchService.search(
-                {type:type, latitude:latitude, longitude:longitude},
+                {type:type, latitude:latitude, longitude:longitude, from:from, count:count},
                 function (value, responseHeaders) {
                     deferred.resolve(value);
                 }, function (httpResponse) {

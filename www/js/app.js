@@ -31,13 +31,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
     var option = {};
     if (ionic.Platform.platform().toUpperCase() === 'ANDROID') {
         option = {
-            "senderID": "196142849250", // Google GCM 서비스에서 생성한 Project Number를 입력한다.
+            "senderID": "196142849250" // Google GCM 서비스에서 생성한 Project Number를 입력한다.
         };
     } else {
         option = {
             "badge": "true", // 뱃지 기능을 사용한다.
             "sound": "true", // 사운드를 사용한다.
-            "alert": "true", // alert를 사용한다.
+            "alert": "true"  // alert를 사용한다.
         };
     }
 
@@ -65,7 +65,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
                         var loginData = '';
                         
                         console.log(token);
-                        
+
                         if (ionic.Platform.platform() == 'win32') {
                             loginData = angular.fromJson({
                                 'Now': parseInt(time / 1000),

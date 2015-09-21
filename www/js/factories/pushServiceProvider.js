@@ -40,12 +40,17 @@ angular.module('starter.controllers')
             
             ionic.Platform.ready(function () {
                 option.ecb = 'window.onPushNotification';
-                
-                console.log(option);
-                if (ionic.Platform.platform().toUpperCase() === 'ANDROID') {
-                    $window.plugins.pushNotification.register(successCallback, errorCallback, option);
-                } else {
-                    $window.plugins.pushNotification.register(onToken, errorCallback, option);
+
+                switch (ionic.Platform.platform().toUpperCase()) {
+                    case 'ANDROID':
+                        $window.plugins.pushNotification.register(successCallback, errorCallback, option);
+                        break;
+                    case 'IOS':
+                        $window.plugins.pushNotification.register(onToken, errorCallback, option);
+                        break;
+                    default:
+                        onToken(ionic.Platform.platform().toUpperCase() + '_DEBUG_TOKEN');
+
                 }
             });
 
