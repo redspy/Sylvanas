@@ -41,14 +41,12 @@
         <div ng-repeat="image in images">
             <img class="full-image" ng-src="{{image}}"/>
         </div>
-        <p style="font-size: 18px; margin: 5px !important;">댓글</p>
-        <hr>
-        <div style="margin-top : 5px;">
-            <div class="card" ng-repeat="reply in item.Replies" style="margin: 3px !important;">
-                <div style="margin: 3px !important;">
-                    <span style="font-size: 15px">{{reply.NickName}}</span>
-                    <span style="font-size: 10px">{{reply.CreateDate | date: 'yyyy-MM-dd HH:mm:ss a'}}</span>
-                    <p id="description" style="font-size: 15px">{{reply.Description}}</p>
+        <div>
+            <div ng-repeat="reply in item.Replies" style="background-color: #EEEEEE">
+                <div style="margin: 5px">
+                    <!--<span style="font-size: 15px">{{reply.NickName}}</span>-->
+                    <span style="font-size: 11px">{{reply.CreateDate | date: 'yyyy-MM-dd HH:mm:ss a'}}</span>
+                    <p style="font-size: 16px">{{reply.Description}}</p>
                 </div>
             </div>
         </div>
