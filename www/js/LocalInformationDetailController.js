@@ -1,7 +1,7 @@
 angular.module('starter.controllers')
 
     .controller('localinformationdetailcontroller', ['$scope', '$stateParams', 'storeService', '$q', 'IMAGE_ENDPOINT', '$ionicSlideBoxDelegate', 'bookmarkStoreService', function ($scope, $stateParams, storeService, $q, IMAGE_ENDPOINT, $ionicSlideBoxDelegate, bookmarkStoreService) {
-        $scope.name = "";
+        $scope.name = '';
         $scope.id = $stateParams.unitid;
         $scope.item = [];
         $scope.images = [];
