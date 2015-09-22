@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-    .factory('imageService', ['$resource', 'SERVICE_ENDPOINT', 'Upload', '$cordovaFileTransfer', '$q', function ($resource, SERVICE_ENDPOINT, Upload, $cordovaFileTransfer, $q) {
+    .factory('imageService', ['$resource', 'SERVICE_ENDPOINT', 'Upload', '$cordovaFileTransfer', '$q', '$http', function ($resource, SERVICE_ENDPOINT, Upload, $cordovaFileTransfer, $q, $http) {
         var IMAGE_SERVICE_ENDPOINT = SERVICE_ENDPOINT + '/images';
         var resource = $resource(IMAGE_SERVICE_ENDPOINT, {}, {
             delete: { method: 'DELETE' }
@@ -11,6 +11,9 @@ angular.module('starter.controllers')
                 var deferred = $q.defer();
                 var options = new FileUploadOptions('image', '', 'image/jpeg', new Object());
                 options.fileName = file.substr(file.lastIndexOf('/') + 1);
+                options.headers = {
+                    'X-Token': $http.defaults.headers.common['X-Token']
+                };
 
                 $cordovaFileTransfer.upload(SERVICE_ENDPOINT + '/images', file, options, true)
                     .then(function (result) {
