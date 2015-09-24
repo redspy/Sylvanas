@@ -31,7 +31,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
     var option = {};
     if (ionic.Platform.platform().toUpperCase() === 'ANDROID') {
         option = {
-            "senderID": "196142849250" // Google GCM 서비스에서 생성한 Project Number를 입력한다.
+            "senderID": "94366515322" // Google GCM 서비스에서 생성한 Project Number를 입력한다.
         };
     } else {
         option = {
@@ -42,6 +42,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
     }
 
     pushServiceProvider.setup(option, function (event) {
+        console.log(event);
     }, function (success) {
     }, function (error) {
     }, function (token) {

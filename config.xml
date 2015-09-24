@@ -27,7 +27,7 @@
   </feature>
   <feature name="PushPlugin">
     <param name="ios-package" value="PushPlugin"/>
-    <param name="android-package" value="com.plugin.gcm.PushPlugin"/>
+    <param name="android-package" value="com.ionicframework.sylvanas958777"/>
   </feature>
   <platform name="android">
     <icon src="resources/android/icon/drawable-ldpi-icon.png" density="ldpi"/>
