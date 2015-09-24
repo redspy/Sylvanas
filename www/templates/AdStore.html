@@ -28,9 +28,7 @@
                                 style="position:relative;left:0px">
                         <img ng-show="item.Images.length > 0"
                              ng-repeat="image in item.Images"
-                             width="200px"
-                             height="100px"
-                             style="margin : 2px !important"
+                             style="height:100px; margin : 2px !important"
                              ng-src="{{getImageURL(image)}}"/>
                     </ion-scroll>
                 </div>
