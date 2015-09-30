@@ -31,8 +31,9 @@ angular.module('starter.controllers')
                     if (event.event === 'registered') {
                         onToken(event.regid);
                     } else if ((event.event === 'message')) {
-                        alert(event.message);
-                        location.replace("#/app/saleevent/" + event.payload.data.Id);
+                        if (confirm(event.message) == true) {
+                            location.replace("#/app/saleevent/" + event.payload.data.Id);
+                        }
                     } else {
                         notificationCallback(event);
                     }
