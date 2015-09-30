@@ -61,6 +61,13 @@ angular.module('starter.controllers')
             $scope.reply = "";
         };
 
+        // 찜찜찜했는지 확인
+        bookmarkStoreService.exists({
+            id: $scope.id
+        }, {}, function (data) {
+            console.log('찜', data.result);
+        });
+
         $scope.favoriteClick = function () {
             $scope.showTop("찜 목록에 등록되었습니다.");
             bookmarkStoreService.create({

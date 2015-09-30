@@ -11,6 +11,9 @@ angular.module('starter.controllers')
             },
             delete: {
                 method: 'DELETE'
+            },
+            exists: {
+                method: 'GET'
             }
         });
     }]);
