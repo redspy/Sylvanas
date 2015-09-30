@@ -65,6 +65,7 @@ angular.module('starter.controllers')
         };
 
         $scope.favoriteClick = function () {
+            $scope.showTop("찜 목록에 등록되었습니다.");
             bookmarkSaleService.create({
                 id: $scope.id
             }, {}, function () {
@@ -107,4 +108,14 @@ angular.module('starter.controllers')
         };
         // google.maps.event.addDomListener(window, 'load', $scope.initialize);
 
+        $scope.showTop = function(messageString) {
+            window.plugins.toast.showWithOptions(
+                {
+                    message: messageString,
+                    duration: "short",
+                    position: "bottom",
+                    addPixelsY: -40  // added a negative value to move it up a bit (default 0)
+                }
+            );
+        };
     }]);
