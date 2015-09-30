@@ -15,8 +15,9 @@
                         <i style="font-size : 12px; margin-left : 3px !important">{{item.LastUpdateDate | date: 'yyyy-MM-dd HH:mm:ss a'}}</i>
                     </p>
 
-                    <p style="font-size : 18px; margin-top : 20px !important; margin-bottom : 12px !important">
-                        {{item.Description}}</p>
+                    <pre style="font-size : 18px; margin-top : 20px !important; margin-bottom : 12px !important">
+{{item.Description}}
+                    </pre>
                 </div>
                 <div class="item item-text-wrap" style="padding : 0px">
                     <ion-scroll delegate-handle="{{'horizontal' + $index}}"
