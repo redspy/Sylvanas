@@ -44,8 +44,8 @@
                                     <i class="ion-ios-alarm"
                                        style="color : #34BAAA"></i>
                                     <span style="font-size : 15px; color : #34BAAA">
-                                        <span>{{days}} 일</span>
-                                        <span>{{hhours}} 시간</span>
+                                        <span ng-show="days != 0"> {{days}}일</span>
+                                        <span ng-show="hours != 0">{{hours}}시간</span>
                                         <span>{{mminutes}} 분</span>
                                         <span>{{sseconds}} 초</span>
                                         <span> 남음</span>
