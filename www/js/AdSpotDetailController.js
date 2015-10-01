@@ -32,7 +32,8 @@ angular.module('starter.controllers')
                 var now = new Date();
                 var end = new Date($scope.item.EndDate);
 
-                $scope.item.EndDate = Math.max((end.getTime() - (now.getTime() + now.getTimezoneOffset() * 60 * 1000)) / 1000, 0);
+                $scope.item.EndDate = end.getTime() - now.getTimezoneOffset() * 60 * 1000;
+                $scope.item.Duration = Math.max((end.getTime() - (now.getTime() + now.getTimezoneOffset() * 60 * 1000)) / 1000, 0);
 
                 // $scope.item.Description = $scope.item.Description.replace(/\n/g, '<br/>');
                 // document.getElementById("description").innerHTML.replace(/\n/g, '<br/>');
