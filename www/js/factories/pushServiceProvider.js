@@ -30,11 +30,8 @@ angular.module('starter.controllers')
                 if (ionic.Platform.platform().toUpperCase() === 'ANDROID') {
                     if (event.event === 'registered') {
                         onToken(event.regid);
-                    } else if ((event.event === 'message')) {
-                        if (confirm(event.message) == true) {
-                            location.replace("#/app/saleevent/" + event.payload.data.Id);
-                        }
-                    } else {
+                    }
+                    else {
                         notificationCallback(event);
                     }
                 } else {

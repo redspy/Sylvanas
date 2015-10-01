@@ -41,10 +41,42 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
         };
     }
 
-    pushServiceProvider.setup(option, function (event) {
-        console.log(event);
-    }, function (success) {
-    }, function (error) {
+        pushServiceProvider.setup(option, function (event) {
+            console.log(event);
+            /*
+             if ((event.event === 'message')) {
+             if (confirm(event.message) == true) {
+             location.replace("#/app/saleevent/" + event.payload.data.Id);
+             }
+             }
+             */
+            if ((event.event === 'message')) {
+                if (event.foreground) { // 푸시 메세지가 왔을 때 앱이 실행되고 있을 경우
+                    //var soundfile = event.soundname || event.payload.sound;
+                    //var my_media = new Media("/android_asset/www/" + soundfile);
+                    //my_media.play();
+                    navigator.notification.confirm(event.message,
+                        function(buttonIndex)
+                        {
+                            if(buttonIndex == 2) {
+                                location.replace("#/app/saleevent/" + event.payload.data.Id);
+                            }
+                        },
+                        '이벤트알림',
+                        ['닫기','이동']);
+                } else { // 푸시 메세지가 왔을 때 앱이 백그라운드로 실행되거나 실행되지 않을 경우
+                    if (event.coldstart) { // 푸시 메세지가 왔을 때 푸시를 선택하여 앱이 열렸을 경우
+                        console.log("알림 왔을 때 앱이 열리고 난 다음에 실행 될때");
+                        location.replace("#/app/saleevent/" + event.payload.data.Id);
+                    } else { // 푸시 메세지가 왔을 때 앱이 백그라운드로 사용되고 있을 경우
+                        console.log("앱이 백그라운드로 실행될 때");
+                    }
+                }
+                console.log(event.payload.title);
+
+            }
+        }, function (success) {
+        }, function (error) {
     }, function (token) {
     });
 })
