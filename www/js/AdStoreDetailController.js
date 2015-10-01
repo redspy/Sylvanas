@@ -25,7 +25,7 @@ angular.module('starter.controllers')
                 console.log(data);
                 $scope.images = [];
                 $scope.item = data[0];
-                $scope.name = $scope.item.Name;
+                //$scope.name = $scope.item.Name;
                 for (var i = 0; i < $scope.item.Images.length; i++) {
                     $scope.images.push($scope.getImageURL($scope.item.Images[i]));
                 }
