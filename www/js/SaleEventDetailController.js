@@ -8,6 +8,7 @@ angular.module('starter.controllers')
         $scope.id = $stateParams.unitid;
         $scope.item = [];
         $scope.images = [];
+        $scope.myStar = false;
         /*
          * 상점 정보를 from에 지정된 id 상점을 기준으로 count만큼의 상점정보를 리턴한다.
          * 만일 count 만큼의 데이터가 없으면 있는 만큼만 리턴함.
@@ -69,10 +70,12 @@ angular.module('starter.controllers')
             id: $scope.id
         }, {}, function (data) {
             console.log('찜', data.result);
+            $scope.myStar = data.result;
         });
 
         $scope.favoriteClick = function () {
             $scope.showTop("찜 목록에 등록되었습니다.");
+            $scope.myStar = true;
             bookmarkSaleService.create({
                 id: $scope.id
             }, {}, function () {
