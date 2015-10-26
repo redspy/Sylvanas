@@ -1,14 +1,42 @@
 <ion-view view-title='{{name}}'>
-    <!--<ion-content>-->
-        <!--<h1>SaleEvent</h1>-->
-        <!--<ion-slide-box does-continue="true" auto-play="true" slide-interval="3000">-->
-            <!--&lt;!&ndash;  on-slide-changed="slideChanged(index)"> &ndash;&gt;-->
+    <ion-content style="background-color: #EEEEEE !important" has-bouncing="true">
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
+        </ion-refresher>
+        <ion-item id="ionListItemStyle" ng-repeat="item in items" class="list card" style="padding : 0px !important" href="{{detailLink}}{{item.Id}}">
+            <div class="row">
+                <div class="col col-33 ">
+                    <img style="height : 135px !important; width: inherit" ng-src="{{getImageURL(item.Images[0])}}">
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col col-90">
+                            <div style="margin-left : 10px">
+                                <span style="color : gray; font-size : 15px">{{MarketName}}</span>
 
-            <!--<ion-slide ng-repeat="image in images">-->
-                <!--<img class="full-image" ng-src="img/{{image.url}}">-->
-            <!--</ion-slide>-->
+                                <div style="margin-top : 5px">
+                                    <span style="color : black; font-size : 23px">{{item.Name}}</span>
+                                    <a style="color : gray; font-size : 15px"> | </a>
+                                    <a class="ion-star" style="color : orange; font-size : 15px"></a>
+                                    <a style="color : gray; font-size : 15px">{{item.BookmarkCount}}</a>
+                                </div>
+                            </div>
+                            <div style="margin-top : 15px; margin-left : 10px">
+                                <p style="color : gray; font-size : 15px; margin : 0px" ng-show="name == '주변 상점 정보'">품목 : {{item.Product}}</p>
+                                <p style="color : gray; font-size : 15px; margin : 0px" ng-show="name != '주변 상점 정보'">종료 : {{item.EventTo}}</p>
 
-        <!--</ion-slide-box>-->
-    <!--</ion-content>-->
-    <my-example></my-example>
+                                <p style="color : gray; font-size : 15px; margin : 0px">문의 : {{item.Contact}}</p>
+
+                                <p style="color : gray; font-size : 15px; margin : 0px">주소 : {{item.Address}}</p>
+                            </div>
+                        </div>
+                        <div class="col" style="margin-top : 50px !important">
+                            <i class="ion-ios-arrow-right" style="font-size : 30px; color : gray"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ion-item>
+        <ion-infinite-scroll icon="ion-loading-c" on-infinite="loadMore()">
+        </ion-infinite-scroll>
+    </ion-content>
 </ion-view>
