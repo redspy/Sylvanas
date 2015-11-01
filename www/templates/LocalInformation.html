@@ -1,10 +1,10 @@
 <ion-view view-title='{{name}}'>
-    <ion-header-bar class="bar bar-subheader" style="height : 60px !important">
-        <label class="item item-input item-select">
-            <div class="input-label">
+    <ion-header-bar class="bar bar-subheader">
+        <label class="item item-input item-select" style="height: 35px !important; padding: 0px !important">
+            <div class="input-label" style="margin-left: 20px">
                 품목
             </div>
-            <select ng-model="searchProductType">
+            <select ng-model="searchProductType" style="padding-top: 0px !important; padding-bottom: 0px !important;">
                 <option selected="selected" value="-1">전체</option>
                 <option ng-repeat="type in productType" value="{{type.Id}}">{{type.Type}}</option>
             </select>

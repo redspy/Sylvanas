@@ -87,7 +87,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
 
         var callbackFn = function(location) {
         console.log('[js] BackgroundGeoLocation callback:  ' + location.latitude + ',' + location.longitude);
-
+            var messageString = '[BackgroundGeoLocation] :  ' + location.latitude + ',' + location.longitude;
+            window.plugins.toast.showWithOptions(
+                {
+                    message: messageString,
+                    duration: "short",
+                    position: "bottom",
+                    addPixelsY: -40  // added a negative value to move it up a bit (default 0)
+                }
+            );
         // Do your HTTP request here to POST location to your server.
         // jQuery.post(url, JSON.stringify(location));
 
@@ -108,8 +116,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
         desiredAccuracy: 10,
         stationaryRadius: 20,
         distanceFilter: 30,
-        debug: true, // <-- enable this hear sounds for background-geolocation life-cycle.
+        // debug: true, // <-- enable this hear sounds for background-geolocation life-cycle.
         stopOnTerminate: false, // <-- enable this to clear background location settings when the app terminates
+        interval : 10000
     });
 
     // Turn ON the background-geolocation system.  The user will be tracked whenever they suspend the app.
