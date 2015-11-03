@@ -115,6 +115,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
 
         // BackgroundGeoLocation is highly configurable. See platform specific configuration options
         backgroundGeoLocation.configure(callbackFn, failureFn, {
+            notificationTitle: '생생시장정보',
+            notificationText: '알림 활성화상태',
             desiredAccuracy: 10,
             stationaryRadius: 20,
             distanceFilter: 30,
