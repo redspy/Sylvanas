@@ -62,7 +62,7 @@ angular.module('starter.controllers')
             var time = now.getTime();
             var loginData = '';
 
-            if (ionic.Platform.platform() == 'win32') {
+            if (ionic.Platform.platform() == 'win32' || ionic.Platform.platform() == 'macintel') {
                 loginData = angular.fromJson({
                     'Now': parseInt(time / 1000),
                     'DeviceUUID': 'WINDOW_DEBUG_DEVICE',
