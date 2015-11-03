@@ -37,7 +37,7 @@ angular.module('starter.controllers')
                 } else {
                     notificationCallback(event);
                 }
-            }    
+            };
             
             ionic.Platform.ready(function () {
                 option.ecb = 'window.onPushNotification';

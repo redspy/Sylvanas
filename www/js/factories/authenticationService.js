@@ -10,6 +10,9 @@ angular.module('starter.controllers')
             },
             logout: {
                 method: 'DELETE'
+            },
+            updateGCMToken: {
+                method: 'PUT'
             }
         });
     }])
@@ -54,10 +57,10 @@ angular.module('starter.controllers')
             };
         };
     })
-    .factory('loginService', function ($q, certService, encryptService, authenticationService, pushService, $cordovaDevice, $http) {
+    .factory('loginService', function ($q, certService, encryptService, authenticationService, $cordovaDevice, $http, pushService) {
         var deferred = $q.defer();
 
-        $q.all([certService, pushService.getToken()]).then(function (data) {
+        $q.all([certService]).then(function (data) {
             var now = new Date();
             var time = now.getTime();
             var loginData = '';
@@ -66,14 +69,12 @@ angular.module('starter.controllers')
                 loginData = angular.fromJson({
                     'Now': parseInt(time / 1000),
                     'DeviceUUID': 'WINDOW_DEBUG_DEVICE',
-                    'DeviceToken': 'WINDOW_DEBUG_TOKEN',
                     'DeviceOS': ionic.Platform.platform()
                 });
             } else {
                 loginData = angular.fromJson({
                     'Now': parseInt(time / 1000),
                     'DeviceUUID': $cordovaDevice.getUUID(),
-                    'DeviceToken': data[1],
                     'DeviceOS': ionic.Platform.platform()
                 });
             }
@@ -85,8 +86,15 @@ angular.module('starter.controllers')
             delete $http.defaults.headers.common['X-Token'];
             authenticationService.login(encryptedLoginData, function (response) {
                 $http.defaults.headers.common['X-Token'] = response.token;
+                var tokens = response.token.split('.');
                 console.log('login success');
-                deferred.resolve(response.token);
+                deferred.resolve(atob(tokens[1]));
+
+                pushService.getToken().then(function (token) {
+                    authenticationService.updateGCMToken({
+                        'Token': token
+                    });
+                });
             }, function (error) {
                 delete $http.defaults.headers.common['X-Token'];
                 console.log('login failed', error);
