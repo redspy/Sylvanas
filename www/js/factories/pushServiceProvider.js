@@ -47,8 +47,8 @@ angular.module('starter.controllers')
                         $window.plugins.pushNotification.register(successCallback, errorCallback, option);
                         break;
                     case 'IOS':
-                        //$window.plugins.pushNotification.register(onToken, errorCallback, option);
-                        tokenDeferred.resolve('Debugging');
+                        $window.plugins.pushNotification.register(onToken, errorCallback, option);
+                        //tokenDeferred.resolve('Debugging');
                         break;
                     default:
                         onToken(ionic.Platform.platform().toUpperCase() + '_DEBUG_TOKEN');
