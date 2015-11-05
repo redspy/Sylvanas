@@ -1,13 +1,13 @@
 <ion-view view-title='{{name}}'>
     <nav mfb-menu position="br" effect="slidein-spring" active-icon="ion-compose" resting-icon="ion-compose"
          toggling-method="click" ng-click="write()"></nav>
-    <ion-content style="background-color: #EEEEEE !important" delegate-handle="mainScroll" has-bouncing="true" scroll="true">
+    <ion-content style="background-color: #eeeeee" delegate-handle="mainScroll" has-bouncing="true" scroll="true">
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
         </ion-refresher>
-        <ion-item id="ionListItemCardStyle" ng-repeat="item in items"
+        <ion-item id="ionListItemCardStyle" ng-repeat="item in items" style="margin:10px"
                   href="#/app/adstore/{{item.Id}}">
-            <div class="card">
-                <div class="item item-divider item-text-wrap" style="background : white;  margin-top : 8px !important">
+            <div>
+                <div class="item item-divider item-text-wrap" style="background-color: white">
                     <b style="font-size : 18px;">{{item.Title}}</b>
 
                     <p style="font-size : 10px; margin-top : 3px !important">
@@ -15,18 +15,16 @@
                         <i style="font-size : 12px; margin-left : 3px !important">{{item.LastUpdateDate | date: 'yyyy-MM-dd HH:mm:ss a'}}</i>
                     </p>
 
-                    <pre style="font-size : 18px; margin-top : 20px !important; margin-bottom : 12px !important">
-{{item.Description}}
-                    </pre>
+                    <pre style="font-size : 18px; margin-top : 20px !important; margin-bottom : 12px !important">{{item.Description}}</pre>
                 </div>
-                <div class="item item-text-wrap" style="padding : 0px">
+                <div class="item item-text-wrap" style="padding : 0px; background-color: white">
                     <ion-scroll delegate-handle="{{'horizontal' + $index}}"
                                 direction="x"
                                 scrollbar-y="false"
                                 scrollbar-x="false"
                                 horizontal-scroll-fix="mainScroll"
                                 class="wide-as-needed"
-                                style="position:relative;left:0px">
+                                style="position:relative">
                         <img ng-show="item.Images.length > 0"
                              ng-repeat="image in item.Images"
                              style="height:100px; margin : 2px !important"
