@@ -60,47 +60,48 @@ angular.module('starter.controllers')
     .factory('loginService', function ($q, certService, encryptService, authenticationService, $cordovaDevice, $http, pushService) {
         var deferred = $q.defer();
 
-        $q.all([certService]).then(function (data) {
-            var now = new Date();
-            var time = now.getTime();
-            var loginData = '';
+        ionic.Platform.ready(function () {
+            $q.all([certService]).then(function (data) {
+                var now = new Date();
+                var time = now.getTime();
+                var loginData = '';
 
-            if (ionic.Platform.platform() == 'win32' || ionic.Platform.platform() == 'macintel') {
-                loginData = angular.fromJson({
-                    'Now': parseInt(time / 1000),
-                    'DeviceUUID': 'WINDOW_DEBUG_DEVICE',
-                    'DeviceOS': ionic.Platform.platform()
-                });
-            } else {
-                loginData = angular.fromJson({
-                    'Now': parseInt(time / 1000),
-                    'DeviceUUID': $cordovaDevice.getUUID(),
-                    'DeviceOS': ionic.Platform.platform()
-                });
-            }
-
-            var publicKey = data[0].data;
-
-            var encryptedLoginData = encryptService(publicKey, loginData);
-
-            delete $http.defaults.headers.common['X-Token'];
-            authenticationService.login(encryptedLoginData, function (response) {
-                $http.defaults.headers.common['X-Token'] = response.token;
-                var tokens = response.token.split('.');
-                console.log('login success');
-                deferred.resolve(atob(tokens[1]));
-
-                pushService.getToken().then(function (token) {
-                    authenticationService.updateGCMToken({
-                        'Token': token
+                if (ionic.Platform.platform() == 'win32' || ionic.Platform.platform() == 'macintel') {
+                    loginData = angular.fromJson({
+                        'Now': parseInt(time / 1000),
+                        'DeviceUUID': 'WINDOW_DEBUG_DEVICE',
+                        'DeviceOS': ionic.Platform.platform()
                     });
-                });
-            }, function (error) {
-                delete $http.defaults.headers.common['X-Token'];
-                console.log('login failed', error);
-                deferred.reject(error);
-            });
-        });
+                } else {
+                    loginData = angular.fromJson({
+                        'Now': parseInt(time / 1000),
+                        'DeviceUUID': $cordovaDevice.getUUID(),
+                        'DeviceOS': ionic.Platform.platform()
+                    });
+                }
 
+                var publicKey = data[0].data;
+
+                var encryptedLoginData = encryptService(publicKey, loginData);
+
+                delete $http.defaults.headers.common['X-Token'];
+                authenticationService.login(encryptedLoginData, function (response) {
+                    $http.defaults.headers.common['X-Token'] = response.token;
+                    var tokens = response.token.split('.');
+                    console.log('login success');
+                    deferred.resolve(atob(tokens[1]));
+
+                    pushService.getToken().then(function (token) {
+                        authenticationService.updateGCMToken({
+                            'Token': token
+                        });
+                    });
+                }, function (error) {
+                    delete $http.defaults.headers.common['X-Token'];
+                    console.log('login failed', error);
+                    deferred.reject(error);
+                });
+            })
+        });
         return deferred.promise;
     });
