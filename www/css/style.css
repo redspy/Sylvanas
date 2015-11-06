@@ -156,6 +156,14 @@ ion-header-bar {
     right: 0;
     top: 0;
 }
+.shop-item.ng-enter {
+    animation: fadeIn 1s;
+}
+
+.shop-item.ng-enter-stagger {
+    animation-delay: 100ms;
+    animation-duration: 0s;
+}
 
 @media (max-width: 679px) {
     .active .modal-backdrop-bg {
