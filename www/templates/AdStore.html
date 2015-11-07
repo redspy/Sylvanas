@@ -4,9 +4,9 @@
     <ion-content style="background-color: #eeeeee" delegate-handle="mainScroll" has-bouncing="true" scroll="true">
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
         </ion-refresher>
-        <ion-item id="ionListItemCardStyle" ng-repeat="item in items" style="margin:10px"
-                  href="#/app/adstore/{{item.Id}}">
-            <div>
+        <ion-item class="ionListItemCardStyle shop-item" ng-repeat="item in items" style="margin:10px"
+                  href="#/app/adstore/{{item.Id}}" >
+            <div id="{{'adStore' + $index}}">
                 <div class="item item-divider item-text-wrap" style="background-color: white">
                     <b style="font-size : 18px;">{{item.Title}}</b>
 
@@ -31,8 +31,9 @@
                              ng-src="{{getImageURL(image)}}"/>
                     </ion-scroll>
                 </div>
+            </div>
                 <div class="item tabs tabs-secondary tabs-icon-left" style="background-color : #f1f1f1">
-                    <a class="tab-item" href="#/app/adstore/{{item.Id}}">
+                    <a class="tab-item" ng-click="onShare('adStore' + $index)">
                        <!--href="#/app/localinformation/{{item.id}}">-->
                         <i class="icon ion-forward"></i> 공유하기
                     </a>
@@ -41,7 +42,7 @@
                         <i class="icon ion-chatbox-working"></i> 댓글({{item.Replies.length}})
                     </a>
                 </div>
-            </div>
+
         </ion-item>
     </ion-content>
 </ion-view>

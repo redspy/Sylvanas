@@ -2,20 +2,18 @@
     <ion-nav-title>{{name}}</ion-nav-title>
     <ion-content id="detailListStyle" has-bouncing="true">
         <div class="item item-divider item-text-wrap" style="background : white;  margin-top : 0px !important">
-            <b style="font-size : 18px;">{{item.Title}}</b>
+            <b style="font-size : 18px;" class="animated bounceInLeft">{{item.Title}}</b>
 
-            <p style="font-size : 10px; margin-top : 3px !important">
+            <p style="font-size : 10px; margin-top : 3px !important" class="animated bounceInRight">
                 <i style="font-size : 15px">{{item.NickName}}</i>
                 <i style="font-size : 12px; margin-left : 3px !important">{{item.LastUpdateDate | date: 'yyyy-MM-dd HH:mm:ss a'}}</i>
             </p>
 
-            <pre style="font-size : 18px; margin-top : 20px !important; margin-bottom : 12px !important">
-{{item.Description}}
-            </pre>
+            <pre style="font-size : 18px; margin-top : 20px !important; margin-bottom : 12px !important" class="animated fadeInUp" style="animation-delay: 2s;animation-duration: 1s">{{item.Description}}</pre>
         </div>
 
-        <div ng-repeat="image in images">
-            <img class="full-image" ng-src="{{image}}"/>
+        <div>
+            <img class="full-image image-item" ng-src="{{image}}" ng-repeat="image in images"/>
         </div>
         <div>
             <div ng-repeat="reply in item.Replies" style="background-color: #EEEEEE">

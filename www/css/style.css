@@ -36,17 +36,17 @@ a.activated {
     margin: 0px !important;
 }
 
-#ionListItemStyle .item-content {
+.ionListItemStyle .item-content {
     max-width: 100% !important;
     padding: 3px !important;
 }
 
-#ionListItemCardStyle .item-content {
+.ionListItemCardStyle .item-content {
     max-width: 100% !important;
     padding: 0px !important;
     background-color: #EEEEEE;
 }
-#ionListItemCardStyle .activated{
+.ionListItemCardStyle .activated{
     background-color: #EEEEEE !important;
 }
 
@@ -157,11 +157,27 @@ ion-header-bar {
     top: 0;
 }
 .shop-item.ng-enter {
+    -webkit-animation: fadeIn 1s;
     animation: fadeIn 1s;
 }
 
 .shop-item.ng-enter-stagger {
-    animation-delay: 100ms;
+    -webkit-animation-delay: 300ms;
+    animation-delay: 300ms;
+    -webkit-animation-duration: 0s;
+    animation-duration: 0s;
+}
+
+.image-item.ng-enter {
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+.image-item.ng-enter-stagger {
+    -webkit-animation-delay: 300ms;
+    animation-delay: 300ms;
+
+    -webkit-animation-duration: 0s;
     animation-duration: 0s;
 }
 

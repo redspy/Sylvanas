@@ -295,4 +295,29 @@ angular.module('starter.controllers')
                 var element = document.getElementById("input_textarea");
                 element.style.height = element.scrollHeight + "px";
             };
+
+            $scope.onShare = function (id) {
+                var target = document.getElementById(id);
+                var clone = target.cloneNode(true);
+
+                var style = clone.style;
+                style.position = 'relative';
+                style.overflow = 'visible';
+                style.left = 0;
+                style.top = 0;
+                style.width = 'auto';
+                style.height = 'auto';
+                style.maxHeight = 'auto';
+
+                document.body.appendChild(clone);
+                html2canvas(clone, {
+                    logging:true,
+                    useCORS: true,
+                    taintTest: false
+                }).then(function(canvas) {
+                    document.body.removeChild(clone);
+                    //document.getElementById(id).appendChild(canvas);
+                    console.log(canvas, canvas.toDataURL());
+                });
+            };
         }]);
