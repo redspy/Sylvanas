@@ -6,22 +6,61 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'])
 
-.run(function ($ionicPlatform) {
-        $ionicPlatform.ready(function () {
-            // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-            // for form inputs)
-            if (window.cordova && window.cordova.plugins.Keyboard) {
-                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-            }
-            if (window.StatusBar) {
-                // org.apache.cordova.statusbar required
-                StatusBar.styleDefault();
-            }
-        });
-    })
-    .config(function ($ionicConfigProvider) {
-        //if(!ionic.Platform.isIOS())$ionicConfigProvider.scrolling.jsScrolling(false);
-    })
+.run(function ($ionicPlatform, locationService) {
+    $ionicPlatform.ready(function () {
+        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+        // for form inputs)
+        if (window.cordova && window.cordova.plugins.Keyboard) {
+            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        }
+        if (window.StatusBar) {
+            // org.apache.cordova.statusbar required
+            StatusBar.styleDefault();
+        }
+
+        console.log('IONIC Device Ready and Register BackgroundGeoLocation!!!');
+
+        if (!(ionic.Platform.platform() == 'win32' || ionic.Platform.platform() == 'macintel')) {
+            backgroundGeoLocation.configure(
+                function (location) {
+                    console.log('[BGL]', location);
+
+                    locationService.inform({
+                        latitude: location.latitude,
+                        longitude: location.longitude
+                    }, function () {
+                        console.log('[BGL]', 'Location is Informed');
+                    });
+
+                    window.plugins.toast.showWithOptions({
+                        message: '[BackgroundGeoLocation] :  ' + location.latitude + ',' + location.longitude,
+                        duration: "short",
+                        position: "bottom",
+                        addPixelsY: -40  // added a negative value to move it up a bit (default 0)
+                    });
+                    backgroundGeoLocation.finish();
+                },
+                function (error) {
+                    console.log('[BGL]', error);
+                }, {
+                notificationTitle: '생생시장정보',
+                notificationText: '알림 활성화상태',
+                desiredAccuracy: 10,
+                stationaryRadius: 20,
+                distanceFilter: 30,
+                debug: true, // <-- enable this hear sounds for background-geolocation life-cycle.
+                stopOnTerminate: false, // <-- enable this to clear background location settings when the app terminates
+                interval: 10000
+            });
+
+            // Turn ON the background-geolocation system.  The user will be tracked whenever they suspend the app.
+            backgroundGeoLocation.start();
+        }
+    });
+})
+.config(function ($ionicConfigProvider) {
+    //if(!ionic.Platform.isIOS())$ionicConfigProvider.scrolling.jsScrolling(false);
+})
 
 
 /**
@@ -79,59 +118,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
         }, function (error) {
     }, function (token) {
     });
-})
-
-.config(function() {
-    if (!(ionic.Platform.platform() == 'win32' || ionic.Platform.platform() == 'macintel'))
-    {
-        ionic.Platform.ready(function(){
-            console.log('IONIC Device Ready and Register BackgroundGeoLocation!!!');
-
-            var callbackFn = function(location) {
-            console.log('[js] BackgroundGeoLocation callback:  ' + location.latitude + ',' + location.longitude);
-                var messageString = '[BackgroundGeoLocation] :  ' + location.latitude + ',' + location.longitude;
-                window.plugins.toast.showWithOptions(
-                    {
-                        message: messageString,
-                        duration: "short",
-                        position: "bottom",
-                        addPixelsY: -40  // added a negative value to move it up a bit (default 0)
-                    }
-                );
-            // Do your HTTP request here to POST location to your server.
-            // jQuery.post(url, JSON.stringify(location));
-
-            /*
-            IMPORTANT:  You must execute the finish method here to inform the native plugin that you're finished,
-            and the background-task may be completed.  You must do this regardless if your HTTP request is successful or not.
-            IF YOU DON'T, ios will CRASH YOUR APP for spending too much time in the background.
-            */
-            backgroundGeoLocation.finish();
-        };
-
-        var failureFn = function(error) {
-            console.log('BackgroundGeoLocation error');
-        };
-
-        // BackgroundGeoLocation is highly configurable. See platform specific configuration options
-        backgroundGeoLocation.configure(callbackFn, failureFn, {
-            notificationTitle: '생생시장정보',
-            notificationText: '알림 활성화상태',
-            desiredAccuracy: 10,
-            stationaryRadius: 20,
-            distanceFilter: 30,
-            debug: true, // <-- enable this hear sounds for background-geolocation life-cycle.
-            stopOnTerminate: false, // <-- enable this to clear background location settings when the app terminates
-            interval : 10000
-        });
-
-        // Turn ON the background-geolocation system.  The user will be tracked whenever they suspend the app.
-        backgroundGeoLocation.start();
-
-        // If you wish to turn OFF background-tracking, call the #stop method.
-        // backgroundGeoLocation.stop();
-        })
-    }
 })
 
 .config(function ($stateProvider, $urlRouterProvider) {
