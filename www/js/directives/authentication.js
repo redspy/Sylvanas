@@ -5,8 +5,11 @@ angular.module('starter.controllers').directive('authentication', ['loginService
             scope.$on('event:auth-loginRequired', function () {
                 console.log('login require');
 
-                loginService.then(function () {
-                    authService.loginConfirmed();
+                loginService.login().then(function (token) {
+                    authService.loginConfirmed(null, function (config) {
+                        config.headers['X-Token'] = token;
+                        return config;
+                    });
                 });
             });
         }
