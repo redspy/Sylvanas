@@ -15,7 +15,9 @@ angular.module('starter.controllers')
         'SERVICE_ENDPOINT',
         '$cordovaFileTransfer',
         'imageService',
-        function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate, $q, introShopService, IMAGE_ENDPOINT, SERVICE_ENDPOINT, $cordovaFileTransfer, imageService) {
+        '$cordovaSocialSharing',
+        '$ionicPlatform',
+        function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate, $q, introShopService, IMAGE_ENDPOINT, SERVICE_ENDPOINT, $cordovaFileTransfer, imageService, $cordovaSocialSharing, $ionicPlatform) {
             $scope.name = "내가게 알리기";
             $scope.$watch('items', function () {
                 $timeout(function () {
@@ -296,7 +298,7 @@ angular.module('starter.controllers')
                 element.style.height = element.scrollHeight + "px";
             };
 
-            $scope.onShare = function (id) {
+            $scope.onShare = function (id, title) {
                 var target = document.getElementById(id);
                 var clone = target.cloneNode(true);
 
@@ -316,8 +318,11 @@ angular.module('starter.controllers')
                     taintTest: false
                 }).then(function(canvas) {
                     document.body.removeChild(clone);
-                    //document.getElementById(id).appendChild(canvas);
-                    console.log(canvas, canvas.toDataURL());
+
+                    $ionicPlatform.ready(function () {
+                        $cordovaSocialSharing
+                            .share(title, title, canvas.toDataURL(), null);
+                    });
                 });
             };
         }]);

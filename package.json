@@ -48,7 +48,11 @@
       "id": "com.phonegap.plugins.PushPlugin"
     },
     "cordova-plugin-x-toast",
-    "cordova-plugin-mauron85-background-geolocation"
+    "cordova-plugin-mauron85-background-geolocation",
+    {
+      "locator": "https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git",
+      "id": "cordova-plugin-x-socialsharing"
+    }
   ],
   "cordovaPlatforms": [
     "ios",
