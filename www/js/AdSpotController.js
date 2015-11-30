@@ -12,7 +12,9 @@ angular.module('starter.controllers')
         'IMAGE_ENDPOINT',
         'imageService',
         '$q',
-        function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate, lightningDealService, IMAGE_ENDPOINT, imageService, $q) {
+        '$cordovaSocialSharing',
+        '$ionicPlatform',
+        function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate, lightningDealService, IMAGE_ENDPOINT, imageService, $q, $cordovaSocialSharing, $ionicPlatform) {
             $scope.name = "반짝 떨이";
             $scope.imageURLs = [];
 
@@ -301,5 +303,34 @@ angular.module('starter.controllers')
             $scope.updateEditor = function () {
                 var element = document.getElementById("input_textarea");
                 element.style.height = element.scrollHeight + "px";
+            };
+
+            $scope.onShare = function (id, title) {
+                var target = document.getElementById(id);
+                var clone = target.cloneNode(true);
+
+                var style = clone.style;
+                style.position = 'relative';
+                style.overflow = 'visible';
+                style.left = 0;
+                style.top = 0;
+                style.width = 'auto';
+                style.height = 'auto';
+                style.maxHeight = 'auto';
+
+                document.body.appendChild(clone);
+                html2canvas(clone, {
+                    logging:true,
+                    useCORS: true,
+                    taintTest: false
+                }).then(function(canvas) {
+                    document.body.removeChild(clone);
+                    console.log(canvas.toDataURL());
+
+                    $ionicPlatform.ready(function () {
+                        $cordovaSocialSharing
+                            .share(title, title, canvas.toDataURL(), null);
+                    });
+                });
             };
         }]);
