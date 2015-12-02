@@ -1,24 +1,9 @@
 <ion-view view-title='{{name}}'>
     <ion-content>
-        <ul class="list">
-
-            <li class="item item-toggle">
-                알림
-                <label class="toggle toggle-positive">
-                    <input type="checkbox">
-                    <div class="track">
-                        <div class="handle"></div>
-                    </div>
-                </label>
-            </li>
-            <li>
-                <div class="item range">
-                    <span style="margin-right : 20px">검색범위</span>
-                    <input type="range" name="region" min="1" max="5" step="1" ng-model="regionValue"
-                           value="{{regionValue}}">
-                    <i>{{regionValue}}km</i>
-                </div>
-            </li>
-        </ul>
+        <div>
+            <ion-toggle ng-model="notificationMode" toggle-class="toggle-calm" ng-change="notificationCheck()">
+                위치정보 서비스 알림
+            </ion-toggle>
+        </div>
     </ion-content>
 </ion-view>

@@ -54,7 +54,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
             });
 
             // Turn ON the background-geolocation system.  The user will be tracked whenever they suspend the app.
-            backgroundGeoLocation.start();
+            // backgroundGeoLocation.start();
         }
     });
 })
