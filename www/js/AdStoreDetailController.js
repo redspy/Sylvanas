@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-    .controller('adstoredetailcontroller', ['$scope', '$stateParams', 'introShopService', '$q', 'IMAGE_ENDPOINT', '$ionicSlideBoxDelegate', 'introShopReplyService', function ($scope, $stateParams, introShopService, $q, IMAGE_ENDPOINT, $ionicSlideBoxDelegate, introShopReplyService) {
+    .controller('adstoredetailcontroller', ['$scope', '$stateParams', 'introShopService', '$q', 'IMAGE_ENDPOINT', '$ionicSlideBoxDelegate', 'introShopReplyService', '$ionicActionSheet', function ($scope, $stateParams, introShopService, $q, IMAGE_ENDPOINT, $ionicSlideBoxDelegate, introShopReplyService, $ionicActionSheet) {
         $scope.name = "내가게 알리기";
         $scope.id = $stateParams.unitid;
         $scope.item = [];
@@ -85,5 +85,30 @@ angular.module('starter.controllers')
 
         refreshIntroShop();
 
-
+        $scope.showActionSheet = function () {
+            $ionicActionSheet.show({
+                titleText: '생생시장정보',
+                buttons: [
+                    {
+                        text: '<i class="icon ion-android-create"></i><b>글 수정</b>'
+                    },
+                    {
+                        text: '<i class="icon ion-close-circled"></i><b>글 삭제</b>'
+                    },
+                ],
+                //destructiveText: 'Delete',
+                cancelText: 'Cancel',
+                cancel: function () {
+                    console.log('CANCELLED');
+                    },
+                buttonClicked: function (index) {
+                        console.log('BUTTON CLICKED', index);
+                        return true;
+                    },
+                destructiveButtonClicked: function () {
+                    console.log('DESTRUCT');
+                    return true;
+                }
+            });
+        }
     }]);

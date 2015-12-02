@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-    .controller('adspotdetailcontroller', ['$scope', '$stateParams', 'lightningDealService', '$q', 'IMAGE_ENDPOINT', '$timeout', 'lightningDealReplyService', function ($scope, $stateParams, lightningDealService, $q, IMAGE_ENDPOINT, $timeout, lightningDealReplyService) {
+    .controller('adspotdetailcontroller', ['$scope', '$stateParams', 'lightningDealService', '$q', 'IMAGE_ENDPOINT', '$timeout', 'lightningDealReplyService', '$ionicActionSheet', function ($scope, $stateParams, lightningDealService, $q, IMAGE_ENDPOINT, $timeout, lightningDealReplyService, $ionicActionSheet) {
         $scope.name = "반짝 떨이";
         $scope.id = $stateParams.unitid;
         $scope.item = [];
@@ -84,5 +84,30 @@ angular.module('starter.controllers')
         $scope.callClick = function () {
             window.open('tel:' + $scope.item.Contact);
         };
-
+        $scope.showActionSheet = function () {
+            $ionicActionSheet.show({
+                titleText: '생생시장정보',
+                buttons: [
+                    {
+                        text: '<i class="icon ion-android-create"></i><b>글 수정</b>'
+                    },
+                    {
+                        text: '<i class="icon ion-close-circled"></i><b>글 삭제</b>'
+                    },
+                ],
+                //destructiveText: 'Delete',
+                cancelText: 'Cancel',
+                cancel: function () {
+                    console.log('CANCELLED');
+                    },
+                buttonClicked: function (index) {
+                        console.log('BUTTON CLICKED', index);
+                        return true;
+                    },
+                destructiveButtonClicked: function () {
+                    console.log('DESTRUCT');
+                    return true;
+                }
+            });
+        }
     }]);

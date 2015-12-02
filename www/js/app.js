@@ -48,7 +48,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
                 desiredAccuracy: 10,
                 stationaryRadius: 20,
                 distanceFilter: 30,
-                debug: true, // <-- enable this hear sounds for background-geolocation life-cycle.
+                debug: false, // <-- enable this hear sounds for background-geolocation life-cycle.
                 stopOnTerminate: false, // <-- enable this to clear background location settings when the app terminates
                 interval: 10000
             });
@@ -90,6 +90,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
              }
              */
             if ((event.event === 'message')) {
+                window.plugins.toast.showWithOptions({
+                        message: event,
+                        duration: "short",
+                        position: "bottom",
+                        addPixelsY: -40  // added a negative value to move it up a bit (default 0)
+                    });
                 if (event.foreground) { // 푸시 메세지가 왔을 때 앱이 실행되고 있을 경우
                     //var soundfile = event.soundname || event.payload.sound;
                     //var my_media = new Media("/android_asset/www/" + soundfile);
