@@ -1,10 +1,13 @@
 angular.module('starter.controllers')
 
-    .controller('adspotdetailcontroller', ['$scope', '$stateParams', 'lightningDealService', '$q', 'IMAGE_ENDPOINT', '$timeout', 'lightningDealReplyService', '$ionicActionSheet', function ($scope, $stateParams, lightningDealService, $q, IMAGE_ENDPOINT, $timeout, lightningDealReplyService, $ionicActionSheet) {
+    .controller('adspotdetailcontroller', ['$scope', '$stateParams', 'lightningDealService', '$q', 'IMAGE_ENDPOINT', '$timeout', 'lightningDealReplyService', '$ionicActionSheet', 'login', function ($scope, $stateParams, lightningDealService, $q, IMAGE_ENDPOINT, $timeout, lightningDealReplyService, $ionicActionSheet, login) {
         $scope.name = "반짝 떨이";
         $scope.id = $stateParams.unitid;
         $scope.item = [];
         $scope.images = [];
+        $scope.showMenu = false;
+
+        var userID = login.context.user;
 
         function getStoreInformation(from, count) {
             var deferred = $q.defer();
@@ -37,8 +40,13 @@ angular.module('starter.controllers')
 
                 // $scope.item.Description = $scope.item.Description.replace(/\n/g, '<br/>');
                 // document.getElementById("description").innerHTML.replace(/\n/g, '<br/>');
+                if (userID == $scope.item.UserId) {
+                    $scope.showMenu = true;
+                }
+                else {
+                    $scope.showMenu = false;
+                }
             });
-
         }
 
         $scope.refreshItems();

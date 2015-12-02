@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-    .controller('localInformationController', ['$scope', '$timeout', '$state', 'storeService', '$q', 'IMAGE_ENDPOINT', 'productTypeService', 'storeSearchService', 'login', function ($scope, $timeout, $state, storeService, $q, IMAGE_ENDPOINT, productTypeService, storeSearchService, login) {
+    .controller('localInformationController', ['$scope', '$timeout', '$state', 'storeService', '$q', 'IMAGE_ENDPOINT', 'productTypeService', 'storeSearchService', function ($scope, $timeout, $state, storeService, $q, IMAGE_ENDPOINT, productTypeService, storeSearchService) {
         $scope.name = "주변 상점 정보";
         $scope.detailLink = "#/app/localinformation/";
         $scope.MarketName = "강릉 중앙시장";
@@ -30,8 +30,6 @@ angular.module('starter.controllers')
                 });
             });
         });
-
-        console.info('user id', login.context.user);
 
         $scope.loadMore = function () {
             console.log(1);

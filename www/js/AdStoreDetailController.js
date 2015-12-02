@@ -1,11 +1,14 @@
 angular.module('starter.controllers')
 
-    .controller('adstoredetailcontroller', ['$scope', '$stateParams', 'introShopService', '$q', 'IMAGE_ENDPOINT', '$ionicSlideBoxDelegate', 'introShopReplyService', '$ionicActionSheet', '$ionicModal', function ($scope, $stateParams, introShopService, $q, IMAGE_ENDPOINT, $ionicSlideBoxDelegate, introShopReplyService, $ionicActionSheet, $ionicModal) {
+    .controller('adstoredetailcontroller', ['$scope', '$stateParams', 'introShopService', '$q', 'IMAGE_ENDPOINT', '$ionicSlideBoxDelegate', 'introShopReplyService', '$ionicActionSheet', '$ionicModal', 'login', function ($scope, $stateParams, introShopService, $q, IMAGE_ENDPOINT, $ionicSlideBoxDelegate, introShopReplyService, $ionicActionSheet, $ionicModal, login) {
         $scope.name = "내가게 알리기";
         $scope.id = $stateParams.unitid;
         $scope.item = [];
         $scope.images = [];
+        $scope.showMenu = false;
 
+        var userID = login.context.user;
+        
         function getStoreInformation(from, count) {
             var deferred = $q.defer();
 
@@ -28,6 +31,12 @@ angular.module('starter.controllers')
                 //$scope.name = $scope.item.Name;
                 for (var i = 0; i < $scope.item.Images.length; i++) {
                     $scope.images.push($scope.getImageURL($scope.item.Images[i]));
+                }
+                if (userID == $scope.item.UserId) {
+                    $scope.showMenu = true;
+                }
+                else {
+                    $scope.showMenu = false;
                 }
             });
         }

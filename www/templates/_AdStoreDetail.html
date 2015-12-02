@@ -1,7 +1,7 @@
 <ion-view>
     <ion-nav-title>{{name}}</ion-nav-title>
     <ion-nav-buttons side="right">
-        <button class="button button-clear ion-android-more-vertical" style="color : white; font-size: 25px; margin-right : 10px" ng-click="showActionSheet()">
+        <button class="button button-clear ion-android-more-vertical" style="color : white; font-size: 25px; margin-right : 10px" ng-click="showActionSheet()" ng-show="showMenu == true">
         </button>
     </ion-nav-buttons>
     <ion-content id="detailListStyle" has-bouncing="true">
