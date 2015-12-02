@@ -133,7 +133,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
         templateUrl: "templates/menu.html",
         resolve: {
             login: function (loginService) {
-                return loginService;
+                return loginService.login();
             }
         }
     })

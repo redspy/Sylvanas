@@ -91,7 +91,11 @@ angular.module('starter.controllers')
                             $http.defaults.headers.common['X-Token'] = response.token;
                             var tokens = response.token.split('.');
                             console.log('login success');
-                            deferred.resolve(response.token);
+
+                            deferred.resolve({
+                                token: response.token,
+                                context: angular.fromJson(atob(tokens[1])).context
+                            });
 
                             pushService.getToken().then(function (token) {
                                 authenticationService.updateGCMToken({
