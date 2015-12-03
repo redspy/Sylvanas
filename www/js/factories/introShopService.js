@@ -14,7 +14,7 @@ angular.module('starter.controllers')
                 method: 'GET'
             },
             modify: {
-                method: 'POST'
+                method: 'PUT'
             },
             delete: {
                 method: 'DELETE'

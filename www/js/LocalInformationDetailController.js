@@ -93,7 +93,7 @@ angular.module('starter.controllers')
                 draggable: false,
                 zoomControl: false,
                 streetViewControl: false,
-                disableDoubleClickZoom: false,
+                disableDoubleClickZoom: true,
                 scrollwheel: false,
                 scaleControl: false,
                 mapTypeControl: false,

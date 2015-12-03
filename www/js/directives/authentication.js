@@ -7,7 +7,7 @@ angular.module('starter.controllers').directive('authentication', ['loginService
 
                 loginService.login().then(function (token) {
                     authService.loginConfirmed(null, function (config) {
-                        config.headers['X-Token'] = token;
+                        config.headers['X-Token'] = token.token;
                         return config;
                     });
                 });
