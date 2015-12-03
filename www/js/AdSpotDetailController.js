@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-.controller('adspotdetailcontroller', ['$scope', '$stateParams', 'lightningDealService', '$q', 'IMAGE_ENDPOINT', '$timeout', 'lightningDealReplyService', '$ionicActionSheet', '$ionicModal', 'login', function ($scope, $stateParams, lightningDealService, $q, IMAGE_ENDPOINT, $timeout, lightningDealReplyService, $ionicActionSheet, $ionicModal, login) {
+.controller('adspotdetailcontroller', ['$scope', '$stateParams', 'lightningDealService', '$q', 'IMAGE_ENDPOINT', '$timeout', 'lightningDealReplyService', '$ionicActionSheet', '$ionicModal', 'login', '$ionicHistory', function ($scope, $stateParams, lightningDealService, $q, IMAGE_ENDPOINT, $timeout, lightningDealReplyService, $ionicActionSheet, $ionicModal, login, $ionicHistory) {
     $scope.name = "반짝 떨이";
     $scope.id = $stateParams.unitid;
     $scope.item = [];
@@ -76,14 +76,14 @@ angular.module('starter.controllers')
             NickName: 'O',
             Description: $scope.reply
         }
-        {
-            lightningDealReplyService.create({
-                id: id
-            }, replyJSON, function () {
-                $scope.item = [];
-                $scope.refreshItems();
-            });
-        }
+
+        lightningDealReplyService.create({
+            id: id
+        }, replyJSON, function () {
+            $scope.item = [];
+            $scope.refreshItems();
+        });
+
 
     };
 
@@ -113,9 +113,13 @@ angular.module('starter.controllers')
                 buttonClicked: function (index) {
                     if (index == 0) {
                         $scope.write();
+                    } else if (index == 1) {
+                        lightningDealService.delete({
+                            id: $scope.id
+                        }, function () {
+                            $ionicHistory.goBack();
+                        });
                     }
-                    console.log('BUTTON CLICKED', index);
-                    return true;
                 },
                 destructiveButtonClicked: function () {
                     console.log('DESTRUCT');

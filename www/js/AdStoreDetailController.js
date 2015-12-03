@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-.controller('adstoredetailcontroller', ['$scope', '$stateParams', 'introShopService', '$q', 'IMAGE_ENDPOINT', '$ionicSlideBoxDelegate', 'introShopReplyService', '$ionicActionSheet', '$ionicModal', 'login', '$timeout', function ($scope, $stateParams, introShopService, $q, IMAGE_ENDPOINT, $ionicSlideBoxDelegate, introShopReplyService, $ionicActionSheet, $ionicModal, login, $timeout) {
+.controller('adstoredetailcontroller', ['$scope', '$stateParams', 'introShopService', '$q', 'IMAGE_ENDPOINT', '$ionicSlideBoxDelegate', 'introShopReplyService', '$ionicActionSheet', '$ionicModal', 'login', '$timeout', '$ionicHistory', function ($scope, $stateParams, introShopService, $q, IMAGE_ENDPOINT, $ionicSlideBoxDelegate, introShopReplyService, $ionicActionSheet, $ionicModal, login, $timeout, $ionicHistory) {
     $scope.name = "내가게 알리기";
     $scope.id = $stateParams.unitid;
     $scope.item = [];
@@ -67,14 +67,15 @@ angular.module('starter.controllers')
         var replyJSON = {
             NickName: 'O',
             Description: $scope.reply
-        }; {
-            introShopReplyService.create({
-                id: id
-            }, replyJSON, function () {
-                $scope.item = [];
-                $scope.refreshItems();
-            });
-        }
+        };
+
+        introShopReplyService.create({
+            id: id
+        }, replyJSON, function () {
+            $scope.item = [];
+            $scope.refreshItems();
+        });
+
 
     };
     $scope.favoriteClick = function () {
@@ -115,8 +116,14 @@ angular.module('starter.controllers')
                 buttonClicked: function (index) {
                     if (index == 0) {
                         $scope.write();
+                    } else if (index == 1) {
+                        introShopService.delete({
+                            id: $scope.id
+                        }, function () {
+                            $ionicHistory.goBack();
+                        });
                     }
-                    console.log('BUTTON CLICKED', index);
+
                     return true;
                 },
                 destructiveButtonClicked: function () {
@@ -175,7 +182,7 @@ angular.module('starter.controllers')
                 Title: $scope.inputData.title,
                 Description: $scope.inputData.body,
                 NickName: $scope.inputData.nickName
-//                    Images: imageKeys
+                    //                    Images: imageKeys
             };
 
             introShopService.modify({
