@@ -120,7 +120,8 @@ angular.module('starter.controllers')
                         introShopService.delete({
                             id: $scope.id
                         }, function () {
-                            $ionicHistory.goBack();
+                            $ionicHistory.clearCache().then(function(){
+                                $state.go('app.adspot')});
                         });
                     }
 
@@ -190,6 +191,8 @@ angular.module('starter.controllers')
             }, introData, function () {
                 $scope.closeWrite();
                 $scope.refreshItems();
+                $ionicHistory.clearCache().then(function(){
+                    $state.go('app.adspot')});
             });
 
         }, 1000);
