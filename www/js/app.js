@@ -6,8 +6,12 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'])
 
-.run(function ($ionicPlatform, locationService) {
+.run(function ($ionicPlatform, locationService, $rootScope, $window) {
     $ionicPlatform.ready(function () {
+        $rootScope.$on('$cordovaNetwork:offline', function (event, networkState) {
+            $window.navigator.notification.confirm('인터넷 접속 상태를 확인해주세요.', function(){}, '서버 접속 실패', ['확인']);
+        });
+
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -61,7 +65,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
 .config(function ($ionicConfigProvider) {
     //if(!ionic.Platform.isIOS())$ionicConfigProvider.scrolling.jsScrolling(false);
 })
+.config(function ($httpProvider) {
+        $httpProvider.interceptors.push(function ($q, $window) {
+            return {
+                responseError: function (rejection) {
+                    console.log(rejection);
+                    if (rejection.status == 0) {
+                        $window.navigator.notification.confirm('인터넷 접속 상태를 확인해주세요.', function(){}, '서버 접속 실패', ['확인']);
+                    }
 
+                    return $q.reject(rejection);
+                }
+            };
+        });
+    })
 
 /**
  * Message 관련 Initialize 함수
