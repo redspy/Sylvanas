@@ -35,6 +35,9 @@ angular.module('starter.controllers')
             for (var i = 0; i < $scope.item.Images.length; i++) {
                 $scope.images.push($scope.getImageURL($scope.item.Images[i]));
             }
+            for (var i = 0; i < $scope.item.Replies.length; i++) {
+                $scope.item.Replies[i].RelativeCreateDate = moment($scope.item.Replies[i].CreateDate).fromNow();
+            }
             if (userID == $scope.item.UserId) {
                 $scope.showMenu = true;
             } else {

@@ -48,8 +48,13 @@ angular.module('starter.controllers')
             } else {
                 $scope.showMenu = false;
             }
+
+            for (var i = 0; i < $scope.item.Replies.length; i++) {
+                $scope.item.Replies[i].RelativeCreateDate = moment($scope.item.Replies[i].CreateDate).fromNow();
+            }
+            console.log($scope.item);
         });
-    }
+    };
 
     $scope.refreshItems();
 

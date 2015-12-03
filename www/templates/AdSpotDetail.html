@@ -48,11 +48,11 @@
             <img class="full-image" ng-src="{{image}}"/>
         </div>
         <div>
-            <div ng-repeat="reply in item.Replies" style="background-color: #EEEEEE">
+            <div ng-repeat="reply in item.Replies" style="padding:5px;border-bottom: 1px solid #EEEEEE">
                 <div style="margin: 5px">
                     <!--<span style="font-size: 15px">{{reply.NickName}}</span>-->
-                    <span style="font-size: 11px">{{reply.CreateDate | date: 'yyyy-MM-dd HH:mm:ss a'}}</span>
-                    <p style="font-size: 16px">{{reply.Description}}</p>
+                    <div style="text-align:right"><span style="font-size: 11px;color:#888">{{reply.RelativeCreateDate}}</span></div>
+                    <span style="font-size: 16px">{{reply.Description}}</span>
                 </div>
             </div>
         </div>

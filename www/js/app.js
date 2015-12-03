@@ -7,6 +7,7 @@
 angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'])
 
 .run(function ($ionicPlatform, locationService, $rootScope, $window) {
+        moment.locale('ko');
     $ionicPlatform.ready(function () {
         $rootScope.$on('$cordovaNetwork:offline', function (event, networkState) {
             $window.navigator.notification.confirm('인터넷 접속 상태를 확인해주세요.', function(){}, '서버 접속 실패', ['확인']);
