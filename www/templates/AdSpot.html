@@ -13,10 +13,10 @@
         <ion-refresher pulling-text="Pull to refresh..."
                        on-refresh="doRefresh()">
         </ion-refresher>
-        <ion-item class="ionListItemCardStyle"
+        <ion-item class="ionListItemCardStyle shop-item"  style="margin:10px"
                   ng-repeat="item in items track by $index"
                   href="#/app/adspot/{{item.Id}}">
-            <div class="card">
+            <div>
                 <div id="{{'lightening' + $index}}" >
                     <div class="item item-divider item-text-wrap"
                          style="background : white">

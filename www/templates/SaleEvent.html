@@ -2,7 +2,7 @@
     <ion-content style="background-color: #EEEEEE !important" has-bouncing="true">
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
         </ion-refresher>
-        <ion-item id="ionListItemStyle" ng-repeat="item in items" class="list card" style="padding : 0px !important" href="{{detailLink}}{{item.Id}}">
+        <ion-item id="ionListItemStyle" ng-repeat="item in items" style="margin:10px" href="{{detailLink}}{{item.Id}}">
             <div class="row">
                 <div class="col col-33 ">
                     <img style="height : 135px !important; width: inherit" ng-src="{{getImageURL(item.Images[0])}}">
