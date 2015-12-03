@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-.controller('adstoredetailcontroller', ['$scope', '$stateParams', 'introShopService', '$q', 'IMAGE_ENDPOINT', '$ionicSlideBoxDelegate', 'introShopReplyService', '$ionicActionSheet', '$ionicModal', 'login', function ($scope, $stateParams, introShopService, $q, IMAGE_ENDPOINT, $ionicSlideBoxDelegate, introShopReplyService, $ionicActionSheet, $ionicModal, login) {
+.controller('adstoredetailcontroller', ['$scope', '$stateParams', 'introShopService', '$q', 'IMAGE_ENDPOINT', '$ionicSlideBoxDelegate', 'introShopReplyService', '$ionicActionSheet', '$ionicModal', 'login', '$timeout', function ($scope, $stateParams, introShopService, $q, IMAGE_ENDPOINT, $ionicSlideBoxDelegate, introShopReplyService, $ionicActionSheet, $ionicModal, login, $timeout) {
     $scope.name = "내가게 알리기";
     $scope.id = $stateParams.unitid;
     $scope.item = [];
@@ -140,7 +140,7 @@ angular.module('starter.controllers')
     $scope.fillinputdata = function () {
         $scope.inputData = {
             title: $scope.item.Title,
-            nickName: $scope.item.NickName,// window.localStorage['nickName'] || '',
+            nickName: $scope.item.NickName, // window.localStorage['nickName'] || '',
             body: $scope.item.Description
         };
     }
@@ -169,32 +169,22 @@ angular.module('starter.controllers')
         window.localStorage['nickName'] = $scope.inputData.nickName;
 
         $timeout(function () {
-            var imageKeys = [];
-            var imagePromise = [];
 
-            $scope.imageURLs.forEach(function (url) {
-                imagePromise.push(imageService.create(url)
-                    .then(function (res) {
-                        imageKeys.push(res.value.image);
-                    }));
+            var introData = {
+                Id: $scope.id,
+                Title: $scope.inputData.title,
+                Description: $scope.inputData.body,
+                NickName: $scope.inputData.nickName
+//                    Images: imageKeys
+            };
+
+            introShopService.modify({
+                id: $scope.id
+            }, introData, function () {
+                $scope.closeWrite();
+                $scope.refreshItems();
             });
 
-            $q.all(imagePromise).then(function () {
-                var introData = {
-                    Title: $scope.inputData.title,
-                    Description: $scope.inputData.body,
-                    NickName: $scope.inputData.nickName,
-                    Images: imageKeys
-                };
-
-                introShopService.create(introData, function () {
-                    $scope.closeWrite();
-                    refreshItems();
-                });
-
-                $scope.imageURLs.length = 0;
-                $scope.inputData = {};
-            });
         }, 1000);
     };
     //글쓰기///////////////////////////////////////////////////////////////////////
