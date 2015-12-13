@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-.controller('adstoredetailcontroller', ['$scope', '$stateParams', 'introShopService', '$q', 'IMAGE_ENDPOINT', '$ionicSlideBoxDelegate', 'introShopReplyService', '$ionicActionSheet', '$ionicModal', 'login', '$timeout', '$ionicHistory', function ($scope, $stateParams, introShopService, $q, IMAGE_ENDPOINT, $ionicSlideBoxDelegate, introShopReplyService, $ionicActionSheet, $ionicModal, login, $timeout, $ionicHistory) {
+.controller('adstoredetailcontroller', ['$scope', '$stateParams', 'introShopService', '$q', 'IMAGE_ENDPOINT', '$ionicSlideBoxDelegate', 'introShopReplyService', '$ionicActionSheet', '$ionicModal', 'login', '$timeout', '$ionicHistory', '$window', '$state', function ($scope, $stateParams, introShopService, $q, IMAGE_ENDPOINT, $ionicSlideBoxDelegate, introShopReplyService, $ionicActionSheet, $ionicModal, login, $timeout, $ionicHistory, $window, $state) {
     $scope.name = "내가게 알리기";
     $scope.id = $stateParams.unitid;
     $scope.item = [];
@@ -16,7 +16,7 @@ angular.module('starter.controllers')
                 id: from,
                 count: count
             },
-            function (value, responseHeaders) {
+            function (value) {
                 deferred.resolve(value);
             },
             function (httpResponse) {
@@ -38,13 +38,9 @@ angular.module('starter.controllers')
             for (var i = 0; i < $scope.item.Replies.length; i++) {
                 $scope.item.Replies[i].RelativeCreateDate = moment($scope.item.Replies[i].CreateDate).fromNow();
             }
-            if (userID == $scope.item.UserId) {
-                $scope.showMenu = true;
-            } else {
-                $scope.showMenu = false;
-            }
+            $scope.showMenu = userID == $scope.item.UserId;
         });
-    }
+    };
 
     $scope.refreshItems();
 
@@ -58,15 +54,11 @@ angular.module('starter.controllers')
     };
 
     $scope.submitReply = function (id) {
-        /*
-         if ('Id' in $scope.reply) {
-         lightningDealService.modify({
-         id: $scope.reply.Id
-         }, $scope.reply, function () {
-         $scope.refreshItems();
-         });
-         } else
-         */
+        if (($scope.reply === undefined) || ($scope.reply.length == 0)){
+            $window.navigator.notification.confirm('댓글을 입력해주세요.', function(){}, '알림', ['확인']);
+            return;
+        }
+
         var replyJSON = {
             NickName: 'O',
             Description: $scope.reply
@@ -109,7 +101,7 @@ angular.module('starter.controllers')
                     },
                     {
                         text: '<i class="icon ion-close-circled"></i><b>글 삭제</b>'
-                    },
+                    }
                 ],
                 //destructiveText: 'Delete',
                 cancelText: 'Cancel',
@@ -135,7 +127,7 @@ angular.module('starter.controllers')
                     return true;
                 }
             });
-        }
+        };
         //글쓰기///////////////////////////////////////////////////////////////////////
         // 글쓰기에서 입력되는 Data 저장 : inputData
     $scope.inputData = [];
@@ -154,7 +146,7 @@ angular.module('starter.controllers')
             nickName: $scope.item.NickName, // window.localStorage['nickName'] || '',
             body: $scope.item.Description
         };
-    }
+    };
 
     // Create the write modal that we will use later
     $ionicModal.fromTemplateUrl('templates/AddAdStore.html', {

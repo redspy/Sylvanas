@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-.controller('adspotdetailcontroller', ['$scope', '$stateParams', 'lightningDealService', '$q', 'IMAGE_ENDPOINT', '$timeout', 'lightningDealReplyService', '$ionicActionSheet', '$ionicModal', 'login', '$ionicHistory', function ($scope, $stateParams, lightningDealService, $q, IMAGE_ENDPOINT, $timeout, lightningDealReplyService, $ionicActionSheet, $ionicModal, login, $ionicHistory) {
+.controller('adspotdetailcontroller', ['$scope', '$stateParams', 'lightningDealService', '$q', 'IMAGE_ENDPOINT', '$timeout', 'lightningDealReplyService', '$ionicActionSheet', '$ionicModal', 'login', '$ionicHistory', '$window', '$state', function ($scope, $stateParams, lightningDealService, $q, IMAGE_ENDPOINT, $timeout, lightningDealReplyService, $ionicActionSheet, $ionicModal, login, $ionicHistory, $window, $state) {
     $scope.name = "반짝 떨이";
     $scope.id = $stateParams.unitid;
     $scope.item = [];
@@ -16,7 +16,7 @@ angular.module('starter.controllers')
                 id: from,
                 count: count
             },
-            function (value, responseHeaders) {
+            function (value) {
                 deferred.resolve(value);
             },
             function (httpResponse) {
@@ -43,11 +43,7 @@ angular.module('starter.controllers')
 
             // $scope.item.Description = $scope.item.Description.replace(/\n/g, '<br/>');
             // document.getElementById("description").innerHTML.replace(/\n/g, '<br/>');
-            if (userID == $scope.item.UserId) {
-                $scope.showMenu = true;
-            } else {
-                $scope.showMenu = false;
-            }
+            $scope.showMenu = userID == $scope.item.UserId;
 
             for (var i = 0; i < $scope.item.Replies.length; i++) {
                 $scope.item.Replies[i].RelativeCreateDate = moment($scope.item.Replies[i].CreateDate).fromNow();
@@ -68,19 +64,15 @@ angular.module('starter.controllers')
     };
 
     $scope.submitReply = function (id) {
-        /*
-        if ('Id' in $scope.reply) {
-            lightningDealService.modify({
-                id: $scope.reply.Id
-            }, $scope.reply, function () {
-                $scope.refreshItems();
-            });
-        } else
-        */
+        if (($scope.reply === undefined) || ($scope.reply.length == 0)){
+            $window.navigator.notification.confirm('댓글을 입력해주세요.', function(){}, '알림', ['확인']);
+            return;
+        }
+
         var replyJSON = {
             NickName: 'O',
             Description: $scope.reply
-        }
+        };
 
         lightningDealReplyService.create({
             id: id
@@ -108,7 +100,7 @@ angular.module('starter.controllers')
                     },
                     {
                         text: '<i class="icon ion-close-circled"></i><b>글 삭제</b>'
-                    },
+                    }
                 ],
                 //destructiveText: 'Delete',
                 cancelText: 'Cancel',
@@ -132,7 +124,7 @@ angular.module('starter.controllers')
                     return true;
                 }
             });
-        }
+        };
         //글쓰기///////////////////////////////////////////////////////////////////////
         // 글쓰기에서 입력되는 Data 저장 : inputData
     $scope.inputData = [];
@@ -152,7 +144,7 @@ angular.module('starter.controllers')
             body: $scope.item.Description,
             enddate: new Date($scope.item.EndDate) // $scope.item.EndDate
         };
-    }
+    };
 
     // Create the write modal that we will use later
     $ionicModal.fromTemplateUrl('templates/AddAdStore.html', {
