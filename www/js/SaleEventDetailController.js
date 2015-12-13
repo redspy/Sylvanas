@@ -32,7 +32,7 @@ angular.module('starter.controllers')
 
             saleService.readAll(
                 {id:from, count:count},
-                function (value, responseHeaders) {
+                function (value) {
                     deferred.resolve(value);
                 }, function (httpResponse) {
                     deferred.reject(httpResponse)
@@ -74,13 +74,23 @@ angular.module('starter.controllers')
         });
 
         $scope.favoriteClick = function () {
-            $scope.showTop("찜 목록에 등록되었습니다.");
-            $scope.myStar = true;
-            bookmarkSaleService.create({
-                id: $scope.id
-            }, {}, function () {
-
-            });
+            if (!$scope.myStar) {
+                bookmarkSaleService.create({
+                    id: $scope.id
+                }, {}, function () {
+                    $scope.myStar = true;
+                    $scope.showTop("찜 목록에 등록되었습니다.");
+                    $scope.item.BookmarkCount++;
+                });
+            } else {
+                bookmarkSaleService.delete({
+                    id: $scope.id
+                }, {}, function () {
+                    $scope.myStar = false;
+                    $scope.showTop("찜을 취소하였습니다.");
+                    $scope.item.BookmarkCount--;
+                });
+            }
         };
 
         $scope.callClick = function () {

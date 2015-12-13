@@ -15,11 +15,6 @@ div.hscroller {
     min-width: 100%;
 }
 
-div.wrapper {
-    float: center; /* important */
-    position: relative; /* important(so we can absolutely position the description div */
-}
-
 #ionListItemStyle .card {
     margin: 13px !important;
 }
@@ -33,7 +28,7 @@ a.activated {
 }
 
 .item-avatar {
-    margin: 0px !important;
+    margin: 0 !important;
 }
 
 .item-content {
@@ -43,7 +38,7 @@ a.activated {
 
 .item-content {
     max-width: 100% !important;
-    padding: 0px !important;
+    padding: 0 !important;
     background-color: #EEEEEE;
 }
 
@@ -57,17 +52,17 @@ a.activated {
 }
 
 .ng-binding {
-    margin: 0px !important;
+    margin: 0 !important;
 }
 
 .full-image {
-    margin: 0px !important;
+    margin: 0 !important;
 }
 
 div.description {
     position: absolute; /* absolute position (so we can position it where we want)*/
-    bottom: 0px; /* position will be on bottom */
-    left: 0px;
+    bottom: 0; /* position will be on bottom */
+    left: 0;
     width: auto; /* 100%; */
     /* styling bellow */
     background-color: black;
@@ -78,9 +73,9 @@ div.description {
 }
 
 i.description_content {
-    align: center;
+    text-align: center;
     padding: 10px;
-    margin: 0px;
+    margin: 0;
 }
 
 .mfb-component__button--main {
@@ -137,7 +132,7 @@ ion-header-bar {
 }
 
 .item-complex {
-    padding: 0px !important;
+    padding: 0 !important;
 }
 
 .transparent {
@@ -198,4 +193,8 @@ ion-header-bar {
         background-color: #000;
         opacity: 0;
     }
+}
+
+.bookmarked {
+    color: #ff0066;
 }
