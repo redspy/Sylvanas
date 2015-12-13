@@ -80,7 +80,7 @@ angular.module('starter.controllers')
              */
             function refreshItems() {
                 introShopService.readAll({
-                    id: -1, count: 10
+                    id: -1, count: -1
                 }, function (data) {
                     $scope.items = data;
                 })
