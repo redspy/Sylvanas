@@ -241,39 +241,44 @@ angular.module('starter.controllers')
 
             // 3
             $cordovaCamera.getPicture(options).then(function (imageData) {
-                $window.FilePath.resolveNativePath(imageData, function (data) {
-                    console.log('resolveNativePath', data);
-                    $window.resolveLocalFileSystemURL('file://' + data,
-                        function (fileEntry) {
-                            var name = fileEntry.fullPath.substr(fileEntry.fullPath.lastIndexOf('/') + 1);
-                            var newName = makeid() + name;
+                function getFileURL(fileEntry) {
+                    var name = fileEntry.fullPath.substr(fileEntry.fullPath.lastIndexOf('/') + 1);
+                    var newName = makeid() + name;
 
-                            $window.resolveLocalFileSystemURL(
-                                cordova.file.dataDirectory,
-                                function (fileSystem2) {
-                                    fileEntry.copyTo(
-                                        fileSystem2,
-                                        newName,
-                                        function (entry) {
-                                            $scope.$apply(function () {
-                                                console.log(entry);
-                                                $scope.thumbimages.push(entry.nativeURL);
-                                            });
-                                        },
-                                        function (error) {
-                                            console.log(error);
-                                        }
-                                    );
+                    $window.resolveLocalFileSystemURL(
+                        cordova.file.dataDirectory,
+                        function (fileSystem2) {
+                            fileEntry.copyTo(
+                                fileSystem2,
+                                newName,
+                                function (entry) {
+                                    $scope.$apply(function () {
+                                        console.log(entry);
+                                        $scope.thumbimages.push(entry.nativeURL);
+                                    });
                                 },
                                 function (error) {
                                     console.log(error);
-                                });
+                                }
+                            );
                         },
                         function (error) {
                             console.log(error);
                         });
+                }
+
+                $window.FilePath.resolveNativePath(imageData, function (data) {
+                    console.log('resolveNativePath', data);
+                    $window.resolveLocalFileSystemURL(
+                        'file://' + data,
+                        getFileURL,
+                        function (error) {
+                            console.log(error);
+                        });
                 }, function (error) {
-                    console.log(error);
+                    $window.resolveLocalFileSystemURL(imageData, getFileURL, function (error) {
+                        console.log(error);
+                    });
                 });
 
                 $scope.imageURLs.push(imageData);
