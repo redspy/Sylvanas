@@ -115,9 +115,11 @@ angular.module('starter.controllers')
                         introShopService.delete({
                             id: $scope.id
                         }, function () {
-                            $ionicHistory.clearCache().then(function(){
-                                $state.go('app.adspot')});
-                        });
+                            //$ionicHistory.clearCache().then(function() {
+                            $ionicHistory.clearCache();
+                            $ionicHistory.clearHistory();
+                            $state.go('app.adstore');//});
+                            });
                     }
 
                     return true;

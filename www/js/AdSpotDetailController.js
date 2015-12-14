@@ -114,8 +114,10 @@ angular.module('starter.controllers')
                         lightningDealService.delete({
                             id: $scope.id
                         }, function () {
-                            $ionicHistory.clearCache().then(function(){
-                                $state.go('app.adspot')});
+                            //$ionicHistory.clearCache().then(function() {
+                            $ionicHistory.clearCache();
+                            $ionicHistory.clearHistory();
+                                $state.go('app.adstore');//});
                         });
                     }
                 },
