@@ -17,7 +17,8 @@ angular.module('starter.controllers')
         'imageService',
         '$cordovaSocialSharing',
         '$ionicPlatform',
-        function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate, $q, introShopService, IMAGE_ENDPOINT, SERVICE_ENDPOINT, $cordovaFileTransfer, imageService, $cordovaSocialSharing, $ionicPlatform) {
+        '$window',
+        function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate, $q, introShopService, IMAGE_ENDPOINT, SERVICE_ENDPOINT, $cordovaFileTransfer, imageService, $cordovaSocialSharing, $ionicPlatform, $window) {
             $scope.name = "내가게 알리기";
             $scope.$watch('items', function () {
                 $timeout(function () {
@@ -112,6 +113,9 @@ angular.module('starter.controllers')
 
             // Triggered in the write modal to close it
             $scope.closeWrite = function () {
+                $scope.refreshInputdata();
+                $scope.imageURLs = [];
+                $scope.thumbimages = [];
                 $scope.modal.hide();
             };
 
@@ -220,11 +224,78 @@ angular.module('starter.controllers')
             $scope.thumbimages = [];
             $scope.imageURLs = [];
 
+            //$scope.addImage = function () {
+            //    // 2
+            //    var options = {
+            //        destinationType: Camera.DestinationType.FILE_URI,
+            //        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,// Camera.PictureSourceType.CAMERA, // Camera.PictureSourceType.PHOTOLIBRARY
+            //        allowEdit: false,
+            //        encodingType: Camera.EncodingType.JPEG,
+            //        popoverOptions: CameraPopoverOptions
+            //    };
+            //
+            //    // 3
+            //    $cordovaCamera.getPicture(options).then(function (imageData) {
+            //
+            //        // 4
+            //        onImageSuccess(imageData);
+            //
+            //        function onImageSuccess(fileURI) {
+            //            createFileEntry(fileURI);
+            //            $scope.imageURLs.push(fileURI);
+            //        }
+            //
+            //        function createFileEntry(fileURI) {
+            //            window.resolveLocalFileSystemURL(fileURI, copyFile, fail);
+            //        }
+            //
+            //        // 5
+            //        function copyFile(fileEntry) {
+            //            var name = fileEntry.fullPath.substr(fileEntry.fullPath.lastIndexOf('/') + 1);
+            //            var newName = makeid() + name;
+            //
+            //            window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (fileSystem2) {
+            //                    fileEntry.copyTo(
+            //                        fileSystem2,
+            //                        newName,
+            //                        onCopySuccess,
+            //                        fail
+            //                    );
+            //                },
+            //                fail);
+            //        }
+            //
+            //        // 6
+            //        function onCopySuccess(entry) {
+            //            $scope.$apply(function () {
+            //                $scope.thumbimages.push(entry.nativeURL);
+            //            });
+            //        }
+            //
+            //        function fail(error) {
+            //            console.log("fail: " + error.code);
+            //        }
+            //
+            //        function makeid() {
+            //            var text = "";
+            //            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            //
+            //            for (var i = 0; i < 5; i++) {
+            //                text += possible.charAt(Math.floor(Math.random() * possible.length));
+            //            }
+            //            return text;
+            //        }
+            //
+            //    }, function (err) {
+            //        console.log(err);
+            //    });
+            //};
+
             $scope.addImage = function () {
                 // 2
                 var options = {
                     destinationType: Camera.DestinationType.FILE_URI,
-                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY,// Camera.PictureSourceType.CAMERA, // Camera.PictureSourceType.PHOTOLIBRARY
+                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY, // Camera.PictureSourceType.CAMERA, // Camera.PictureSourceType.PHOTOLIBRARY
                     allowEdit: false,
                     encodingType: Camera.EncodingType.JPEG,
                     popoverOptions: CameraPopoverOptions
@@ -232,45 +303,47 @@ angular.module('starter.controllers')
 
                 // 3
                 $cordovaCamera.getPicture(options).then(function (imageData) {
-
-                    // 4
-                    onImageSuccess(imageData);
-
-                    function onImageSuccess(fileURI) {
-                        createFileEntry(fileURI);
-                        $scope.imageURLs.push(fileURI);
-                    }
-
-                    function createFileEntry(fileURI) {
-                        window.resolveLocalFileSystemURL(fileURI, copyFile, fail);
-                    }
-
-                    // 5
-                    function copyFile(fileEntry) {
+                    function getFileURL(fileEntry) {
                         var name = fileEntry.fullPath.substr(fileEntry.fullPath.lastIndexOf('/') + 1);
                         var newName = makeid() + name;
 
-                        window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (fileSystem2) {
+                        $window.resolveLocalFileSystemURL(
+                            cordova.file.dataDirectory,
+                            function (fileSystem2) {
                                 fileEntry.copyTo(
                                     fileSystem2,
                                     newName,
-                                    onCopySuccess,
-                                    fail
+                                    function (entry) {
+                                        $scope.$apply(function () {
+                                            console.log(entry);
+                                            $scope.thumbimages.push(entry.nativeURL);
+                                        });
+                                    },
+                                    function (error) {
+                                        console.log(error);
+                                    }
                                 );
                             },
-                            fail);
+                            function (error) {
+                                console.log(error);
+                            });
                     }
 
-                    // 6
-                    function onCopySuccess(entry) {
-                        $scope.$apply(function () {
-                            $scope.thumbimages.push(entry.nativeURL);
+                    $window.FilePath.resolveNativePath(imageData, function (data) {
+                        console.log('resolveNativePath', data);
+                        $window.resolveLocalFileSystemURL(
+                            'file://' + data,
+                            getFileURL,
+                            function (error) {
+                                console.log(error);
+                            });
+                    }, function (error) {
+                        $window.resolveLocalFileSystemURL(imageData, getFileURL, function (error) {
+                            console.log(error);
                         });
-                    }
+                    });
 
-                    function fail(error) {
-                        console.log("fail: " + error.code);
-                    }
+                    $scope.imageURLs.push(imageData);
 
                     function makeid() {
                         var text = "";
@@ -281,7 +354,6 @@ angular.module('starter.controllers')
                         }
                         return text;
                     }
-
                 }, function (err) {
                     console.log(err);
                 });

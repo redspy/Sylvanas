@@ -137,6 +137,9 @@ angular.module('starter.controllers')
 
         // Triggered in the write modal to close it
         $scope.closeWrite = function () {
+            $scope.refreshInputdata();
+            $scope.imageURLs = [];
+            $scope.thumbimages = [];
             $scope.modal.hide();
         };
 
