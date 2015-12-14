@@ -84,7 +84,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
 /**
  * Message 관련 Initialize 함수
  **/
-.config(function (pushServiceProvider) {
+.config(function (pushServiceProvider, $ionicConfigProvider) {
+    $ionicConfigProvider.views.transition('none');
     var option = {};
     if (ionic.Platform.platform().toUpperCase() === 'ANDROID') {
         option = {
