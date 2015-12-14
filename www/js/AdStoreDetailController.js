@@ -126,6 +126,12 @@ angular.module('starter.controllers')
                                         $state.go('app.adstore');//});
                                     });
                                 }
+                                window.plugins.toast.showWithOptions({
+                                    message: '삭제되었습니다',
+                                    duration: "short",
+                                    position: "bottom",
+                                    addPixelsY: -40  // added a negative value to move it up a bit (default 0)
+                                });
                             },
                             '정말 삭제하시겠습니까?',
                             ['취소','확인']);
