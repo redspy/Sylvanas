@@ -203,8 +203,9 @@ angular.module('starter.controllers')
             }, introData, function () {
                 $scope.closeWrite();
                 $scope.refreshItems();
-                $ionicHistory.clearCache().then(function(){
-                    $state.go('app.adspot')});
+                //$ionicHistory.clearCache();//.then(function(){
+                //
+                //    $state.go('app.adspot');//});
             });
 
         }, 1000);
