@@ -158,7 +158,7 @@ angular.module('starter.controllers')
             title: $scope.item.Title,
             nickName: $scope.item.NickName, // window.localStorage['nickName'] || '',
             body: $scope.item.Description,
-            enddate: new Date($scope.item.EndDate) // $scope.item.EndDate
+            EndDate: new Date($scope.item.EndDate)
         };
     };
 
@@ -190,6 +190,7 @@ angular.module('starter.controllers')
                 Title: $scope.inputData.title,
                 Description: $scope.inputData.body,
                 NickName: $scope.inputData.nickName
+                // EndDate : $scope.inputData.EndDate
                     // Images: imageKeys
             };
 
@@ -198,8 +199,8 @@ angular.module('starter.controllers')
             }, introData, function () {
                 $scope.closeWrite();
                 $scope.refreshItems();
-                $ionicHistory.clearCache().then(function(){
-                    $state.go('app.adspot')});
+                //$ionicHistory.clearCache().then(function(){
+                //    $state.go('app.adspot')});
             });
         }, 1000);
     };
