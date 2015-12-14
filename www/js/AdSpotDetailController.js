@@ -111,14 +111,22 @@ angular.module('starter.controllers')
                     if (index == 0) {
                         $scope.write();
                     } else if (index == 1) {
-                        lightningDealService.delete({
-                            id: $scope.id
-                        }, function () {
-                            //$ionicHistory.clearCache().then(function() {
-                            $ionicHistory.clearCache();
-                            $ionicHistory.clearHistory();
-                                $state.go('app.adstore');//});
-                        });
+                        $window.navigator.notification.confirm('삭제를 원하시면 확인버튼을 눌러 주세요',
+                            function(buttonIndex)
+                            {
+                                if(buttonIndex == 2) {
+                                    lightningDealService.delete({
+                                        id: $scope.id
+                                    }, function () {
+                                        //$ionicHistory.clearCache().then(function() {
+                                        $ionicHistory.clearCache();
+                                        $ionicHistory.clearHistory();
+                                        $state.go('app.adstore');//});
+                                    });
+                                }
+                            },
+                            '정말 삭제하시겠습니까?',
+                            ['취소','확인']);
                     }
                 },
                 destructiveButtonClicked: function () {
