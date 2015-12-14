@@ -13,7 +13,8 @@
     "jsencrypt": "jsencrypt#~2.1.0",
     "ng-file-upload": "~6.0.2",
     "ng-mfb": "~0.6.1",
-    "ngCordova": "~0.1.17-alpha"
+    "ngCordova": "~0.1.17-alpha",
+    "angular-preload-image": "*"
   },
   "resolutions": {
     "angular": "1.4.2"

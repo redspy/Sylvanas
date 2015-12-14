@@ -35,7 +35,6 @@
                             <span> 남음</span>
                         </timer>
                     </span>
-
             </div>
             <span ng-if="item.Duration <= 0" style="font-size : 15px; color : red">마감된 이벤트 입니다</span>
             <hr size="1" style="border-color: white">
@@ -45,7 +44,7 @@
         </div>
 
         <div ng-repeat="image in images">
-            <img class="full-image" ng-src="{{image}}"/>
+            <img preload-image ng-src="{{image}}" default-image="img/placeholder-image.png" fallback-image="img/placeholder-no-image.jpg" style="width:100%" />
         </div>
         <div>
             <div ng-repeat="reply in item.Replies" style="padding:5px;border-bottom: 1px solid #EEEEEE">
