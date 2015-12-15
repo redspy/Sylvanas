@@ -198,3 +198,72 @@ ion-header-bar {
 .bookmarked {
     color: orange;
 }
+
+.storeInfoContainer {
+    padding: 10px;
+}
+
+.vertical-align-items {
+    align-items: center;
+    justify-content: center
+}
+
+.storeInfo {
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.storeInfo p,span {
+    text-overflow: ellipsis;
+    overflow:hidden;
+    white-space: nowrap;
+}
+
+.storeInfo .col img {
+    width: 100%;
+    height: 120px;
+}
+
+.storeInfoText {
+    margin-top: 15px;
+}
+
+.storeInfoText p {
+    color : gray;
+    font-size : 15px;
+}
+
+.storeInfoMarketText {
+    color : gray;
+    font-size : 15px;
+}
+
+.storeInfoMarketTitle {
+    color : black;
+    font-size : 20px;
+    padding-top : 5px;
+}
+
+.storeInfoDetailArrow {
+    font-size : 30px;
+    color : gray;
+}
+
+.storeInfo .col:nth-child(1) {
+    flex:2;
+}
+
+.storeInfo .col:nth-child(2) {
+    flex: none;
+    width: 5px;
+}
+
+.storeInfo .col:nth-child(3) {
+    flex:5;
+}
+
+.storeInfo .col:nth-child(4) {
+    flex: none;
+    width: 20px;
+}
