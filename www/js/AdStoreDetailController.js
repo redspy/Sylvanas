@@ -54,8 +54,8 @@ angular.module('starter.controllers')
     };
 
     $scope.submitReply = function (id) {
-        if (($scope.reply === undefined) || ($scope.reply.length == 0)){
-            $window.navigator.notification.confirm('댓글을 입력해주세요.', function(){}, '알림', ['확인']);
+        if (($scope.reply === undefined) || ($scope.reply.length == 0)) {
+            $window.navigator.notification.confirm('댓글을 입력해주세요.', function () {}, '알림', ['확인']);
             return;
         }
 
@@ -93,60 +93,58 @@ angular.module('starter.controllers')
     refreshIntroShop();
 
     $scope.showActionSheet = function () {
-            $ionicActionSheet.show({
-                titleText: '생생시장정보',
-                buttons: [
-                    {
-                        text: '<i class="icon ion-android-create"></i><b>글 수정</b>'
+        $ionicActionSheet.show({
+            titleText: '생생시장정보',
+            buttons: [
+                {
+                    text: '<i class="icon ion-android-create"></i><b>글 수정</b>'
                     },
-                    {
-                        text: '<i class="icon ion-close-circled"></i><b>글 삭제</b>'
+                {
+                    text: '<i class="icon ion-close-circled"></i><b>글 삭제</b>'
                     }
                 ],
-                //destructiveText: 'Delete',
-                cancelText: 'Cancel',
-                cancel: function () {
-                    console.log('CANCELLED');
-                },
-                buttonClicked: function (index) {
-                    if (index == 0) {
-                        $scope.write();
-                    } else if (index == 1) {
-                        //$window.navigator.notification.confirm('dddd', function() {});
-                        $window.navigator.notification.confirm('삭제를 원하시면 확인버튼을 눌러 주세요',
-                            function(buttonIndex)
-                            {
-                                if(buttonIndex == 2) {
-                                    introShopService.delete({
-                                        id: $scope.id
-                                    }, function () {
-                                        //$ionicHistory.clearCache().then(function() {
-                                        $ionicHistory.clearCache();
-                                        $ionicHistory.clearHistory();
-                                        $state.go('app.adstore');//});
+            //destructiveText: 'Delete',
+            cancelText: 'Cancel',
+            cancel: function () {
+                console.log('CANCELLED');
+            },
+            buttonClicked: function (index) {
+                if (index == 0) {
+                    $scope.write();
+                } else if (index == 1) {
+                    //$window.navigator.notification.confirm('dddd', function() {});
+                    $window.navigator.notification.confirm('삭제를 원하시면 확인버튼을 눌러 주세요',
+                        function (buttonIndex) {
+                            if (buttonIndex == 2) {
+                                introShopService.delete({
+                                    id: $scope.id
+                                }, function () {
+                                    //$ionicHistory.clearCache().then(function() {
+                                    $ionicHistory.clearCache();
+                                    $ionicHistory.clearHistory();
+                                    $state.go('app.adstore'); //});
+                                    window.plugins.toast.showWithOptions({
+                                        message: '삭제되었습니다',
+                                        duration: "short",
+                                        position: "bottom",
+                                        addPixelsY: -40 // added a negative value to move it up a bit (default 0)
                                     });
-                                }
-                                window.plugins.toast.showWithOptions({
-                                    message: '삭제되었습니다',
-                                    duration: "short",
-                                    position: "bottom",
-                                    addPixelsY: -40  // added a negative value to move it up a bit (default 0)
                                 });
-                            },
-                            '정말 삭제하시겠습니까?',
-                            ['취소','확인']);
-                    }
-
-                    return true;
-                },
-                destructiveButtonClicked: function () {
-                    console.log('DESTRUCT');
-                    return true;
+                            }
+                        },
+                        '정말 삭제하시겠습니까?', ['취소', '확인']);
                 }
-            });
-        };
-        //글쓰기///////////////////////////////////////////////////////////////////////
-        // 글쓰기에서 입력되는 Data 저장 : inputData
+
+                return true;
+            },
+            destructiveButtonClicked: function () {
+                console.log('DESTRUCT');
+                return true;
+            }
+        });
+    };
+    //글쓰기///////////////////////////////////////////////////////////////////////
+    // 글쓰기에서 입력되는 Data 저장 : inputData
     $scope.inputData = [];
     // 글쓰기에서 입력되는 Data의 초기화
     $scope.refreshInputdata = function () {
