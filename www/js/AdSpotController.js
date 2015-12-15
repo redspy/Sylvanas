@@ -239,7 +239,10 @@ angular.module('starter.controllers')
                 sourceType: Camera.PictureSourceType.PHOTOLIBRARY, // Camera.PictureSourceType.CAMERA, // Camera.PictureSourceType.PHOTOLIBRARY
                 allowEdit: false,
                 encodingType: Camera.EncodingType.JPEG,
-                popoverOptions: CameraPopoverOptions
+                popoverOptions: CameraPopoverOptions,
+                targetWidth: 1024,
+                targetHeight: 1024,
+                correctOrientation: true
             };
 
             // 3
