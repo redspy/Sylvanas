@@ -3,7 +3,7 @@
         <div class="scrollable" style="background-color : white">
             <div class="scrollable-content">
                 <a ng-href="{{ad.url}}" ng-repeat="ad in ads">
-                    <img ng-src="{{ad.img}}" width="100%" class="adImage" style="max-width : 100%; max-height:15%; padding:0px; margin : 0px; border-radius:0px" />
+                    <img ng-src="{{ad.img}}" preload-image default-image="img/placeholder-image.png" fallback-image="img/placeholder-no-image.jpg" width="100%" class="adImage" style="max-width : 100%; max-height:15%; padding:0px; margin : 0px; border-radius:0px" />
                 </a>
             </div>
         </div>
