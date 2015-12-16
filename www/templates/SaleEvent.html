@@ -4,7 +4,7 @@
         </ion-refresher>
         <div>
             <div class="storeInfoContainer"
-                 href="{{detailLink}}{{item.Id}}"
+                 ui-sref="app.saleeventdetail({unitid : item.Id})"
                  collection-repeat="item in items"
                  item-width="100%"
                  item-height="187px">

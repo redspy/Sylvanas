@@ -15,13 +15,14 @@
         </ion-refresher>
         <div>
             <div class="storeInfoContainer"
-                 href="{{detailLink}}{{item.Id}}"
                  collection-repeat="item in items"
+                 ui-sref="app.localinformationdetail({unitid : item.Id})"
                  item-width="100%"
                  item-height="187px">
                 <div class="storeInfo vertical-align-items row">
                     <div class="col">
                         <img ng-src="{{getImageURL(item.Images[0])}}">
+<!--                        <img preload-image ng-src="{{getImageURL(item.Images[0])}}" default-image="img/placeholder-image.png" fallback-image="img/placeholder-no-image.jpg" style="width:100%" />-->
                     </div>
                     <div class="col"></div>
                     <div class="col">

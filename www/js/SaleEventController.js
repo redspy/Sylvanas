@@ -14,7 +14,7 @@ angular.module('starter.controllers')
                 // Refresh
                 //$window.location.reload(true);
                 //Stop the ion-refresher from spinning
-                getStoreInformation(-1, -1).then(function (data) {
+                getStoreInformation(-1, 5).then(function (data) {
                     console.log(data);
                     $scope.items = data;
                 });
@@ -23,7 +23,6 @@ angular.module('starter.controllers')
                 $scope.$broadcast('scroll.refreshComplete');
             }, 1000);
         };
-
         /*
          * 상점 정보를 from에 지정된 id 상점을 기준으로 count만큼의 상점정보를 리턴한다.
          * 만일 count 만큼의 데이터가 없으면 있는 만큼만 리턴함.
