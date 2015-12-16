@@ -1,43 +1,41 @@
 <ion-view view-title='{{name}}'>
-    <ion-content style="background-color: #EEEEEE !important" has-bouncing="true">
+    <ion-content has-bouncing="true" style="background-color: #eeeeee">
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
         </ion-refresher>
-        <ion-item id="ionListItemStyle" ng-repeat="item in items" style="margin:10px" href="{{detailLink}}{{item.Id}}">
-            <div class="row">
-                <div class="col col-33">
-                    <img style="height : 160px !important; width: inherit" ng-src="{{getImageURL(item.Images[0])}}">
-                </div>
-                <div class="col">
-                    <div class="row">
-                        <div class="col col-90">
+        <div>
+            <div class="storeInfoContainer"
+                 href="{{detailLink}}{{item.Id}}"
+                 collection-repeat="item in items"
+                 item-width="100%"
+                 item-height="187px">
+                <div class="storeInfo vertical-align-items row">
+                    <div class="col">
+                        <img ng-src="{{getImageURL(item.Images[0])}}">
+                    </div>
+                    <div class="col"></div>
+                    <div class="col">
+                        <div>
+                            <p class="storeInfoMarketText">{{MarketName}}</p>
+                            <p class="storeInfoMarketTitle">{{item.Name}}</p>
                             <div>
-                                <span style="color : gray; font-size : 15px">{{MarketName}}</span>
-
-                                <div class="item-text-wrap" style="margin-top : 5px">
-                                    <span style="color : black; font-size : 20px">{{item.Name}}</span>
-                                    <div>
-                                        <!--<a style="color : gray; font-size : 15px"> | </a>-->
-                                        <a class="ion-star" style="color : orange; font-size : 15px"></a>
-                                        <a style="color : gray; font-size : 15px">{{item.BookmarkCount}}</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="margin-top : 15px">
-                                <p style="color : gray; font-size : 15px; margin : 0px" ng-show="name == '주변 상점 정보'">품목 : {{item.Product}}</p>
-                                <p style="color : gray; font-size : 15px; margin : 0px" ng-show="name != '주변 상점 정보'">종료 : {{item.EventTo}}</p>
-
-                                <p style="color : gray; font-size : 15px; margin : 0px">문의 : {{item.Contact}}</p>
-
-                                <p style="color : gray; font-size : 15px; margin : 0px">주소 : {{item.Address}}</p>
+                                <a class="ion-star" style="color : orange; font-size : 15px"></a>
+                                <a style="color : gray; font-size : 15px">{{item.BookmarkCount}}</a>
                             </div>
                         </div>
-                        <div class="col" style="margin-top : 50px !important">
-                            <i class="ion-ios-arrow-right" style="font-size : 30px; color : gray"></i>
+                        <div class="storeInfoText">
+                            <p ng-show="name == '주변 상점 정보'">품목 : {{item.Product}}</p>
+                            <p ng-show="name != '주변 상점 정보'">종료 : {{item.EventTo}}</p>
+
+                            <p>문의 : {{item.Contact}}</p>
+                            <p>주소 : {{item.Address}}</p>
                         </div>
+                    </div>
+                    <div class="col">
+                        <i class="storeInfoDetailArrow ion-ios-arrow-right"></i>
                     </div>
                 </div>
             </div>
-        </ion-item>
+        </div>
         <ion-infinite-scroll icon="ion-loading-c" on-infinite="loadMore()">
         </ion-infinite-scroll>
     </ion-content>

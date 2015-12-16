@@ -56,13 +56,25 @@ angular.module('starter.controllers')
             return deferred.promise;
         }
 
-        getStoreInformation(-1, -1).then(function (data) {
+        getStoreInformation(-1, 5).then(function (data) {
             console.log(data);
             $scope.items = data;
         });
 
         $scope.getImageURL = function (imageID) {
             return IMAGE_ENDPOINT + 'thumb/' + imageID;
+        };
+
+        $scope.loadMore = function () {
+            getStoreInformation($scope.items.length, 5).then(function (data) {
+                console.log(data);
+                if (data.length != 0) {
+                    data.forEach(function (item) {
+                        $scope.items.push(item);
+                    });
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+                }
+            })
         };
     }
     ]);
