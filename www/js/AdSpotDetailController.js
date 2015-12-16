@@ -1,55 +1,31 @@
 angular.module('starter.controllers')
 
-.controller('adspotdetailcontroller', ['$scope', '$stateParams', 'lightningDealService', '$q', 'IMAGE_ENDPOINT', '$timeout', 'lightningDealReplyService', '$ionicActionSheet', '$ionicModal', 'login', '$ionicHistory', '$window', '$state', function ($scope, $stateParams, lightningDealService, $q, IMAGE_ENDPOINT, $timeout, lightningDealReplyService, $ionicActionSheet, $ionicModal, login, $ionicHistory, $window, $state) {
+.controller('adspotdetailcontroller', ['$scope', '$stateParams', 'lightningDealService', '$q', 'IMAGE_ENDPOINT', '$timeout', 'lightningDealReplyService', '$ionicActionSheet', '$ionicModal', 'login', '$ionicHistory', '$window', '$state', 'lightningDeals', function ($scope, $stateParams, lightningDealService, $q, IMAGE_ENDPOINT, $timeout, lightningDealReplyService, $ionicActionSheet, $ionicModal, login, $ionicHistory, $window, $state, lightningDeals) {
     $scope.name = "반짝 떨이";
     $scope.id = $stateParams.unitid;
     $scope.item = [];
     $scope.images = [];
-    $scope.showMenu = false;
+    $scope.showMenu = true;
 
     var userID = login.context.user;
 
-    function getStoreInformation(from, count) {
-        var deferred = $q.defer();
+    function transformItem(item) {
+        console.log(item);
+        $scope.images = [];
+        for (var i = 0; i < item.Images.length; i++) {
+            $scope.images.push($scope.getImageURL(item.Images[i]));
+        }
+        //$scope.showMenu = userID == $scope.item.UserId;
 
-        lightningDealService.readAll({
-                id: from,
-                count: count
-            },
-            function (value) {
-                deferred.resolve(value);
-            },
-            function (httpResponse) {
-                deferred.reject(httpResponse)
-            });
+        for (var i = 0; i < item.Replies.length; i++) {
+            item.Replies[i].RelativeCreateDate = moment(item.Replies[i].CreateDate).fromNow();
+        }
 
-        return deferred.promise;
+        $scope.item = item;
     }
 
     $scope.refreshItems = function () {
-        getStoreInformation($scope.id, 1).then(function (data) {
-            console.log(data);
-            $scope.images = [];
-            $scope.item = data[0];
-            //$scope.name = $scope.item.Name;
-            for (var i = 0; i < $scope.item.Images.length; i++) {
-                $scope.images.push($scope.getImageURL($scope.item.Images[i]));
-            }
-            var now = new Date();
-            var end = new Date($scope.item.EndDate);
-
-            $scope.item.EndDate = end.getTime() - now.getTimezoneOffset() * 60 * 1000;
-            $scope.item.Duration = Math.max((end.getTime() - (now.getTime() + now.getTimezoneOffset() * 60 * 1000)) / 1000, 0);
-
-            // $scope.item.Description = $scope.item.Description.replace(/\n/g, '<br/>');
-            // document.getElementById("description").innerHTML.replace(/\n/g, '<br/>');
-            $scope.showMenu = userID == $scope.item.UserId;
-
-            for (var i = 0; i < $scope.item.Replies.length; i++) {
-                $scope.item.Replies[i].RelativeCreateDate = moment($scope.item.Replies[i].CreateDate).fromNow();
-            }
-            console.log($scope.item);
-        });
+        lightningDeals.getItem($scope.id).then(transformItem);
     };
 
     $scope.refreshItems();
@@ -58,41 +34,32 @@ angular.module('starter.controllers')
         return IMAGE_ENDPOINT + imageID;
     };
 
-    $scope.doSomething = function () {
-        $scope.submitReply($scope.id);
-        $scope.reply = '';
-    };
+    $scope.doSomething = function () {};
 
-    $scope.submitReply = function (id) {
-        if (($scope.reply === undefined) || ($scope.reply.length == 0)) {
+    $scope.submitReply = function () {
+        var id = $scope.id;
+        if (!$scope.reply && $scope.reply.length != 0) {
             $window.navigator.notification.confirm('댓글을 입력해주세요.', function () {}, '알림', ['확인']);
             return;
         }
 
         var replyJSON = {
-            NickName: 'O',
+            NickName: 'anonymous',
             Description: $scope.reply
         };
 
         lightningDealReplyService.create({
             id: id
         }, replyJSON, function () {
+            $scope.reply = '';
             $scope.item = [];
-            $scope.refreshItems();
+
+            lightningDeals.refreshItem($scope.id).then(transformItem);
         });
-
-
     };
 
-    $scope.favoriteClick = function () {
-        alert('Add to Favorite');
-    };
-
-    $scope.callClick = function () {
-        window.open('tel:' + $scope.item.Contact);
-    };
     $scope.showActionSheet = function () {
-        $ionicActionSheet.show({
+        var sheet = $ionicActionSheet.show({
             titleText: '생생시장정보',
             buttons: [
                 {
@@ -114,10 +81,7 @@ angular.module('starter.controllers')
                     $window.navigator.notification.confirm('삭제를 원하시면 확인버튼을 눌러 주세요',
                         function (buttonIndex) {
                             if (buttonIndex == 2) {
-                                lightningDealService.delete({
-                                    id: $scope.id
-                                }, function () {
-                                    //$ionicHistory.clearCache().then(function() {
+                                lightningDeals.removeItem($scope.id).then(function () {
                                     $ionicHistory.clearCache();
                                     $ionicHistory.clearHistory();
                                     $state.go('app.adspot'); //});
@@ -133,6 +97,7 @@ angular.module('starter.controllers')
                         },
                         '정말 삭제하시겠습니까?', ['취소', '확인']);
                 }
+                sheet();
             },
             destructiveButtonClicked: function () {
                 console.log('DESTRUCT');
@@ -140,6 +105,7 @@ angular.module('starter.controllers')
             }
         });
     };
+
     //글쓰기///////////////////////////////////////////////////////////////////////
     // 글쓰기에서 입력되는 Data 저장 : inputData
     $scope.inputData = [];
@@ -193,15 +159,9 @@ angular.module('starter.controllers')
                     // Images: imageKeys
             };
 
-            lightningDealService.modify({
-                id: $scope.id
-            }, introData, function () {
+            lightningDeals.modifyItem($scope.id, introData).then(function () {
                 $scope.closeWrite();
-                $scope.refreshItems();
-                //$ionicHistory.clearCache().then(function(){
-                //    $state.go('app.adspot')});
             });
         }, 1000);
     };
-    //글쓰기///////////////////////////////////////////////////////////////////////
-    }]);
+}]);

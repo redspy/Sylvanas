@@ -15,7 +15,8 @@ angular.module('starter.controllers')
         '$cordovaSocialSharing',
         '$ionicPlatform',
         '$window',
-        function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate, lightningDealService, IMAGE_ENDPOINT, imageService, $q, $cordovaSocialSharing, $ionicPlatform, $window) {
+        'lightningDeals',
+        function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate, lightningDealService, IMAGE_ENDPOINT, imageService, $q, $cordovaSocialSharing, $ionicPlatform, $window, lightningDeals) {
         $scope.name = "반짝 떨이";
         $scope.imageURLs = [];
 
@@ -28,10 +29,18 @@ angular.module('starter.controllers')
 
                         var container = sv.__container;
 
-                        var originaltouchStart = sv.touchStart;
-                        var originalmouseDown = sv.mouseDown;
-                        var originaltouchMove = sv.touchMove;
-                        var originalmouseMove = sv.mouseMove;
+                        var originaltouchStart = sv.touchStart || {
+                            apply: function () {}
+                        };
+                        var originalmouseDown = sv.mouseDown || {
+                            apply: function () {}
+                        };
+                        var originaltouchMove = sv.touchMove || {
+                            apply: function () {}
+                        };
+                        var originalmouseMove = sv.mouseMove || {
+                            apply: function () {}
+                        };
 
                         container.removeEventListener('touchstart', sv.touchStart);
                         container.removeEventListener('mousedown', sv.mouseDown);
@@ -70,19 +79,8 @@ angular.module('starter.controllers')
         });
 
         function refreshItems() {
-            lightningDealService.readAll({
-                id: -1,
-                count: -1
-            }, function (data) {
-                data.forEach(function (item) {
-                    var now = new Date();
-                    var end = new Date(item.EndDate);
-
-                    item.EndDate = end.getTime() - now.getTimezoneOffset() * 60 * 1000;
-                    item.Duration = Math.max((end.getTime() - (now.getTime() + now.getTimezoneOffset() * 60 * 1000)) / 1000, 0);
-                    console.log(item.Duration);
-                });
-                $scope.items = data;
+            lightningDeals.initialize().then(function (items) {
+                $scope.items = items;
             });
         }
 
@@ -342,4 +340,6 @@ angular.module('starter.controllers')
                 });
             });
         };
+
+
         }]);

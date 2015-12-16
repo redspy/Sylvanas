@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-    .factory('lightningDealService', ['$resource', 'SERVICE_ENDPOINT', function ($resource, SERVICE_ENDPOINT) {
+.factory('lightningDealService', ['$resource', 'SERVICE_ENDPOINT', function ($resource, SERVICE_ENDPOINT) {
         'use strict';
         return $resource(SERVICE_ENDPOINT + '/deal/:id/:count', {}, {
             create: {
@@ -20,4 +20,111 @@ angular.module('starter.controllers')
                 method: 'DELETE'
             }
         });
+    }])
+    .factory('lightningDeals', ['$q', 'lightningDealService', function ($q, lightningDealService) {
+        var initDeferred = undefined,
+            nextDeferred = undefined;
+        var items = [];
+        var defers = [];
+
+        function transform(item) {
+            var now = new Date();
+            var end = new Date(item.EndDate);
+
+            item.EndDate = end.getTime() - now.getTimezoneOffset() * 60 * 1000;
+            item.Duration = Math.max((end.getTime() - (now.getTime() + now.getTimezoneOffset() * 60 * 1000)) / 1000, 0);
+
+            return item;
+        }
+
+        return {
+            initialize: function () {
+                initDeferred = $q.defer();
+                lightningDealService.readAll({
+                    id: -1,
+                    count: -1
+                }, function (data) {
+                    data.forEach(transform);
+                    items = data;
+                    initDeferred.resolve(items);
+                });
+
+                defers = [initDeferred.promise];
+                return initDeferred.promise;
+            },
+            getNext: function () {
+
+            },
+            getItems: function () {
+                var deferred = $q.defer();
+                $q.all(defers).then(function () {
+                    deferred.resolve(items);
+                });
+
+                return deferred.promise;
+            },
+            getItem: function (id) {
+                var deferred = $q.defer();
+                $q.all(defers).then(function () {
+                    for (var i = 0; i < items.length - 1; i++) {
+                        if (id == items[i].Id) {
+                            deferred.resolve(items[i]);
+                            return;
+                        }
+                    }
+                });
+                return deferred.promise;
+            },
+            refreshItem: function (id) {
+                var deferred = $q.defer();
+                $q.all(defers).then(function () {
+                    for (var i = 0; i < items.length - 1; i++) {
+                        if (id == items[i].Id) {
+                            lightningDealService.read({
+                                id: id
+                            }, function (item) {
+                                angular.copy(transform(item), items[i]);
+                                deferred.resolve(items[i]);
+                            });
+                            break;
+                        }
+                    }
+                });
+                return deferred.promise;
+            },
+            modifyItem: function (id, item) {
+                var deferred = $q.defer();
+                $q.all(defers).then(function () {
+                    for (var i = 0; i < items.length - 1; i++) {
+                        if (id == items[i].Id) {
+                            lightningDealService.modify({
+                                id: id
+                            }, item, function (item) {
+                                angular.copy(transform(item), items[i]);
+                                deferred.resolve(items[i]);
+                            });
+                            break;
+                        }
+                    }
+                });
+                return deferred.promise;
+            },
+            removeItem: function (id) {
+                var deferred = $q.defer();
+                $q.all(defers).then(function () {
+                    for (var i = 0; i < items.length - 1; i++) {
+                        if (id == items[i].Id) {
+                            lightningDealService.delete({
+                                id: id
+                            }, function () {
+                                items.splice(i, 1);
+                                deferred.resolve();
+                            });
+                            break;
+                        }
+                    }
+                });
+                return deferred.promise;
+            }
+        }
     }]);
