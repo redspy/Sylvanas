@@ -55,7 +55,7 @@ angular.module('starter.controllers')
             return deferred.promise;
         }
 
-        getStoreInformation(-1, 5).then(function (data) {
+        getStoreInformation(-1, -1).then(function (data) {
             console.log(data);
             $scope.items = data;
         });
