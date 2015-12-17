@@ -16,8 +16,8 @@
             <pre style="font-size : 18px; margin-top : 20px !important; margin-bottom : 12px !important" style="animation-delay: 2s;animation-duration: 1s">{{item.Description}}</pre>
         </div>
 
-        <div>
-            <img class="full-image image-item" ng-src="{{image}}" ng-repeat="image in images"/>
+        <div ng-repeat="image in images">
+            <img preload-image ng-src="{{image}}" default-image="img/placeholder-image.png" fallback-image="img/placeholder-no-image.jpg" style="width:100%" />
         </div>
         <div>
             <div ng-repeat="reply in item.Replies" style="padding:5px;border-bottom: 1px solid #EEEEEE">

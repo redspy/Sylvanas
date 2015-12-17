@@ -4,7 +4,7 @@
         <ion-slide-box does-continue="true" auto-play="true" slide-interval="4000">
             <!--  on-slide-changed="slideChanged(index)"> -->
             <ion-slide ng-repeat="image in images">
-                <img style="height: 100% !important; width: inherit" ng-src="{{image}}">
+                <img preload-image default-image="img/placeholder-image.png" fallback-image="img/placeholder-no-image.jpg"  style="height: 100% !important; width: inherit" ng-src="{{image}}">
             </ion-slide>
         </ion-slide-box>
         <div style="margin-top : 15px; margin-left : 30px">

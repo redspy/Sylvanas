@@ -33,6 +33,15 @@
     <param name="ios-package" value="PushPlugin"/>
     <param name="android-package" value="com.ionicframework.sylvanas958777"/>
   </feature>
+    <feature name="Device">
+        <param name="ios-package" value="CDVDevice" />
+    </feature>
+    <feature name="File">
+        <param name="ios-package" value="CDVFile" />
+    </feature>
+    <feature name="FileTransfer">
+        <param name="ios-package" value="CDVFileTransfer" />
+    </feature>
   <platform name="android">
     <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png"/>
     <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png"/>
