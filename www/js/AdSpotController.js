@@ -242,63 +242,7 @@ angular.module('starter.controllers')
                 correctOrientation: true
             };
             // 2
-            if (!(ionic.Platform.platform() == 'win32' || ionic.Platform.platform() == 'macintel')) {
-                    $cordovaCamera.getPicture(options).then(function (imageData) {
-
-                        // 4
-                        onImageSuccess(imageData);
-
-                        function onImageSuccess(fileURI) {
-                            createFileEntry(fileURI);
-                            $scope.imageURLs.push(fileURI);
-                        }
-
-                        function createFileEntry(fileURI) {
-                            window.resolveLocalFileSystemURL(fileURI, copyFile, fail);
-                        }
-
-                        // 5
-                        function copyFile(fileEntry) {
-                            var name = fileEntry.fullPath.substr(fileEntry.fullPath.lastIndexOf('/') + 1);
-                            var newName = makeid() + name;
-
-                            window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (fileSystem2) {
-                                    fileEntry.copyTo(
-                                        fileSystem2,
-                                        newName,
-                                        onCopySuccess,
-                                        fail
-                                    );
-                                },
-                                fail);
-                        }
-
-                        // 6
-                        function onCopySuccess(entry) {
-                            $scope.$apply(function () {
-                                $scope.thumbimages.push(entry.nativeURL);
-                            });
-                        }
-
-                        function fail(error) {
-                            console.log("fail: " + error.code);
-                        }
-
-                        function makeid() {
-                            var text = "";
-                            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-                            for (var i = 0; i < 5; i++) {
-                                text += possible.charAt(Math.floor(Math.random() * possible.length));
-                            }
-                            return text;
-                        }
-
-                    }, function (err) {
-                        console.log(err);
-                    });
-            }
-            else {
+            if (ionic.Platform.platform().toUpperCase() === 'ANDROID') {
                 $cordovaCamera.getPicture(options).then(function (imageData) {
                     function getFileURL(fileEntry) {
                         var name = fileEntry.fullPath.substr(fileEntry.fullPath.lastIndexOf('/') + 1);
@@ -354,6 +298,64 @@ angular.module('starter.controllers')
                 }, function (err) {
                     console.log(err);
                 });
+
+            }
+            else {
+                    $cordovaCamera.getPicture(options).then(function (imageData) {
+
+                        // 4
+                        onImageSuccess(imageData);
+
+                        function onImageSuccess(fileURI) {
+                            createFileEntry(fileURI);
+                            $scope.imageURLs.push(fileURI);
+                        }
+
+                        function createFileEntry(fileURI) {
+                            window.resolveLocalFileSystemURL(fileURI, copyFile, fail);
+                        }
+
+                        // 5
+                        function copyFile(fileEntry) {
+                            var name = fileEntry.fullPath.substr(fileEntry.fullPath.lastIndexOf('/') + 1);
+                            var newName = makeid() + name;
+
+                            window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (fileSystem2) {
+                                    fileEntry.copyTo(
+                                        fileSystem2,
+                                        newName,
+                                        onCopySuccess,
+                                        fail
+                                    );
+                                },
+                                fail);
+                        }
+
+                        // 6
+                        function onCopySuccess(entry) {
+                            $scope.$apply(function () {
+                                $scope.thumbimages.push(entry.nativeURL);
+                            });
+                        }
+
+                        function fail(error) {
+                            console.log("fail: " + error.code);
+                        }
+
+                        function makeid() {
+                            var text = "";
+                            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+                            for (var i = 0; i < 5; i++) {
+                                text += possible.charAt(Math.floor(Math.random() * possible.length));
+                            }
+                            return text;
+                        }
+
+                    }, function (err) {
+                        console.log(err);
+                    });
+
             }
 
         };
