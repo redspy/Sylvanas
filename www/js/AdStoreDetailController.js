@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-.controller('adstoredetailcontroller', ['$scope', '$stateParams', 'introShopService', '$q', 'IMAGE_ENDPOINT', '$ionicSlideBoxDelegate', 'introShopReplyService', '$ionicActionSheet', '$ionicModal', 'login', '$timeout', '$ionicHistory', '$window', '$state', function ($scope, $stateParams, introShopService, $q, IMAGE_ENDPOINT, $ionicSlideBoxDelegate, introShopReplyService, $ionicActionSheet, $ionicModal, login, $timeout, $ionicHistory, $window, $state) {
+.controller('adstoredetailcontroller', ['$scope', '$stateParams', 'introShopService', '$q', 'IMAGE_ENDPOINT', '$ionicSlideBoxDelegate', 'introShopReplyService', '$ionicActionSheet', '$ionicModal', 'login', '$timeout', '$ionicHistory', '$window', '$state', 'introShops', function ($scope, $stateParams, introShopService, $q, IMAGE_ENDPOINT, $ionicSlideBoxDelegate, introShopReplyService, $ionicActionSheet, $ionicModal, login, $timeout, $ionicHistory, $window, $state, introShops) {
     $scope.name = "내가게 알리기";
     $scope.id = $stateParams.unitid;
     $scope.item = [];
@@ -9,37 +9,21 @@ angular.module('starter.controllers')
 
     var userID = login.context.user;
 
-    function getStoreInformation(from, count) {
-        var deferred = $q.defer();
+    function transformItem(item) {
+        $scope.images = [];
 
-        introShopService.readAll({
-                id: from,
-                count: count
-            },
-            function (value) {
-                deferred.resolve(value);
-            },
-            function (httpResponse) {
-                deferred.reject(httpResponse)
-            });
-
-        return deferred.promise;
+        for (var i = 0; i < item.Images.length; i++) {
+            $scope.images.push($scope.getImageURL(item.Images[i]));
+        }
+        for (var i = 0; i < item.Replies.length; i++) {
+            item.Replies[i].RelativeCreateDate = moment(item.Replies[i].CreateDate).fromNow();
+        }
+        $scope.showMenu = userID == $scope.item.UserId;
+        $scope.item = item;
     }
 
     $scope.refreshItems = function () {
-        getStoreInformation($scope.id, 1).then(function (data) {
-            console.log(data);
-            $scope.images = [];
-            $scope.item = data[0];
-            //$scope.name = $scope.item.Name;
-            for (var i = 0; i < $scope.item.Images.length; i++) {
-                $scope.images.push($scope.getImageURL($scope.item.Images[i]));
-            }
-            for (var i = 0; i < $scope.item.Replies.length; i++) {
-                $scope.item.Replies[i].RelativeCreateDate = moment($scope.item.Replies[i].CreateDate).fromNow();
-            }
-            $scope.showMenu = userID == $scope.item.UserId;
-        });
+        introShops.getItem($scope.id).then(transformItem);
     };
 
     $scope.refreshItems();
@@ -73,24 +57,6 @@ angular.module('starter.controllers')
 
 
     };
-    $scope.favoriteClick = function () {
-        alert('Add to Favorite');
-    };
-
-    $scope.callClick = function () {
-        window.open('tel:' + $scope.item.Contact);
-    };
-
-    function refreshIntroShop() {
-        introShopService.readAll({
-            id: -1,
-            count: -1
-        }, function (data) {
-            $scope.introShops = data;
-        });
-    }
-
-    refreshIntroShop();
 
     $scope.showActionSheet = function () {
         $ionicActionSheet.show({
@@ -112,17 +78,14 @@ angular.module('starter.controllers')
                 if (index == 0) {
                     $scope.write();
                 } else if (index == 1) {
-                    //$window.navigator.notification.confirm('dddd', function() {});
                     $window.navigator.notification.confirm('삭제를 원하시면 확인버튼을 눌러 주세요',
                         function (buttonIndex) {
                             if (buttonIndex == 2) {
-                                introShopService.delete({
-                                    id: $scope.id
-                                }, function () {
-                                    //$ionicHistory.clearCache().then(function() {
+                                introShops.removeItem($scope.id).then(function () {
                                     $ionicHistory.clearCache();
                                     $ionicHistory.clearHistory();
                                     $state.go('app.adstore'); //});
+
                                     window.plugins.toast.showWithOptions({
                                         message: '삭제되었습니다',
                                         duration: "short",
@@ -196,14 +159,8 @@ angular.module('starter.controllers')
                     //                    Images: imageKeys
             };
 
-            introShopService.modify({
-                id: $scope.id
-            }, introData, function () {
+            introShops.modifyItem($scope.id, introData).then(function () {
                 $scope.closeWrite();
-                $scope.refreshItems();
-                //$ionicHistory.clearCache();//.then(function(){
-                //
-                //    $state.go('app.adspot');//});
             });
 
         }, 1000);

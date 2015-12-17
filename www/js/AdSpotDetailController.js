@@ -5,7 +5,7 @@ angular.module('starter.controllers')
     $scope.id = $stateParams.unitid;
     $scope.item = [];
     $scope.images = [];
-    $scope.showMenu = true;
+    $scope.showMenu = false;
 
     var userID = login.context.user;
 
@@ -15,7 +15,7 @@ angular.module('starter.controllers')
         for (var i = 0; i < item.Images.length; i++) {
             $scope.images.push($scope.getImageURL(item.Images[i]));
         }
-        //$scope.showMenu = userID == $scope.item.UserId;
+        $scope.showMenu = userID == $scope.item.UserId;
 
         for (var i = 0; i < item.Replies.length; i++) {
             item.Replies[i].RelativeCreateDate = moment(item.Replies[i].CreateDate).fromNow();

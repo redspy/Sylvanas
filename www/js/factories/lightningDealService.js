@@ -24,6 +24,7 @@ angular.module('starter.controllers')
     .factory('lightningDeals', ['$q', 'lightningDealService', function ($q, lightningDealService) {
         var initDeferred = undefined,
             nextDeferred = undefined;
+        var service = lightningDealService;
         var items = [];
         var defers = [];
 
@@ -40,9 +41,9 @@ angular.module('starter.controllers')
         return {
             initialize: function () {
                 initDeferred = $q.defer();
-                lightningDealService.readAll({
+                service.readAll({
                     id: -1,
-                    count: -1
+                    count: 10
                 }, function (data) {
                     data.forEach(transform);
                     items = data;
@@ -80,7 +81,7 @@ angular.module('starter.controllers')
                 $q.all(defers).then(function () {
                     for (var i = 0; i < items.length - 1; i++) {
                         if (id == items[i].Id) {
-                            lightningDealService.read({
+                            service.read({
                                 id: id
                             }, function (item) {
                                 angular.copy(transform(item), items[i]);
@@ -97,7 +98,7 @@ angular.module('starter.controllers')
                 $q.all(defers).then(function () {
                     for (var i = 0; i < items.length - 1; i++) {
                         if (id == items[i].Id) {
-                            lightningDealService.modify({
+                            service.modify({
                                 id: id
                             }, item, function (item) {
                                 angular.copy(transform(item), items[i]);
@@ -114,7 +115,7 @@ angular.module('starter.controllers')
                 $q.all(defers).then(function () {
                     for (var i = 0; i < items.length - 1; i++) {
                         if (id == items[i].Id) {
-                            lightningDealService.delete({
+                            service.delete({
                                 id: id
                             }, function () {
                                 items.splice(i, 1);

@@ -17,7 +17,8 @@ angular.module('starter.controllers')
         '$cordovaSocialSharing',
         '$ionicPlatform',
         '$window',
-        function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate, $q, introShopService, IMAGE_ENDPOINT, SERVICE_ENDPOINT, $cordovaFileTransfer, imageService, $cordovaSocialSharing, $ionicPlatform, $window) {
+        'introShops',
+        function ($scope, $ionicModal, $timeout, $cordovaCamera, $cordovaFile, $cordovaGeolocation, $state, $ionicScrollDelegate, $q, introShopService, IMAGE_ENDPOINT, SERVICE_ENDPOINT, $cordovaFileTransfer, imageService, $cordovaSocialSharing, $ionicPlatform, $window, introShops) {
         $scope.name = "내가게 알리기";
         $scope.$watch('items', function () {
             $timeout(function () {
@@ -28,10 +29,18 @@ angular.module('starter.controllers')
 
                         var container = sv.__container;
 
-                        var originaltouchStart = sv.touchStart;
-                        var originalmouseDown = sv.mouseDown;
-                        var originaltouchMove = sv.touchMove;
-                        var originalmouseMove = sv.mouseMove;
+                        var originaltouchStart = sv.touchStart || {
+                            apply: function () {}
+                        };
+                        var originalmouseDown = sv.mouseDown || {
+                            apply: function () {}
+                        };
+                        var originaltouchMove = sv.touchMove || {
+                            apply: function () {}
+                        };
+                        var originalmouseMove = sv.mouseMove || {
+                            apply: function () {}
+                        };
 
                         container.removeEventListener('touchstart', sv.touchStart);
                         container.removeEventListener('mousedown', sv.mouseDown);
@@ -79,12 +88,9 @@ angular.module('starter.controllers')
          * 서버에서 데이터를 가져온다. 제일 최근에서 부터 10개 데이터를 가져오도록 함.
          */
         function refreshItems() {
-            introShopService.readAll({
-                id: -1,
-                count: -1
-            }, function (data) {
-                $scope.items = data;
-            })
+            introShops.initialize().then(function (items) {
+                $scope.items = items;
+            });
         }
         $scope.getImageURL = function (imageID) {
             return IMAGE_ENDPOINT + 'thumb/' + imageID;
@@ -359,8 +365,7 @@ angular.module('starter.controllers')
                 }, function (err) {
                     console.log(err);
                 });
-            }
-            else {
+            } else {
                 $cordovaCamera.getPicture(options).then(function (imageData) {
 
                     function getFileURL(fileEntry) {
