@@ -133,37 +133,43 @@ angular.module('starter.controllers')
 
         // 글쓰기 입력 후 글 올리기 버튼 눌렀을때
         $scope.doWrite = function () {
-            $scope.thumbimages = [];
-            window.localStorage['nickName'] = $scope.inputData.nickName;
+            if ($scope.inputData.title == '' || $scope.inputData.NickName == '' || $scope.inputData.Body == '')
+            {
+                $window.navigator.notification.confirm('입력되지 않은 항목이 존재합니다.', function(){}, '입력오류', ['확인']);
+            }
+            else {
+                $scope.thumbimages = [];
+                window.localStorage['nickName'] = $scope.inputData.nickName;
 
-            $timeout(function () {
-                var imageKeys = [];
-                var imagePromise = [];
+                $timeout(function () {
+                    var imageKeys = [];
+                    var imagePromise = [];
 
-                $scope.imageURLs.forEach(function (url) {
-                    imagePromise.push(imageService.create(url)
-                        .then(function (res) {
-                            imageKeys.push(res.value.image);
-                        }));
-                });
-
-                $q.all(imagePromise).then(function () {
-                    var introData = {
-                        Title: $scope.inputData.title,
-                        Description: $scope.inputData.body,
-                        NickName: $scope.inputData.nickName,
-                        Images: imageKeys
-                    };
-
-                    introShopService.create(introData, function () {
-                        $scope.closeWrite();
-                        refreshItems();
+                    $scope.imageURLs.forEach(function (url) {
+                        imagePromise.push(imageService.create(url)
+                            .then(function (res) {
+                                imageKeys.push(res.value.image);
+                            }));
                     });
 
-                    $scope.imageURLs.length = 0;
-                    $scope.inputData = {};
-                });
-            }, 1000);
+                    $q.all(imagePromise).then(function () {
+                        var introData = {
+                            Title: $scope.inputData.title,
+                            Description: $scope.inputData.body,
+                            NickName: $scope.inputData.nickName,
+                            Images: imageKeys
+                        };
+
+                        introShopService.create(introData, function () {
+                            $scope.closeWrite();
+                            refreshItems();
+                        });
+
+                        $scope.imageURLs.length = 0;
+                        $scope.inputData = {};
+                    });
+                }, 1000);
+            }
         };
         //글쓰기///////////////////////////////////////////////////////////////////////
 
