@@ -18,8 +18,6 @@ angular.module('starter.controllers')
                     console.log(data);
                     $scope.items = data;
                 });
-
-
                 $scope.$broadcast('scroll.refreshComplete');
             }, 1000);
         };
@@ -55,18 +53,13 @@ angular.module('starter.controllers')
             return deferred.promise;
         }
 
-        getStoreInformation(-1, -1).then(function (data) {
-            console.log(data);
-            $scope.items = data;
-        });
-
         $scope.getImageURL = function (imageID) {
             return IMAGE_ENDPOINT + 'thumb/' + imageID;
         };
 
         $scope.loadMore = function () {
-            getStoreInformation($scope.items.length, 5).then(function (data) {
-                console.log(data);
+            getStoreInformation($scope.items.length - 1, 5).then(function (data) {
+                console.log(22);
                 if (data.length != 0) {
                     data.forEach(function (item) {
                         $scope.items.push(item);
@@ -75,5 +68,11 @@ angular.module('starter.controllers')
                 }
             })
         };
+
+        getStoreInformation(-1, 5).then(function (data) {
+            console.log(data);
+            $scope.items = data;
+        });
+
     }
     ]);

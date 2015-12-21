@@ -6,7 +6,6 @@ angular.module('starter.controllers')
         $scope.MarketName = "강릉 중앙시장";
 
         $scope.items = [];
-        //$scope.items = getData(10);
 
         $scope.doRefresh = function () {
             $timeout(function () {
@@ -35,32 +34,14 @@ angular.module('starter.controllers')
             console.log(1);
 
             filterStoreByType($scope.searchProductType, 37.5, 127.5, $scope.items.length, 5).then(function (data) {
-
                 if (data.length != 0) {
                     data.forEach(function (item) {
                         $scope.items.push(item);
                     });
-
                     $scope.$broadcast('scroll.infiniteScrollComplete');
                 }
             });
         };
-
-        //$scope.loadMore = function () {
-        //
-        //    var startIndex = $scope.items.length;
-        //
-        //    for (var i = startIndex; i < 10; i++) {
-        //        $scope.items.push(getStoreInformation(i-1, i));
-        //    }
-        //    $scope.$broadcast('scroll.infiniteScrollComplete');
-        //};
-        //
-        //$scope.$on('$stateChangeSuccess', function () {
-        //    if ($state.is('app.localinformation')) {
-        //        $scope.loadMore();
-        //    }
-        //});
 
         /*
          * type에 해당하는 상점 정보를 리턴한다. 이때 (latitude, longtitude)에서 가장 가까운 순서로
@@ -111,12 +92,6 @@ angular.module('starter.controllers')
 
             return deferred.promise;
         }
-        /*
-        getStoreInformation(-1, -1).then(function (data) {
-            console.log(data);
-            $scope.items = data;
-        });
-        */
 
         $scope.getImageURL = function (imageID) {
             return IMAGE_ENDPOINT + 'thumb/' + imageID;
