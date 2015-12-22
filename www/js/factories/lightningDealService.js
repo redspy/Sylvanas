@@ -67,7 +67,7 @@ angular.module('starter.controllers')
             getItem: function (id) {
                 var deferred = $q.defer();
                 $q.all(defers).then(function () {
-                    for (var i = 0; i < items.length - 1; i++) {
+                    for (var i = 0; i < items.length; i++) {
                         if (id == items[i].Id) {
                             deferred.resolve(items[i]);
                             return;
@@ -79,7 +79,7 @@ angular.module('starter.controllers')
             refreshItem: function (id) {
                 var deferred = $q.defer();
                 $q.all(defers).then(function () {
-                    for (var i = 0; i < items.length - 1; i++) {
+                    for (var i = 0; i < items.length; i++) {
                         if (id == items[i].Id) {
                             service.read({
                                 id: id
@@ -96,7 +96,7 @@ angular.module('starter.controllers')
             modifyItem: function (id, item) {
                 var deferred = $q.defer();
                 $q.all(defers).then(function () {
-                    for (var i = 0; i < items.length - 1; i++) {
+                    for (var i = 0; i < items.length; i++) {
                         if (id == items[i].Id) {
                             service.modify({
                                 id: id
@@ -113,7 +113,7 @@ angular.module('starter.controllers')
             removeItem: function (id) {
                 var deferred = $q.defer();
                 $q.all(defers).then(function () {
-                    for (var i = 0; i < items.length - 1; i++) {
+                    for (var i = 0; i < items.length; i++) {
                         if (id == items[i].Id) {
                             service.delete({
                                 id: id
