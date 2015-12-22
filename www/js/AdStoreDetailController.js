@@ -18,7 +18,7 @@ angular.module('starter.controllers')
         for (var i = 0; i < item.Replies.length; i++) {
             item.Replies[i].RelativeCreateDate = moment(item.Replies[i].CreateDate).fromNow();
         }
-        $scope.showMenu = userID == $scope.item.UserId;
+        $scope.showMenu = userID == item.UserId;
         $scope.item = item;
     }
 
