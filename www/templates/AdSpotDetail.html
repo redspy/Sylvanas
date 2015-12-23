@@ -1,14 +1,13 @@
 <ion-view>
     <ion-nav-title>{{name}}</ion-nav-title>
-    <ion-nav-buttons side="right" >
+    <ion-nav-buttons side="right">
         <button class="button button-clear ion-android-more-vertical" style="color : white; font-size: 25px; margin-right : 10px" ng-click="showActionSheet()" ng-show="showMenu == true">
         </button>
     </ion-nav-buttons>
     <ion-content id="detailListStyle" has-bouncing="true">
         <div class="item item-divider item-text-wrap" style="background : white;  margin-top : 0px !important">
-            <div ng-show="item.Duration < 10800; item.Duration != 0">
-                <table align="right"
-                       style="width:70px; border: 1px solid #FEAB62; border-collapse: collapse; ; margin-bottom : 7px">
+            <div ng-show="item.Duration < 10800 && item.Duration != 0">
+                <table align="right" style="width:70px; border: 1px solid #FEAB62; border-collapse: collapse; ; margin-bottom : 7px">
                     <tr>
                         <th>
                             <span style="font-size : 13px; color : #FEAB62">마감임박</span>
@@ -26,15 +25,15 @@
             <div ng-if="item.Duration > 0" style="margin-top : 10px">
                 <!--<span style="color : gray; font-size : 10px; color : red"> 남은시간 : </span>-->
                 <i class="ion-ios-alarm" style="color : #34BAAA"></i>
-                    <span style="font-size : 15px; color : #34BAAA">
+                <span style="font-size : 15px; color : #34BAAA">
                         <timer end-time="item.EndDate" interval="1000" language="ko">
                             <span ng-show="days != 0"> {{days}}일</span>
-                            <span ng-show="hours != 0">{{hours}}시간</span>
-                            <span>{{mminutes}} 분</span>
-                            <span>{{sseconds}} 초</span>
-                            <span> 남음</span>
-                        </timer>
-                    </span>
+                <span ng-show="hours != 0">{{hours}}시간</span>
+                <span>{{mminutes}} 분</span>
+                <span>{{sseconds}} 초</span>
+                <span> 남음</span>
+                </timer>
+                </span>
             </div>
             <span ng-if="item.Duration <= 0" style="font-size : 15px; color : red">마감된 이벤트 입니다</span>
             <hr size="1" style="border-color: white">
@@ -58,8 +57,7 @@
     </ion-content>
     <ion-footer-bar align-title="left" class="bar-stable" style="padding : 0px !important">
         <div class="row">
-            <input type="text" placeholder="댓글을 달아주세요." class="col col-90"
-                   style="margin-right : 4px; padding-left : 4px" ng-model="reply">
+            <input type="text" placeholder="댓글을 달아주세요." class="col col-90" style="margin-right : 4px; padding-left : 4px" ng-model="reply">
             <button class="col button text-center" ng-click="submitReply()" style="min-width : 32px !important;">
                 <i class="ion-chatbubble-working" style=" font-size : 18px"></i>
             </button>
