@@ -32,13 +32,12 @@ angular.module('starter.controllers')
             var now = new Date();
             var end = new Date(item.EndDate);
 
-            item.EndDate = end.getTime() - now.getTimezoneOffset() * 60 * 1000;
-            item.Duration = Math.max((end.getTime() - (now.getTime() + now.getTimezoneOffset() * 60 * 1000)) / 1000, 0);
+            item.Duration = (end.getTime() - now.getTime()) / 1000;
 
             return item;
         }
 
-        return {
+        var self = {
             initialize: function () {
                 initDeferred = $q.defer();
                 service.readAll({
@@ -96,17 +95,13 @@ angular.module('starter.controllers')
             modifyItem: function (id, item) {
                 var deferred = $q.defer();
                 $q.all(defers).then(function () {
-                    for (var i = 0; i < items.length; i++) {
-                        if (id == items[i].Id) {
-                            service.modify({
-                                id: id
-                            }, item, function (item) {
-                                angular.copy(transform(item), items[i]);
-                                deferred.resolve(items[i]);
-                            });
-                            break;
-                        }
-                    }
+                    service.modify({
+                        id: id
+                    }, item, function () {
+                        self.refreshItem(id).then(function (item) {
+                            deferred.resolve(item);
+                        });
+                    });
                 });
                 return deferred.promise;
             },
@@ -127,5 +122,7 @@ angular.module('starter.controllers')
                 });
                 return deferred.promise;
             }
-        }
+        };
+
+        return self;
     }]);

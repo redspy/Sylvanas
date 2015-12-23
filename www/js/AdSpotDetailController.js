@@ -10,7 +10,6 @@ angular.module('starter.controllers')
     var userID = login.context.user;
 
     function transformItem(item) {
-        console.log(item);
         $scope.images = [];
         for (var i = 0; i < item.Images.length; i++) {
             $scope.images.push($scope.getImageURL(item.Images[i]));
@@ -123,7 +122,7 @@ angular.module('starter.controllers')
             title: $scope.item.Title,
             nickName: $scope.item.NickName, // window.localStorage['nickName'] || '',
             body: $scope.item.Description,
-            EndDate: new Date($scope.item.EndDate)
+            enddate: new Date($scope.item.EndDate)
         };
     };
 
@@ -151,15 +150,17 @@ angular.module('starter.controllers')
         window.localStorage['nickName'] = $scope.inputData.nickName;
 
         $timeout(function () {
+            var end = new Date($scope.inputData.enddate);
+            end = new Date(end.getTime() - end.getTimezoneOffset() * 60 * 1000);
+
             var introData = {
                 Title: $scope.inputData.title,
                 Description: $scope.inputData.body,
                 NickName: $scope.inputData.nickName,
-                EndDate: $scope.inputData.enddate
+                EndDate: end
             };
 
             lightningDeals.modifyItem($scope.id, introData).then(function (data) {
-                console.log(data);
                 transformItem(data);
                 $scope.closeWrite();
             });

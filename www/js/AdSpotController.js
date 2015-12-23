@@ -168,18 +168,16 @@ angular.module('starter.controllers')
                     });
 
                     $q.all(imagePromise).then(function () {
+                        var end = new Date($scope.inputData.enddate);
+                        end = new Date(end.getTime() - end.getTimezoneOffset() * 60 * 1000);
                         var introData = {
                             Title: $scope.inputData.title,
                             Description: $scope.inputData.body,
                             NickName: $scope.inputData.nickName,
-                            EndDate: $scope.inputData.enddate,
+                            EndDate: end,
                             Images: imageKeys
                         };
 
-                        lightningDealService.create(introData, function () {
-                            $scope.closeWrite();
-                            refreshItems();
-                        });
                         lightningDealService.create(introData, function () {
                             $scope.closeWrite();
                             refreshItems();
