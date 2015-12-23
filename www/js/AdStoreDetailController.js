@@ -51,11 +51,11 @@ angular.module('starter.controllers')
         introShopReplyService.create({
             id: id
         }, replyJSON, function () {
+            $scope.reply = '';
             $scope.item = [];
-            $scope.refreshItems();
+
+            introShops.refreshItem($scope.id).then(transformItem);
         });
-
-
     };
 
     $scope.showActionSheet = function () {
