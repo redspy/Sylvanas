@@ -14,8 +14,7 @@
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
         </ion-refresher>
         <div collection-repeat="item in items" style="margin : 5px" collection-item-height="355">
-            <div ui-sref="app.localinformationdetail({unitid : item.Id})"
-                 item-width="100%" item-height="400px">
+            <div ng-click="showDetail(item)" item-width="100%" item-height="400px">
                 <div style="background-color: black; color : white">
                     <img ng-src="{{getImageURL(item.Images[0])}}" width="100%" style="height : 265px">
 

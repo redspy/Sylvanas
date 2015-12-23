@@ -3,7 +3,7 @@
  */
 angular.module('starter.controllers')
 
-    .factory('storeService', ['$resource', 'SERVICE_ENDPOINT', function ($resource, SERVICE_ENDPOINT) {
+.factory('storeService', ['$resource', 'SERVICE_ENDPOINT', function ($resource, SERVICE_ENDPOINT) {
         'use strict';
         var base = $resource(SERVICE_ENDPOINT + '/store/:id/:count', {}, {
             create: {
@@ -35,4 +35,15 @@ angular.module('starter.controllers')
         });
 
         return search;
-    }]);
+    }])
+    .factory('storeItem', function () {
+        var item = null;
+        return {
+            store: function (data) {
+                item = data;
+            },
+            get: function () {
+                return item;
+            }
+        };
+    });

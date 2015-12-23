@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-    .controller('localInformationController', ['$scope', '$timeout', '$state', 'storeService', '$q', 'IMAGE_ENDPOINT', 'productTypeService', 'storeSearchService', function ($scope, $timeout, $state, storeService, $q, IMAGE_ENDPOINT, productTypeService, storeSearchService) {
+.controller('localInformationController', ['$scope', '$timeout', '$state', 'storeService', '$q', 'IMAGE_ENDPOINT', 'productTypeService', 'storeSearchService', 'storeItem', function ($scope, $timeout, $state, storeService, $q, IMAGE_ENDPOINT, productTypeService, storeSearchService, storeItem) {
         $scope.name = "주변 상점 정보";
         $scope.detailLink = "#/app/localinformation/";
         $scope.MarketName = "강릉 중앙시장";
@@ -50,11 +50,17 @@ angular.module('starter.controllers')
         function filterStoreByType(type, latitude, longitude, from, count) {
             var deferred = $q.defer();
 
-            storeSearchService.search(
-                {type:type, latitude:latitude, longitude:longitude, from:from, count:count},
+            storeSearchService.search({
+                    type: type,
+                    latitude: latitude,
+                    longitude: longitude,
+                    from: from,
+                    count: count
+                },
                 function (value, responseHeaders) {
                     deferred.resolve(value);
-                }, function (httpResponse) {
+                },
+                function (httpResponse) {
                     deferred.reject(httpResponse)
                 });
 
@@ -82,13 +88,16 @@ angular.module('starter.controllers')
         function getStoreInformation(from, count) {
             var deferred = $q.defer();
 
-            storeService.readAll(
-                {id:from, count:count},
+            storeService.readAll({
+                    id: from,
+                    count: count
+                },
                 function (value, responseHeaders) {
                     deferred.resolve(value);
-                }, function (httpResponse) {
+                },
+                function (httpResponse) {
                     deferred.reject(httpResponse)
-            });
+                });
 
             return deferred.promise;
         }
@@ -96,5 +105,12 @@ angular.module('starter.controllers')
         $scope.getImageURL = function (imageID) {
             return IMAGE_ENDPOINT + 'thumb/' + imageID;
         };
+
+        $scope.showDetail = function (item) {
+            storeItem.store(item);
+            $state.go('app.localinformationdetail', {
+                unitid: item.Id
+            });
+        }
     }
     ]);
