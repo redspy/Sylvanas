@@ -154,12 +154,13 @@ angular.module('starter.controllers')
             var introData = {
                 Title: $scope.inputData.title,
                 Description: $scope.inputData.body,
-                NickName: $scope.inputData.nickName
-                    // EndDate : $scope.inputData.EndDate
-                    // Images: imageKeys
+                NickName: $scope.inputData.nickName,
+                EndDate: $scope.inputData.enddate
             };
 
-            lightningDeals.modifyItem($scope.id, introData).then(function () {
+            lightningDeals.modifyItem($scope.id, introData).then(function (data) {
+                console.log(data);
+                transformItem(data);
                 $scope.closeWrite();
             });
         }, 1000);
