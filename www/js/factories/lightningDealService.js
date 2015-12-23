@@ -33,6 +33,8 @@ angular.module('starter.controllers')
             var end = new Date(item.EndDate);
 
             item.Duration = (end.getTime() - now.getTime()) / 1000;
+            if (item.Duration < 0)
+                item.Duration = 0;
 
             return item;
         }
