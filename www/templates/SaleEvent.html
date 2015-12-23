@@ -3,42 +3,41 @@
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
         </ion-refresher>
         <!--<div>-->
-            <!--<div class="storeInfoContainer"-->
-                 <!--ui-sref="app.saleeventdetail({unitid : item.Id})"-->
-                 <!--collection-repeat="item in items"-->
-                 <!--item-width="100%"-->
-                 <!--item-height="187px">-->
-                <!--<div class="storeInfo vertical-align-items row">-->
-                    <!--<div class="col">-->
-                        <!--<img ng-src="{{getImageURL(item.Images[0])}}">-->
-                    <!--</div>-->
-                    <!--<div class="col"></div>-->
-                    <!--<div class="col">-->
-                        <!--<div>-->
-                            <!--<p class="storeInfoMarketText">{{MarketName}}</p>-->
-                            <!--<p class="storeInfoMarketTitle">{{item.Name}}</p>-->
-                            <!--<div>-->
-                                <!--<a class="ion-star" style="color : orange; font-size : 15px"></a>-->
-                                <!--<a style="color : gray; font-size : 15px">{{item.BookmarkCount}}</a>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="storeInfoText">-->
-                            <!--<p ng-show="name == '주변 상점 정보'">품목 : {{item.Product}}</p>-->
-                            <!--<p ng-show="name != '주변 상점 정보'">종료 : {{item.EventTo}}</p>-->
+        <!--<div class="storeInfoContainer"-->
+        <!--ui-sref="app.saleeventdetail({unitid : item.Id})"-->
+        <!--collection-repeat="item in items"-->
+        <!--item-width="100%"-->
+        <!--item-height="187px">-->
+        <!--<div class="storeInfo vertical-align-items row">-->
+        <!--<div class="col">-->
+        <!--<img ng-src="{{getImageURL(item.Images[0])}}">-->
+        <!--</div>-->
+        <!--<div class="col"></div>-->
+        <!--<div class="col">-->
+        <!--<div>-->
+        <!--<p class="storeInfoMarketText">{{MarketName}}</p>-->
+        <!--<p class="storeInfoMarketTitle">{{item.Name}}</p>-->
+        <!--<div>-->
+        <!--<a class="ion-star" style="color : orange; font-size : 15px"></a>-->
+        <!--<a style="color : gray; font-size : 15px">{{item.BookmarkCount}}</a>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="storeInfoText">-->
+        <!--<p ng-show="name == '주변 상점 정보'">품목 : {{item.Product}}</p>-->
+        <!--<p ng-show="name != '주변 상점 정보'">종료 : {{item.EventTo}}</p>-->
 
-                            <!--<p>문의 : {{item.Contact}}</p>-->
-                            <!--<p>주소 : {{item.Address}}</p>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="col">-->
-                        <!--<i class="storeInfoDetailArrow ion-ios-arrow-right"></i>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
+        <!--<p>문의 : {{item.Contact}}</p>-->
+        <!--<p>주소 : {{item.Address}}</p>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col">-->
+        <!--<i class="storeInfoDetailArrow ion-ios-arrow-right"></i>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
         <!--</div>-->
         <div collection-repeat="item in items" style="margin : 5px" collection-item-height="355">
-            <div ui-sref="app.saleeventdetail({unitid : item.Id})"
-                 item-width="100%" item-height="400px">
+            <div ng-click="showDetail(item)" item-width="100%" item-height="400px">
                 <div style="background-color: black; color : white">
                     <img ng-src="{{getImageURL(item.Images[0])}}" width="100%" style="height : 265px">
 

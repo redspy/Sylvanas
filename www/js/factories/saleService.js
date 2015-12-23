@@ -3,7 +3,7 @@
  */
 angular.module('starter.controllers')
 
-    .factory('saleService', ['$resource', 'SERVICE_ENDPOINT', function ($resource, SERVICE_ENDPOINT) {
+.factory('saleService', ['$resource', 'SERVICE_ENDPOINT', function ($resource, SERVICE_ENDPOINT) {
         'use strict';
         return $resource(SERVICE_ENDPOINT + '/sales/:id/:count', {}, {
             create: {
@@ -23,4 +23,16 @@ angular.module('starter.controllers')
                 method: 'DELETE'
             }
         });
-    }]);
+    }])
+    .factory('saleItem', function () {
+        'use strict';
+        var item = null;
+        return {
+            store: function (data) {
+                item = data;
+            },
+            get: function () {
+                return item;
+            }
+        };
+    });

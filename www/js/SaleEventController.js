@@ -1,13 +1,11 @@
 angular.module('starter.controllers')
 
-.controller('saleEventController', ['$scope', '$timeout', '$state', '$q', 'saleService', 'IMAGE_ENDPOINT', function ($scope, $timeout, $state, $q, saleService, IMAGE_ENDPOINT) {
+.controller('saleEventController', ['$scope', '$timeout', '$state', '$q', 'saleService', 'IMAGE_ENDPOINT', 'saleItem', function ($scope, $timeout, $state, $q, saleService, IMAGE_ENDPOINT, saleItem) {
     $scope.name = "할인 & 이벤트";
     $scope.detailLink = "#/app/saleevent/";
-
     $scope.MarketName = "강릉 중앙시장";
-
     $scope.items = [];
-    //$scope.items = getData(10);
+
     $scope.doRefresh = function () {
         $timeout(function () {
             //simulate async response
@@ -60,6 +58,13 @@ angular.module('starter.controllers')
         return IMAGE_ENDPOINT + 'thumb/' + imageID;
     };
 
+    $scope.showDetail = function (item) {
+        saleItem.store(item);
+        $state.go("app.saleeventdetail", {
+            unitid: item.Id
+        });
+    }
+
     $scope.loadMore = function () {
         var lastId = -1;
 
@@ -76,4 +81,4 @@ angular.module('starter.controllers')
             }
         });
     };
-    }]);
+}]);
