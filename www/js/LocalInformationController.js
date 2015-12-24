@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 
-.controller('localInformationController', ['$scope', '$timeout', '$state', 'storeService', '$q', 'IMAGE_ENDPOINT', 'productTypeService', 'storeSearchService', 'storeItem', function ($scope, $timeout, $state, storeService, $q, IMAGE_ENDPOINT, productTypeService, storeSearchService, storeItem) {
+.controller('localInformationController', ['$scope', '$timeout', '$state', 'storeService', '$q', 'IMAGE_ENDPOINT', 'productTypeService', 'storeSearchService', 'storeItem', 'gpslocationservice', function ($scope, $timeout, $state, storeService, $q, IMAGE_ENDPOINT, productTypeService, storeSearchService, storeItem, gpslocationservice) {
         $scope.name = "주변 상점 정보";
         $scope.detailLink = "#/app/localinformation/";
         $scope.MarketName = "강릉 중앙시장";
@@ -11,10 +11,16 @@ angular.module('starter.controllers')
             $timeout(function () {
                 $scope.$broadcast('scroll.infiniteScrollComplete');
 
-                filterStoreByType($scope.searchProductType, 37.5, 127.5, 0, 5).then(function (data) {
-                    $scope.items = data;
-                    $scope.$broadcast('scroll.refreshComplete');
-                    console.log(1111);
+                gpslocationservice.then(function(position) {
+                    filterStoreByType($scope.searchProductType, position.lat, position.long, 0, 5).then(function (data) {
+                        $scope.items = data;
+                        $scope.$broadcast('scroll.refreshComplete');
+                    });
+                }, function(error) {
+                    filterStoreByType($scope.searchProductType, 37.7521565, 128.8759359, 0, 5).then(function (data) {
+                        $scope.items = data;
+                        $scope.$broadcast('scroll.refreshComplete');
+                    });
                 });
             }, 1000);
         };
@@ -24,8 +30,14 @@ angular.module('starter.controllers')
             $scope.productType = data;
 
             $scope.$watch('searchProductType', function (nv) {
-                filterStoreByType(nv, 37.5, 127.5, 0, 5).then(function (data) {
-                    $scope.items = data;
+                gpslocationservice.then(function(position) {
+                    filterStoreByType(nv, position.lat, position.long, 0, 5).then(function (data) {
+                        $scope.items = data;
+                    });
+                }, function(error) {
+                    filterStoreByType(nv, 37.7521565, 128.8759359, 0, 5).then(function (data) {
+                        $scope.items = data;
+                    });
                 });
             });
         });
@@ -33,13 +45,24 @@ angular.module('starter.controllers')
         $scope.loadMore = function () {
             console.log(1);
 
-            filterStoreByType($scope.searchProductType, 37.5, 127.5, $scope.items.length, 5).then(function (data) {
-                if (data.length != 0) {
-                    data.forEach(function (item) {
-                        $scope.items.push(item);
-                    });
-                    $scope.$broadcast('scroll.infiniteScrollComplete');
-                }
+            gpslocationservice.then(function(position) {
+                filterStoreByType($scope.searchProductType, position.lat, position.long, $scope.items.length, 5).then(function (data) {
+                    if (data.length != 0) {
+                        data.forEach(function (item) {
+                            $scope.items.push(item);
+                        });
+                        $scope.$broadcast('scroll.infiniteScrollComplete');
+                    }
+                });
+            }, function(error) {
+                filterStoreByType($scope.searchProductType, 37.7521565, 128.8759359, $scope.items.length, 5).then(function (data) {
+                    if (data.length != 0) {
+                        data.forEach(function (item) {
+                            $scope.items.push(item);
+                        });
+                        $scope.$broadcast('scroll.infiniteScrollComplete');
+                    }
+                });
             });
         };
 
