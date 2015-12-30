@@ -54,7 +54,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
                 stationaryRadius: 20,
                 distanceFilter: 30,
                 debug: false, // <-- enable this hear sounds for background-geolocation life-cycle.
-                stopOnTerminate: false, // <-- enable this to clear background location settings when the app terminates
+                stopOnTerminate: true, // <-- enable this to clear background location settings when the app terminates
                 interval: 10000
             });
 
@@ -65,26 +65,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
 })
 .config(function ($ionicConfigProvider) {
     //if(!ionic.Platform.isIOS())$ionicConfigProvider.scrolling.jsScrolling(false);
-    document.addEventListener("deviceready", onDeviceReady, false);
-
-    function onDeviceReady() {
-        window.backgroundGeoLocationOn = false;
-        document.addEventListener("pause", function(){
-            if (window.backgroundGeoLocationOn == true) {
-                backgroundGeoLocation.stop();
-            }
-        }, false);
-
-        document.addEventListener("resume", function(){
-            //if ($state.current.toString() == 'app/setting')
-            //{
-            //
-            //}
-            //if(document.title.toString() == "설정") {
-                window.location.reload(true);
-            //}
-        }, false);
-    }
 })
 .config(function ($httpProvider) {
         $httpProvider.interceptors.push(function ($q, $window) {
