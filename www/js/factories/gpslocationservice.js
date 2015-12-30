@@ -20,7 +20,7 @@ angular.module('starter.controllers')
                     console.log('gps error', error);
                     deferred.reject(error);
                 }, {
-                    timeout: 3000
+                    timeout: 7000
                 });
 
             return deferred.promise;

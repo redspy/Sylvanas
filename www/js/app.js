@@ -37,12 +37,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
                         console.log('[BGL]', 'Location is Informed');
                     });
 
-                    window.plugins.toast.showWithOptions({
-                        message: '[BackgroundGeoLocation] :  ' + location.latitude + ',' + location.longitude,
-                        duration: "short",
-                        position: "bottom",
-                        addPixelsY: -40  // added a negative value to move it up a bit (default 0)
-                    });
+                    //window.plugins.toast.showWithOptions({
+                    //    message: '[BackgroundGeoLocation] :  ' + location.latitude + ',' + location.longitude,
+                    //    duration: "short",
+                    //    position: "bottom",
+                    //    addPixelsY: -40  // added a negative value to move it up a bit (default 0)
+                    //});
                     backgroundGeoLocation.finish();
                 },
                 function (error) {
@@ -65,6 +65,26 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ng-mfb', 'ngCordova'
 })
 .config(function ($ionicConfigProvider) {
     //if(!ionic.Platform.isIOS())$ionicConfigProvider.scrolling.jsScrolling(false);
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    function onDeviceReady() {
+        window.backgroundGeoLocationOn = false;
+        document.addEventListener("pause", function(){
+            if (window.backgroundGeoLocationOn == true) {
+                backgroundGeoLocation.stop();
+            }
+        }, false);
+
+        document.addEventListener("resume", function(){
+            //if ($state.current.toString() == 'app/setting')
+            //{
+            //
+            //}
+            //if(document.title.toString() == "설정") {
+                window.location.reload(true);
+            //}
+        }, false);
+    }
 })
 .config(function ($httpProvider) {
         $httpProvider.interceptors.push(function ($q, $window) {
